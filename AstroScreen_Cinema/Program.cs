@@ -26,4 +26,6 @@ app.MapControllerRoute(
 
 app.Run();
 
-//chuj
+//Lukasz ciezko kapuje temat
+//Ale stara sie walczyc
+//Chociaz roznie to wychodzi
