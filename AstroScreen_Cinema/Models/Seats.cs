@@ -23,7 +23,6 @@ namespace AstroScreen_Cinema.Models
 
 		public int Reservation_ID { get; set; }
 
-
 		public Reservation Reservation { get; set; }
 
 	}

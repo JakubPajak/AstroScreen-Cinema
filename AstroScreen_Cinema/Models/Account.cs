@@ -24,7 +24,10 @@ namespace AstroScreen_Cinema.Models
 		public int PhoneNum { get; set; }
 
 
-		public int Reservation_ID { get; set; }
+        //	//	Connection between different entities	//	//
+
+
+        public List<Reservation> Reservations { get; set; }
 	}
 }
 

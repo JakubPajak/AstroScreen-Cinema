@@ -8,14 +8,16 @@ namespace AstroScreen_Cinema.Models
 		public int Reservation_ID { get; set; }
 
 
+		public DateTime Reservation_date { get; set; }
+
+
+		//	//	Connection between different entities	//	//
+
 
 		public int Customer_ID { get; set; }
 
 
 		public Customer Customer { get; set; }
-
-
-		public DateTime Reservation_date { get; set; }
 
 
 		public int Seat_ID { get; set; }
