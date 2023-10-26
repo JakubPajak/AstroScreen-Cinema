@@ -76,6 +76,33 @@ namespace AstroScreen_Cinema.Models
 				.HasOne(sh => sh.Showtime)
 				.WithOne(m => m.Movie)
 				.HasForeignKey<Showtime>(sh => sh.Movie_ID);
+
+			modelBuilder.Entity<ActorsInMovies>()
+				.HasKey(k => new { k.Actor_ID, k.Movie_ID });
+
+			modelBuilder.Entity<ActorsInMovies>()
+				.HasOne(a => a.Actor)
+				.WithMany(m => m.Movies)
+				.HasForeignKey(k => k.Actor_ID);
+
+			modelBuilder.Entity<ActorsInMovies>()
+				.HasOne(m => m.Movie)
+				.WithMany(a => a.Actors)
+				.HasForeignKey(k => k.Movie_ID);
+
+			modelBuilder.Entity<CategoriesAndMovies>()
+				.HasKey(k => new { k.Category_ID, k.Movie_ID });
+
+			modelBuilder.Entity<CategoriesAndMovies>()
+				.HasOne(c => c.Categories)
+				.WithMany(m => m.Movies)
+				.HasForeignKey(k => k.Category_ID);
+
+			modelBuilder.Entity<CategoriesAndMovies>()
+				.HasOne(m => m.Movies)
+				.WithMany(c => c.Categories)
+				.HasForeignKey(k => k.Movie_ID);
+
 		}
 				
     }
