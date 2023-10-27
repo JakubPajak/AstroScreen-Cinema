@@ -1,9 +1,12 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+
 namespace AstroScreen_Cinema.Models
 {
 	public class Seats
 	{
-		public int Seat_ID { get; set; }
+        [Key]
+        public int Seat_ID { get; set; }
 
 
 		public int RowNum { get; set; }

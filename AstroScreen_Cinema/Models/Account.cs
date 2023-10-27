@@ -1,9 +1,12 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+
 namespace AstroScreen_Cinema.Models
 {
 	public class Account
 	{
-		public int Account_ID { get; set; }
+        [Key]
+        public int Account_ID { get; set; }
 
 
 		public string Name { get; set; }
@@ -27,7 +30,7 @@ namespace AstroScreen_Cinema.Models
         //	//	Connection between different entities	//	//
 
 
-        public List<Reservation> Reservations { get; set; }
+        public List<Reservation>? Reservations { get; set; }
 	}
 }
 

@@ -1,9 +1,12 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+
 namespace AstroScreen_Cinema.Models
 {
 	public class CinemaHall
 	{
-		public int Hall_ID { get; set; }
+        [Key]
+        public int Hall_ID { get; set; }
 
 
 		public int NumOfSeats { get; set; }

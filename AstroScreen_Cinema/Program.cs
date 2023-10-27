@@ -1,9 +1,22 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using AstroScreen_Cinema.Models;
+using Microsoft.EntityFrameworkCore;
+
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+
+//builder.Services.AddDbContext<AppDBContext>();
+builder.Services.AddDbContext<AppDBContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DataBaseMAC"));
+    //options.UseSqlServer(builder.Configuration.GetConnectionString("DataBaseWIN"));
+});
+
 var app = builder.Build();
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

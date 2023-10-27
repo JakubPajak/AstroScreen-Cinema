@@ -16,4 +16,22 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Models\Config\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\Config\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Models\Config\EntitiesConfig\CustomerConfig.cs" />
+    <Compile Remove="Models\Config\EntitiesConfig\CategoriesConfig.cs" />
+    <Compile Remove="Models\Config\EntitiesConfig\ReservationConfig.cs" />
+    <Compile Remove="Models\Config\EntitiesConfig\SeatsConfig.cs" />
+    <Compile Remove="Models\Config\EntitiesConfig\CinemaHallConfig.cs" />
+    <Compile Remove="Models\Config\EntitiesConfig\ActorsConfig.cs" />
+    <Compile Remove="Models\Config\EntitiesConfig\AccountConfig.cs" />
+    <Compile Remove="Models\Config\EntitiesConfig\DirectorsConfig.cs" />
+    <Compile Remove="Models\Config\EntitiesConfig\MovieConfig.cs" />
+    <Compile Remove="Models\Config\EntitiesConfig\ShowtimeConfig.cs" />
+  </ItemGroup>
 </Project>

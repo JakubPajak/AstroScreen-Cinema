@@ -5,9 +5,9 @@ namespace AstroScreen_Cinema.Models
 {
 	public class AppDBContext : DbContext
 	{
-		public AppDBContext(DbContextOptions<AppDBContext> options) : base(options)
-		{
-		}
+
+		//private readonly string ConnectionStringMAC = "Server=localhost,1433;Database=AstroCinema_DB;User=sa; Password=reallyStrongPwd123;TrustServerCertificate=true;";
+		//private readonly string ConnectionStringWIN = "";
 
 		public DbSet<Account> Accounts { get; set; }
 
@@ -34,8 +34,28 @@ namespace AstroScreen_Cinema.Models
 		public DbSet<Showtime> Showtimes { get; set; }
 
 
+		public AppDBContext(DbContextOptions<AppDBContext> options) : base(options)
+		{
+		}
+
+
+		//public AppDBContext(DbContextOptions<AppDBContext> options) : base(options)
+		//{
+		//}
+
+
+		//protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+		//{
+		//	optionsBuilder.UseSqlServer("ConnectionStringMAC");
+		//}
+
+
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
+
+			//modelBuilder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
+
+
 			modelBuilder.Entity<Reservation>()
 				.HasOne(r => r.Account)
 				.WithMany(a => a.Reservations)
@@ -50,7 +70,8 @@ namespace AstroScreen_Cinema.Models
 			modelBuilder.Entity<Reservation>()
 				.HasOne(r => r.Seat)
 				.WithOne(s => s.Reservation)
-				.HasForeignKey<Seats>(k => k.Reservation_ID);
+				.HasForeignKey<Seats>(k => k.Reservation_ID)
+                .OnDelete(DeleteBehavior.Restrict);
 
 			modelBuilder.Entity<Showtime>()
 				.HasMany(r => r.Reservations)
@@ -73,9 +94,10 @@ namespace AstroScreen_Cinema.Models
 				.HasForeignKey(k => k.Director_ID);
 
 			modelBuilder.Entity<Movie>()
-				.HasOne(sh => sh.Showtime)
-				.WithOne(m => m.Movie)
-				.HasForeignKey<Showtime>(sh => sh.Movie_ID);
+				.HasOne(m => m.Showtime)
+				.WithOne(sh => sh.Movie)
+				.HasForeignKey<Showtime>(sh => sh.Showtime_ID)
+				.OnDelete(DeleteBehavior.Restrict);
 
 			modelBuilder.Entity<ActorsInMovies>()
 				.HasKey(k => new { k.Actor_ID, k.Movie_ID });
@@ -102,7 +124,6 @@ namespace AstroScreen_Cinema.Models
 				.HasOne(m => m.Movies)
 				.WithMany(c => c.Categories)
 				.HasForeignKey(k => k.Movie_ID);
-
 		}
 				
     }

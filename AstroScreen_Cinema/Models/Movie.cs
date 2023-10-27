@@ -1,9 +1,12 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+
 namespace AstroScreen_Cinema.Models
 {
 	public class Movie
 	{
-		public int Film_ID { get; set; }
+        [Key]
+        public int Film_ID { get; set; }
 
 
 		public string Title { get; set; }
@@ -28,6 +31,11 @@ namespace AstroScreen_Cinema.Models
 
 
 		public Showtime Showtime { get; set; }
+
+
+		public List<ActorsInMovies> Actors { get; set; }
+
+		public List<CategoriesAndMovies> Categories { get; set; }
 	}
 }
 

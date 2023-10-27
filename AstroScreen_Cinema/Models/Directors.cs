@@ -1,10 +1,13 @@
 ﻿
 using System;
+using System.ComponentModel.DataAnnotations;
+
 namespace AstroScreen_Cinema.Models
 {
 	public class Directors
 	{
-		public int Director_ID { get; set; }
+        [Key]
+        public int Director_ID { get; set; }
 
 
 		public string FullName { get; set; }
@@ -13,7 +16,7 @@ namespace AstroScreen_Cinema.Models
         //	//	Connection between different entities	//	//
 
 
-        public List<Movie> Movies { get; set; }
+        public List<Movie>? Movies { get; set; }
 	}
 }
 

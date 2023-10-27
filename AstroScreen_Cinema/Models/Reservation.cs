@@ -5,7 +5,8 @@ namespace AstroScreen_Cinema.Models
 {
 	public class Reservation
 	{
-		public int Reservation_ID { get; set; }
+        [Key]
+        public int Reservation_ID { get; set; }
 
 
 		public DateTime Reservation_date { get; set; }
