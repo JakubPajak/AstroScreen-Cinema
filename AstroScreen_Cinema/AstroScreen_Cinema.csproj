@@ -19,9 +19,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Models\Config\" />
+    <None Remove="DataSeed\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\Config\" />
+    <Folder Include="DataSeed\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Models\Config\EntitiesConfig\CustomerConfig.cs" />
