@@ -1,4 +1,6 @@
-﻿using AstroScreen_Cinema.Models;
+﻿using AstroScreen_Cinema;
+using AstroScreen_Cinema.DataSeed;
+using AstroScreen_Cinema.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,9 +15,17 @@ builder.Services.AddDbContext<AppDBContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DataBaseMAC"));
     //options.UseSqlServer(builder.Configuration.GetConnectionString("DataBaseWIN"));
 });
+builder.Services.AddScoped<DataSeeding>();
+builder.Services.AddScoped<DataGenerator>();
+
 
 var app = builder.Build();
 
+
+using var scope = app.Services.CreateScope();
+var seeder = scope.ServiceProvider.GetRequiredService<DataGenerator>();
+
+seeder.Seed();
 
 
 // Configure the HTTP request pipeline.
