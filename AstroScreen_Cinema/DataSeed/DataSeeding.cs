@@ -100,7 +100,7 @@ namespace AstroScreen_Cinema.DataSeed
         {
             var ReservationGenerator = new Faker<Reservation>()     //Reservations
 
-            //.RuleFor(r => r.Reservation_ID, f => f.IndexFaker)
+            .RuleFor(r => r.Reservation_ID, f => f.IndexFaker)
             .RuleFor(r => r.Reservation_date, f => f.Person.DateOfBirth)    // <-- Inny format daty nie chcial dzialac
             .RuleFor(r => r.Account_ID, f => f.IndexFaker)      //AccountID   
             .RuleFor(r => r.Seat_ID, f => f.IndexFaker)     //SeatID   

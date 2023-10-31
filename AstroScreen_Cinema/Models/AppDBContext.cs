@@ -59,7 +59,7 @@ namespace AstroScreen_Cinema.Models
 				.HasOne(r => r.Account)
 				.WithMany(a => a.Reservations)
 				.HasForeignKey(k => k.Account_ID)
-				.OnDelete(DeleteBehavior.NoAction);
+				.OnDelete(DeleteBehavior.Restrict);
 
 
 			modelBuilder.Entity<Reservation>()
@@ -76,37 +76,11 @@ namespace AstroScreen_Cinema.Models
 				.OnDelete(DeleteBehavior.NoAction);
 
 
-			modelBuilder.Entity<Account>()
-				.HasMany(r => r.Reservations)
-				.WithOne(a => a.Account)
-				.HasForeignKey(k => k.Reservation_ID)
-				.OnDelete(DeleteBehavior.Cascade);
-
-
-			modelBuilder.Entity<Seats>()
-				.HasMany(r => r.Reservations)
-				.WithOne(s => s.Seat)
-				.HasForeignKey(k => k.Reservation_ID)
-				.OnDelete(DeleteBehavior.NoAction);
-
-
-			modelBuilder.Entity<Seats>()
-				.HasOne(ch => ch.CinemaHall)
-				.WithMany(s => s.Seats)
-				.HasForeignKey(k => k.Hall_ID)
-				.OnDelete(DeleteBehavior.NoAction);
-
 			modelBuilder.Entity<Showtime>()
 				.HasMany(r => r.Reservations)
 				.WithOne(sh => sh.Showtime)
 				.HasForeignKey(k => k.Reservation_ID)
 				.OnDelete(DeleteBehavior.Cascade);
-
-			modelBuilder.Entity<Showtime>()
-				.HasOne(ch => ch.CinemaHall)
-				.WithMany(sh => sh.Showtimes)
-				.HasForeignKey(k => k.Hall_ID)
-				.OnDelete(DeleteBehavior.NoAction);
 
 
 			modelBuilder.Entity<Showtime>()
@@ -134,11 +108,6 @@ namespace AstroScreen_Cinema.Models
 				.HasForeignKey(k => k.Director_ID)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<Movie>()
-				.HasOne(m => m.Showtime)
-				.WithOne(sh => sh.Movie)
-				.HasForeignKey<Showtime>(sh => sh.Showtime_ID)
-				.OnDelete(DeleteBehavior.NoAction);
 
 			modelBuilder.Entity<Movie>()
 				.HasMany(a => a.Actors)
@@ -172,6 +141,8 @@ namespace AstroScreen_Cinema.Models
 				.HasOne(m => m.Movies)
 				.WithMany(c => c.Categories)
 				.HasForeignKey(k => k.Movie_ID);
+
+			base.OnModelCreating(modelBuilder);
 		}
 				
     }
