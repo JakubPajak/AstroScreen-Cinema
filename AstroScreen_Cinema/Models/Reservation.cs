@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 namespace AstroScreen_Cinema.Models
 {
@@ -12,16 +13,29 @@ namespace AstroScreen_Cinema.Models
 		public DateTime Reservation_date { get; set; }
 
 
-		//	//	Connection between different entities	//	//
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [Phone]
+        public int PhoneNum { get; set; }
 
 
-		public int Customer_ID { get; set; }
+        public string Name { get; set; }
 
 
-		public Customer Customer { get; set; }
+        public string Surname { get; set; }
 
 
-		public int Seat_ID { get; set; }
+        public DateTime Birthdate { get; set; }
+
+
+        public bool IsRegistered { get; set; }
+
+
+        //	//	Connection between different entities	//	//
+
+
+        public int Seat_ID { get; set; }
 
 
 		public Seats Seat { get; set; }
@@ -36,7 +50,7 @@ namespace AstroScreen_Cinema.Models
 		public int Account_ID { get; set; }
 
 
-		public Account Account { get; set; }
+		public Account? Account { get; set; }
 	}
 }
 

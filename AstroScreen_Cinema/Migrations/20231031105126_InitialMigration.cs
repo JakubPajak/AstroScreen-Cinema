@@ -167,6 +167,28 @@ namespace AstroScreen_Cinema.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Seats",
+                columns: table => new
+                {
+                    Seat_ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RowNum = table.Column<int>(type: "int", nullable: false),
+                    SeatNum = table.Column<int>(type: "int", nullable: false),
+                    IsReserved = table.Column<bool>(type: "bit", nullable: false),
+                    Hall_ID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Seats", x => x.Seat_ID);
+                    table.ForeignKey(
+                        name: "FK_Seats_CinemaHalls_Hall_ID",
+                        column: x => x.Hall_ID,
+                        principalTable: "CinemaHalls",
+                        principalColumn: "Hall_ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Showtimes",
                 columns: table => new
                 {
@@ -213,6 +235,11 @@ namespace AstroScreen_Cinema.Migrations
                         principalColumn: "Account_ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
+                        name: "FK_Reservations_Seats_Seat_ID",
+                        column: x => x.Seat_ID,
+                        principalTable: "Seats",
+                        principalColumn: "Seat_ID");
+                    table.ForeignKey(
                         name: "FK_Reservations_Showtimes_Reservation_ID",
                         column: x => x.Reservation_ID,
                         principalTable: "Showtimes",
@@ -243,35 +270,6 @@ namespace AstroScreen_Cinema.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Seats",
-                columns: table => new
-                {
-                    Seat_ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RowNum = table.Column<int>(type: "int", nullable: false),
-                    SeatNum = table.Column<int>(type: "int", nullable: false),
-                    IsReserved = table.Column<bool>(type: "bit", nullable: false),
-                    Hall_ID = table.Column<int>(type: "int", nullable: false),
-                    Reservation_ID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Seats", x => x.Seat_ID);
-                    table.ForeignKey(
-                        name: "FK_Seats_CinemaHalls_Hall_ID",
-                        column: x => x.Hall_ID,
-                        principalTable: "CinemaHalls",
-                        principalColumn: "Hall_ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Seats_Reservations_Reservation_ID",
-                        column: x => x.Reservation_ID,
-                        principalTable: "Reservations",
-                        principalColumn: "Reservation_ID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_actorsInMovies_Movie_ID",
                 table: "actorsInMovies",
@@ -298,15 +296,14 @@ namespace AstroScreen_Cinema.Migrations
                 column: "Account_ID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Reservations_Seat_ID",
+                table: "Reservations",
+                column: "Seat_ID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Seats_Hall_ID",
                 table: "Seats",
                 column: "Hall_ID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Seats_Reservation_ID",
-                table: "Seats",
-                column: "Reservation_ID",
-                unique: true);
         }
 
         /// <inheritdoc />
@@ -322,9 +319,6 @@ namespace AstroScreen_Cinema.Migrations
                 name: "Customers");
 
             migrationBuilder.DropTable(
-                name: "Seats");
-
-            migrationBuilder.DropTable(
                 name: "Actors");
 
             migrationBuilder.DropTable(
@@ -335,6 +329,9 @@ namespace AstroScreen_Cinema.Migrations
 
             migrationBuilder.DropTable(
                 name: "Accounts");
+
+            migrationBuilder.DropTable(
+                name: "Seats");
 
             migrationBuilder.DropTable(
                 name: "Showtimes");

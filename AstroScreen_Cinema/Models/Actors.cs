@@ -13,7 +13,7 @@ namespace AstroScreen_Cinema.Models
 		public string FullName { get; set; }
 
 
-		public List<ActorsInMovies>? Movies { get; set; }
+		public List<ActorsInMovies> Movies { get; set; }
 	}
 }
 

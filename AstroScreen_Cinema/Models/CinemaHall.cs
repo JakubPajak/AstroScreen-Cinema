@@ -21,13 +21,6 @@ namespace AstroScreen_Cinema.Models
 		public string City { get; set; }
 
 
-
-        public int Movie_ID { get; set; }
-
-
-		public Movie Movie { get; set; }
-
-
 		public List<Seats> Seats { get; set; }
 
 

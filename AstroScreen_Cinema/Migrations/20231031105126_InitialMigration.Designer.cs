@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AstroScreen_Cinema.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20231027192507_InitialMigration")]
+    [Migration("20231031105126_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -272,6 +272,8 @@ namespace AstroScreen_Cinema.Migrations
 
                     b.HasIndex("Account_ID");
 
+                    b.HasIndex("Seat_ID");
+
                     b.ToTable("Reservations");
                 });
 
@@ -289,9 +291,6 @@ namespace AstroScreen_Cinema.Migrations
                     b.Property<bool>("IsReserved")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Reservation_ID")
-                        .HasColumnType("int");
-
                     b.Property<int>("RowNum")
                         .HasColumnType("int");
 
@@ -301,9 +300,6 @@ namespace AstroScreen_Cinema.Migrations
                     b.HasKey("Seat_ID");
 
                     b.HasIndex("Hall_ID");
-
-                    b.HasIndex("Reservation_ID")
-                        .IsUnique();
 
                     b.ToTable("Seats");
                 });
@@ -412,7 +408,15 @@ namespace AstroScreen_Cinema.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("AstroScreen_Cinema.Models.Seats", "Seat")
+                        .WithMany("Reservations")
+                        .HasForeignKey("Seat_ID")
+                        .OnDelete(DeleteBehavior.ClientNoAction)
+                        .IsRequired();
+
                     b.Navigation("Account");
+
+                    b.Navigation("Seat");
 
                     b.Navigation("Showtime");
                 });
@@ -425,15 +429,7 @@ namespace AstroScreen_Cinema.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AstroScreen_Cinema.Models.Reservation", "Reservation")
-                        .WithOne("Seat")
-                        .HasForeignKey("AstroScreen_Cinema.Models.Seats", "Reservation_ID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.Navigation("CinemaHall");
-
-                    b.Navigation("Reservation");
                 });
 
             modelBuilder.Entity("AstroScreen_Cinema.Models.Showtime", b =>
@@ -496,9 +492,11 @@ namespace AstroScreen_Cinema.Migrations
                 {
                     b.Navigation("Customer")
                         .IsRequired();
+                });
 
-                    b.Navigation("Seat")
-                        .IsRequired();
+            modelBuilder.Entity("AstroScreen_Cinema.Models.Seats", b =>
+                {
+                    b.Navigation("Reservations");
                 });
 
             modelBuilder.Entity("AstroScreen_Cinema.Models.Showtime", b =>

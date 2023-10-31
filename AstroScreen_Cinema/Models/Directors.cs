@@ -16,7 +16,7 @@ namespace AstroScreen_Cinema.Models
         //	//	Connection between different entities	//	//
 
 
-        public List<Movie>? Movies { get; set; }
+        public List<Movie> Movies { get; set; }
 	}
 }
 

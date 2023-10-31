@@ -16,7 +16,7 @@ namespace AstroScreen_Cinema.DataSeed
                 .RuleFor(a => a.Email, f => f.Person.Email)
                 .RuleFor(a => a.Password, f => f.Random.Word())
                 .RuleFor(a => a.Birthdate, f => f.Person.DateOfBirth)
-                .RuleFor(a => a.PhoneNum, f => f.Random.Number(111111111,999999999));
+                .RuleFor(a => a.PhoneNum, f => f.Random.Number(111111111, 999999999));
 
             return AccountGenerator.Generate(count);
             //return new List<Account>();
@@ -28,7 +28,6 @@ namespace AstroScreen_Cinema.DataSeed
         public List<Actors> GenerateActors(int count)
         {
             var ActorsGenerator = new Faker<Actors>()       //Actors
-
                 //.RuleFor(a => a.Actor_ID, f => f.IndexFaker)
                 .RuleFor(a => a.FullName, f => f.Person.FullName);
 
@@ -60,30 +59,11 @@ namespace AstroScreen_Cinema.DataSeed
                 .RuleFor(s => s.NumOfSeats, f => f.Random.Int(100, 200))
                 .RuleFor(s => s.RowNum, f => f.Random.Int(10, 20))   //RowNum
                 .RuleFor(s => s.SeatNum, f => f.Random.Int(100, 200))  //SeatNum
-                .RuleFor(s => s.City, f => f.Address.City())
-                .RuleFor(s => s.Movie_ID, f => f.Random.Number(1, 100));    //MovieID
+                .RuleFor(s => s.City, f => f.Address.City());
 
             return HallGenerator.Generate(count);
             //return new List<CinemaHall>();
         }
-
-
-
-        public List<Customer> GenerateCustomer(int count)
-        {
-            var CustomerGenerator = new Faker<Customer>()   //Customer
-                //.RuleFor(c => c.Customer_ID, f => f.IndexFaker)
-                .RuleFor(c => c.Email, (f, c) => f.Internet.Email(c.Name, c.Surname))
-                .RuleFor(c => c.Name, f => f.Person.FirstName)
-                .RuleFor(c => c.Surname, f => f.Person.LastName)
-                .RuleFor(c => c.Birthdate, f => f.Person.DateOfBirth)
-                .RuleFor(c => c.PhoneNum, f => f.Random.Number(111111111, 999999999))
-                .RuleFor(c => c.Reservation_ID, f => f.Random.Number(1, 100));  //Reservation_ID
-
-            return CustomerGenerator.Generate(count);
-            //return new List<Customer>();
-        }
-
 
 
         public List<Directors> GenerateDirectors(int count)
@@ -107,8 +87,8 @@ namespace AstroScreen_Cinema.DataSeed
                 .RuleFor(m => m.Title, f => f.Random.Word())
                 .RuleFor(m => m.Description, f => f.Random.Word())
                 .RuleFor(m => m.Duration, f => f.Random.Int(90, 200))
-                .RuleFor(m => m.Director_ID, f => f.Random.Number(1, 100))
-                .RuleFor(m => m.Showtime_ID, f => f.Random.Number(1, 100));
+                .RuleFor(m => m.Director_ID, f => f.IndexFaker)
+                .RuleFor(m => m.Showtime_ID, f => f.IndexFaker);
 
             return MovieGenerator.Generate(count);
             //return new List<Movie>();
@@ -120,12 +100,15 @@ namespace AstroScreen_Cinema.DataSeed
         {
             var ReservationGenerator = new Faker<Reservation>()     //Reservations
 
-            .RuleFor(r => r.Reservation_ID, f => f.IndexFaker)
+            //.RuleFor(r => r.Reservation_ID, f => f.IndexFaker)
             .RuleFor(r => r.Reservation_date, f => f.Person.DateOfBirth)    // <-- Inny format daty nie chcial dzialac
-            .RuleFor(r => r.Customer_ID, f => f.Random.Number(1, 100))     //CustomerID
-            .RuleFor(r => r.Account_ID, f => f.Random.Number(1, 100))      //AccountID   
-            .RuleFor(r => r.Seat_ID, f => f.Random.Number(1, 100))     //SeatID   
-            .RuleFor(r => r.Showtime_ID, f => f.Random.Number(1, 100));    //HallID
+            .RuleFor(r => r.Account_ID, f => f.IndexFaker)      //AccountID   
+            .RuleFor(r => r.Seat_ID, f => f.IndexFaker)     //SeatID   
+            .RuleFor(r => r.Showtime_ID, f => f.IndexFaker)
+            .RuleFor(r => r.Name, f => f.Person.FirstName)
+            .RuleFor(r => r.Surname, f => f.Person.LastName)
+            .RuleFor(r => r.Email, f => f.Person.Email)
+            .RuleFor(r => r.PhoneNum, f => f.Random.Number(111111111, 999999999));    //HallID
 
             return ReservationGenerator.Generate(count);
             //return new List<Reservation>();
@@ -141,7 +124,7 @@ namespace AstroScreen_Cinema.DataSeed
                 .RuleFor(s => s.RowNum, f => f.Random.Int(10, 20))
                 .RuleFor(s => s.SeatNum, f => f.Random.Int(100, 200))
                 .RuleFor(s => s.IsReserved, f => f.Random.Bool())
-                .RuleFor(s => s.Hall_ID, f => f.Random.Number(1, 100));    // Reservation_ID
+                .RuleFor(s => s.Hall_ID, f => f.IndexFaker);    // Reservation_ID
 
             return SeatsGenerator.Generate(count);
             //return new List<Seats>();
@@ -154,9 +137,10 @@ namespace AstroScreen_Cinema.DataSeed
             var ShowTimeGenerator = new Faker<Showtime>()   //Showtime
 
                 //.RuleFor(st => st.Showtime_ID, f => f.IndexFaker)
-                .RuleFor(st => st.Hall_ID, f => f.Random.Number(1, 100))   //HallID
+                .RuleFor(st => st.Hall_ID, f => f.IndexFaker)   //HallID
                 .RuleFor(st => st.Day, f => f.Date.Recent())
-                .RuleFor(st => st.Time, f => f.Date.Recent());
+                .RuleFor(st => st.Time, f => f.Date.Recent())
+                .RuleFor(st => st.Movie_ID, f => f.IndexFaker);
 
             return ShowTimeGenerator.Generate(count);
             //return new List<Showtime>();
@@ -168,9 +152,8 @@ namespace AstroScreen_Cinema.DataSeed
         {
             var ActorsInMovieGenerator = new Faker<ActorsInMovies>()    //ActorsinMovie
 
-                //.RuleFor(am => am.ActorsFilms_ID, f => f.IndexFaker)
-                .RuleFor(am => am.Actor_ID, f => f.Random.Number(1, 100))
-                .RuleFor(am => am.Movie_ID, f => f.Random.Number(1, 100));
+                .RuleFor(am => am.Actor_ID, f => f.IndexFaker)
+                .RuleFor(am => am.Movie_ID, f => f.IndexFaker);
 
             return ActorsInMovieGenerator.Generate(count);
             //return new List<ActorsInMovies>();
@@ -182,9 +165,8 @@ namespace AstroScreen_Cinema.DataSeed
         {
             var CategoryMovieGenerator = new Faker<CategoriesAndMovies>()       //CategoryMovie
 
-                .RuleFor(cm => cm.CategoriesAndFilms_ID, f => f.IndexFaker)
-                .RuleFor(cm => cm.Movie_ID, f => f.Random.Number(1, 100))
-                .RuleFor(cm => cm.Category_ID, f => f.Random.Number(1,100));
+                .RuleFor(cm => cm.Movie_ID, f => f.IndexFaker)
+                .RuleFor(cm => cm.Category_ID, f => f.IndexFaker);
 
             return CategoryMovieGenerator.Generate(count);
 

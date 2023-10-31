@@ -27,6 +27,9 @@ namespace AstroScreen_Cinema.Models
 		public CinemaHall CinemaHall { get; set; }
 
 
+		public int Movie_ID { get; set; }
+
+
 		public Movie Movie { get; set; }
 	}
 }

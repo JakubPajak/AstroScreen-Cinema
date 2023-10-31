@@ -89,7 +89,7 @@ namespace AstroScreen_Cinema.Migrations
 
                     b.HasIndex("Movie_ID");
 
-                    b.ToTable("actorsInMovies");
+                    b.ToTable("ActorsInMovies");
                 });
 
             modelBuilder.Entity("AstroScreen_Cinema.Models.Categories", b =>
@@ -143,12 +143,6 @@ namespace AstroScreen_Cinema.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("MovieFilm_ID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Movie_ID")
-                        .HasColumnType("int");
-
                     b.Property<int>("NumOfSeats")
                         .HasColumnType("int");
 
@@ -160,40 +154,7 @@ namespace AstroScreen_Cinema.Migrations
 
                     b.HasKey("Hall_ID");
 
-                    b.HasIndex("MovieFilm_ID");
-
                     b.ToTable("CinemaHalls");
-                });
-
-            modelBuilder.Entity("AstroScreen_Cinema.Models.Customer", b =>
-                {
-                    b.Property<int>("Customer_ID")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Birthdate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PhoneNum")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Reservation_ID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Surname")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Customer_ID");
-
-                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("AstroScreen_Cinema.Models.Directors", b =>
@@ -253,7 +214,21 @@ namespace AstroScreen_Cinema.Migrations
                     b.Property<int>("Account_ID")
                         .HasColumnType("int");
 
-                    b.Property<int>("Customer_ID")
+                    b.Property<DateTime>("Birthdate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsRegistered")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PhoneNum")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Reservation_date")
@@ -265,11 +240,11 @@ namespace AstroScreen_Cinema.Migrations
                     b.Property<int>("Showtime_ID")
                         .HasColumnType("int");
 
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Reservation_ID");
-
-                    b.HasIndex("Account_ID");
-
-                    b.HasIndex("Seat_ID");
 
                     b.ToTable("Reservations");
                 });
@@ -312,6 +287,9 @@ namespace AstroScreen_Cinema.Migrations
                     b.Property<int>("Hall_ID")
                         .HasColumnType("int");
 
+                    b.Property<int>("Movie_ID")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("Time")
                         .HasColumnType("datetime2");
 
@@ -331,7 +309,7 @@ namespace AstroScreen_Cinema.Migrations
                     b.HasOne("AstroScreen_Cinema.Models.Movie", "Movie")
                         .WithMany("Actors")
                         .HasForeignKey("Movie_ID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Actor");
@@ -358,34 +336,12 @@ namespace AstroScreen_Cinema.Migrations
                     b.Navigation("Movies");
                 });
 
-            modelBuilder.Entity("AstroScreen_Cinema.Models.CinemaHall", b =>
-                {
-                    b.HasOne("AstroScreen_Cinema.Models.Movie", "Movie")
-                        .WithMany()
-                        .HasForeignKey("MovieFilm_ID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Movie");
-                });
-
-            modelBuilder.Entity("AstroScreen_Cinema.Models.Customer", b =>
-                {
-                    b.HasOne("AstroScreen_Cinema.Models.Reservation", "Reservation")
-                        .WithOne("Customer")
-                        .HasForeignKey("AstroScreen_Cinema.Models.Customer", "Customer_ID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Reservation");
-                });
-
             modelBuilder.Entity("AstroScreen_Cinema.Models.Movie", b =>
                 {
                     b.HasOne("AstroScreen_Cinema.Models.Directors", "Director")
                         .WithMany("Movies")
                         .HasForeignKey("Director_ID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Director");
@@ -395,19 +351,19 @@ namespace AstroScreen_Cinema.Migrations
                 {
                     b.HasOne("AstroScreen_Cinema.Models.Account", "Account")
                         .WithMany("Reservations")
-                        .HasForeignKey("Account_ID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AstroScreen_Cinema.Models.Showtime", "Showtime")
-                        .WithMany("Reservations")
                         .HasForeignKey("Reservation_ID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("AstroScreen_Cinema.Models.Seats", "Seat")
                         .WithMany("Reservations")
-                        .HasForeignKey("Seat_ID")
+                        .HasForeignKey("Reservation_ID")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("AstroScreen_Cinema.Models.Showtime", "Showtime")
+                        .WithMany("Reservations")
+                        .HasForeignKey("Reservation_ID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -423,7 +379,7 @@ namespace AstroScreen_Cinema.Migrations
                     b.HasOne("AstroScreen_Cinema.Models.CinemaHall", "CinemaHall")
                         .WithMany("Seats")
                         .HasForeignKey("Hall_ID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("CinemaHall");
@@ -434,13 +390,13 @@ namespace AstroScreen_Cinema.Migrations
                     b.HasOne("AstroScreen_Cinema.Models.Movie", "Movie")
                         .WithOne("Showtime")
                         .HasForeignKey("AstroScreen_Cinema.Models.Showtime", "Showtime_ID")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("AstroScreen_Cinema.Models.CinemaHall", "CinemaHall")
                         .WithMany("Showtimes")
                         .HasForeignKey("Showtime_ID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("CinemaHall");
@@ -482,12 +438,6 @@ namespace AstroScreen_Cinema.Migrations
                     b.Navigation("Categories");
 
                     b.Navigation("Showtime")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("AstroScreen_Cinema.Models.Reservation", b =>
-                {
-                    b.Navigation("Customer")
                         .IsRequired();
                 });
 

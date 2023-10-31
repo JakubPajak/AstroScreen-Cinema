@@ -5,10 +5,6 @@ namespace AstroScreen_Cinema.Models
 {
 	public class CategoriesAndMovies
 	{
-        [Key]
-        public int CategoriesAndFilms_ID { get; set; }
-
-
 		public int Category_ID { get; set; }
 
 

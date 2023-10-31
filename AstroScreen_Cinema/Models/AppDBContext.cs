@@ -13,15 +13,13 @@ namespace AstroScreen_Cinema.Models
 
 		public DbSet<Actors> Actors { get; set; }
 
-		public DbSet<ActorsInMovies> actorsInMovies { get; set; }
+		public DbSet<ActorsInMovies> ActorsInMovies { get; set; }
 
 		public DbSet<Categories> Categories { get; set; }
 
 		public DbSet<CategoriesAndMovies> CategoriesAndMovies { get; set; }
 
 		public DbSet<CinemaHall> CinemaHalls { get; set; }
-
-		public DbSet<Customer> Customers { get; set; }
 
 		public DbSet<Directors> Directors { get; set; }
 
@@ -46,7 +44,8 @@ namespace AstroScreen_Cinema.Models
 
 		//protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		//{
-		//	optionsBuilder.UseSqlServer("ConnectionStringMAC");
+		//	optionsBuilder.UseSqlServer("ConnectionStringMAC")
+		//		.EnableSensitiveDataLogging();
 		//}
 
 
@@ -59,46 +58,96 @@ namespace AstroScreen_Cinema.Models
 			modelBuilder.Entity<Reservation>()
 				.HasOne(r => r.Account)
 				.WithMany(a => a.Reservations)
-				.HasForeignKey(k => k.Account_ID);
+				.HasForeignKey(k => k.Account_ID)
+				.OnDelete(DeleteBehavior.NoAction);
 
 
 			modelBuilder.Entity<Reservation>()
-				.HasOne(r => r.Customer)
-				.WithOne(c => c.Reservation)
-				.HasForeignKey<Customer>(k => k.Customer_ID);
+				.HasOne(s => s.Seat) 
+				.WithMany(r => r.Reservations)
+				.HasForeignKey(k => k.Seat_ID)
+				.OnDelete(DeleteBehavior.ClientNoAction);
+
+
+			modelBuilder.Entity<Reservation>()
+				.HasOne(sh => sh.Showtime)
+				.WithMany(r => r.Reservations)
+				.HasForeignKey(k => k.Showtime_ID)
+				.OnDelete(DeleteBehavior.NoAction);
+
+
+			modelBuilder.Entity<Account>()
+				.HasMany(r => r.Reservations)
+				.WithOne(a => a.Account)
+				.HasForeignKey(k => k.Reservation_ID)
+				.OnDelete(DeleteBehavior.Cascade);
+
 
 			modelBuilder.Entity<Seats>()
 				.HasMany(r => r.Reservations)
 				.WithOne(s => s.Seat)
-				.HasForeignKey(k => k.Seat_ID);
+				.HasForeignKey(k => k.Reservation_ID)
+				.OnDelete(DeleteBehavior.NoAction);
+
+
+			modelBuilder.Entity<Seats>()
+				.HasOne(ch => ch.CinemaHall)
+				.WithMany(s => s.Seats)
+				.HasForeignKey(k => k.Hall_ID)
+				.OnDelete(DeleteBehavior.NoAction);
 
 			modelBuilder.Entity<Showtime>()
 				.HasMany(r => r.Reservations)
 				.WithOne(sh => sh.Showtime)
-				.HasForeignKey(k => k.Reservation_ID);
+				.HasForeignKey(k => k.Reservation_ID)
+				.OnDelete(DeleteBehavior.Cascade);
+
+			modelBuilder.Entity<Showtime>()
+				.HasOne(ch => ch.CinemaHall)
+				.WithMany(sh => sh.Showtimes)
+				.HasForeignKey(k => k.Hall_ID)
+				.OnDelete(DeleteBehavior.NoAction);
+
+
+			modelBuilder.Entity<Showtime>()
+				.HasOne(m => m.Movie)
+				.WithOne(sh => sh.Showtime)
+				.HasForeignKey<Movie>(k => k.Showtime_ID)
+				.OnDelete(DeleteBehavior.NoAction);
 
 			modelBuilder.Entity<CinemaHall>()
 				.HasMany(s => s.Seats)
 				.WithOne(h => h.CinemaHall)
-				.HasForeignKey(k => k.Hall_ID);
+				.HasForeignKey(k => k.Hall_ID)
+                .OnDelete(DeleteBehavior.NoAction);
 
-			modelBuilder.Entity<CinemaHall>()
+            modelBuilder.Entity<CinemaHall>()
 				.HasMany(sh => sh.Showtimes)
 				.WithOne(h => h.CinemaHall)
-				.HasForeignKey(k => k.Showtime_ID);
+				.HasForeignKey(k => k.Showtime_ID)
+                .OnDelete(DeleteBehavior.NoAction);
 
-			modelBuilder.Entity<Movie>()
+
+            modelBuilder.Entity<Movie>()
 				.HasOne(d => d.Director)
 				.WithMany(m => m.Movies)
-				.HasForeignKey(k => k.Director_ID);
+				.HasForeignKey(k => k.Director_ID)
+                .OnDelete(DeleteBehavior.NoAction);
 
-			modelBuilder.Entity<Movie>()
+            modelBuilder.Entity<Movie>()
 				.HasOne(m => m.Showtime)
 				.WithOne(sh => sh.Movie)
 				.HasForeignKey<Showtime>(sh => sh.Showtime_ID)
-				.OnDelete(DeleteBehavior.Restrict);
+				.OnDelete(DeleteBehavior.NoAction);
 
-			modelBuilder.Entity<ActorsInMovies>()
+			modelBuilder.Entity<Movie>()
+				.HasMany(a => a.Actors)
+				.WithOne(m => m.Movie)
+				.HasForeignKey(k => k.Movie_ID)
+                .OnDelete(DeleteBehavior.NoAction);
+
+
+            modelBuilder.Entity<ActorsInMovies>()
 				.HasKey(k => new { k.Actor_ID, k.Movie_ID });
 
 			modelBuilder.Entity<ActorsInMovies>()

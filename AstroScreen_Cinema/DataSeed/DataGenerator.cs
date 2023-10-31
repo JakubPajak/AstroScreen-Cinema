@@ -37,26 +37,25 @@ namespace AstroScreen_Cinema
                 var actorsmovie = _dataSeeding.GenerateActorsInMovie(count);
                 var category = _dataSeeding.GenerateCategories(count);
                 var categorymovie = _dataSeeding.GenerateCategoriesAndMovies(count);
-
-                var customers = _dataSeeding.GenerateCustomer(count);    // <-- czy dodawac reservationID?
                 var reservations = _dataSeeding.GenerateReservation(count);
 
+                //_appContext.Accounts.AddRange(account);
+                //_appContext.SaveChanges();
 
-                _appContext.Accounts.AddRange(account);
                 _appContext.Reservations.AddRange(reservations);
-                _appContext.Customers.AddRange(customers);
                 _appContext.Seats.AddRange(seat);
                 _appContext.CinemaHalls.AddRange(hall);
-                _appContext.Actors.AddRange(actors);
-                _appContext.Showtimes.AddRange(showtime);
-                _appContext.Movies.AddRange(movie);
-                _appContext.actorsInMovies.AddRange(actorsmovie);
-                _appContext.Categories.AddRange(category);
-                _appContext.Directors.AddRange(director);
-//                _appContext.CategoriesAndMovies.AddRange(categorymovie);
-
-
-                _appContext.SaveChanges();
+                //_appContext.Actors.AddRange(actors);
+            
+            _appContext.Showtimes.AddRange(showtime);
+            
+            //_appContext.Directors.AddRange(director);
+            _appContext.Movies.AddRange(movie);
+            
+            _appContext.ActorsInMovies.AddRange(actorsmovie);
+            //_appContext.Categories.AddRange(category);
+            _appContext.CategoriesAndMovies.AddRange(categorymovie);
+            _appContext.SaveChanges();
         }
 
     }
