@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AstroScreen_Cinema.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20231104195130_InitFUCKOF")]
+    [Migration("20231104202257_InitFUCKOF")]
     partial class InitFUCKOF
     {
         /// <inheritdoc />
@@ -156,11 +156,9 @@ namespace AstroScreen_Cinema.Migrations
 
             modelBuilder.Entity("AstroScreen_Cinema.Models.Directors", b =>
                 {
-                    b.Property<int>("Director_ID")
+                    b.Property<Guid>("Director_ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Director_ID"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("FullName")
                         .IsRequired()
@@ -183,8 +181,8 @@ namespace AstroScreen_Cinema.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Director_ID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("Director_ID")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Duration")
                         .HasColumnType("int");

@@ -24,6 +24,12 @@ namespace AstroScreen_Cinema
             int count = 100;
 
 
+            var DirectorGenerator = new Faker<Directors>()      //Director
+                                                                //.RuleFor(d => d.Director_ID, f => f.IndexFaker)
+                .RuleFor(d => d.FullName, f => f.Person.FullName);
+
+                var ActorsGenerator = new Faker<Actors>()       //Actors                                              //.RuleFor(a => a.Actor_ID, f => f.IndexFaker)
+                    .RuleFor(a => a.FullName, f => f.Person.FullName);
 
 
             var MovieGenerator = new Faker<Movie>()     //Movie
@@ -31,14 +37,30 @@ namespace AstroScreen_Cinema
                 //.RuleFor(m => m.Film_ID, f => f.IndexFaker)
                 .RuleFor(m => m.Title, f => f.Random.Word())
                 .RuleFor(m => m.Description, f => f.Random.Word())
-                .RuleFor(m => m.Duration, f => f.Random.Int(90, 200));
+                .RuleFor(m => m.Duration, f => f.Random.Int(90, 200))
+                .RuleFor(m => m.Director, f => DirectorGenerator.Generate());
 
 
 
-                var DirectorGenerator = new Faker<Directors>()      //Director
-                   //.RuleFor(d => d.Director_ID, f => f.IndexFaker)
-                    .RuleFor(d => d.FullName, f => f.Person.FullName)
-                    .RuleFor(d => d.Movies, f => MovieGenerator.Generate(3));
+
+                var HallGenerator = new Faker<CinemaHall>()     //Hall
+
+                    //.RuleFor(s => s.Hall_ID, f => f.IndexFaker)
+                    .RuleFor(s => s.NumOfSeats, f => f.Random.Int(100, 200))
+                    .RuleFor(s => s.RowNum, f => f.Random.Int(10, 20))   //RowNum
+                    .RuleFor(s => s.SeatNum, f => f.Random.Int(100, 200))  //SeatNum
+                    .RuleFor(s => s.City, f => f.Address.City());
+
+            // Poprawka wymagana
+            //Movie dodane i dziala razem z direvtory
+            var ShowTimeGenerator = new Faker<Showtime>()   //Showtime
+
+                //.RuleFor(st => st.Showtime_ID, f => f.IndexFaker)
+                .RuleFor(st => st.Day, f => f.Date.Recent())
+                .RuleFor(st => st.Time, f => f.Date.Recent())
+                .RuleFor(s => s.CinemaHall, f => HallGenerator.Generate())
+                .RuleFor(s => s.Movie, f => MovieGenerator.Generate());
+
 
 
                 var AccountGenerator = new Faker<Account>()
@@ -50,25 +72,12 @@ namespace AstroScreen_Cinema
                     .RuleFor(a => a.Birthdate, f => f.Person.DateOfBirth)
                     .RuleFor(a => a.PhoneNum, f => f.Random.Number(111111111, 999999999));
 
-                var ActorsGenerator = new Faker<Actors>()       //Actors                                              //.RuleFor(a => a.Actor_ID, f => f.IndexFaker)
-                    .RuleFor(a => a.FullName, f => f.Person.FullName);
-
 
 
                 var CategoryGenerator = new Faker<Categories>()     //Category
                     //.RuleFor(c => c.Categorie_ID, f => f.IndexFaker)
                     .RuleFor(c => c.Name, f => f.Random.Word())
                     .RuleFor(c => c.Description, f => f.Lorem.Sentences(4));
-
-
-                var HallGenerator = new Faker<CinemaHall>()     //Hall
-
-                    //.RuleFor(s => s.Hall_ID, f => f.IndexFaker)
-                    .RuleFor(s => s.NumOfSeats, f => f.Random.Int(100, 200))
-                    .RuleFor(s => s.RowNum, f => f.Random.Int(10, 20))   //RowNum
-                    .RuleFor(s => s.SeatNum, f => f.Random.Int(100, 200))  //SeatNum
-                    .RuleFor(s => s.City, f => f.Address.City());
-
 
 
 
@@ -92,13 +101,6 @@ namespace AstroScreen_Cinema
                     .RuleFor(s => s.IsReserved, f => f.Random.Bool())
                     .RuleFor(s => s.Hall_ID, f => f.IndexFaker);    // Reservation_ID
 
-                var ShowTimeGenerator = new Faker<Showtime>()   //Showtime
-
-                    //.RuleFor(st => st.Showtime_ID, f => f.IndexFaker)
-                    .RuleFor(st => st.Hall_ID, f => f.IndexFaker)   //HallID
-                    .RuleFor(st => st.Day, f => f.Date.Recent())
-                    .RuleFor(st => st.Time, f => f.Date.Recent())
-                    .RuleFor(st => st.Movie_ID, f => f.IndexFaker);
 
 
 
@@ -114,8 +116,8 @@ namespace AstroScreen_Cinema
                     .RuleFor(cm => cm.Category_ID, f => f.IndexFaker);
 
 
-            var movie = MovieGenerator.Generate(3);
-            var director = DirectorGenerator.Generate(3);
+            //var movie = MovieGenerator.Generate(3);
+            //var director = DirectorGenerator.Generate(3);
 
             var actors = _dataSeeding.GenerateActors(count);
 
@@ -130,9 +132,9 @@ namespace AstroScreen_Cinema
             var categorymovie = _dataSeeding.GenerateCategoriesAndMovies(count);
             var reservations = _dataSeeding.GenerateReservation(count);
 
-
-          _appContext.Directors.AddRange(director);
-            _appContext.Movies.AddRange(movie);
+            //_appContext.Movies.AddRange(movie);
+            //_appContext.Directors.AddRange(director);
+          
             _appContext.SaveChanges();
 
             _appContext.Accounts.AddRange(account);

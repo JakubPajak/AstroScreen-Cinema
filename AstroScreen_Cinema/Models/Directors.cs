@@ -17,7 +17,7 @@ namespace AstroScreen_Cinema.Models
 
 
 
-        public List<Movie> Movies { get; set; }
+        public List<Movie> Movies { get; set; } = new List<Movie>();
 	}
 }
 

@@ -27,12 +27,12 @@ namespace AstroScreen_Cinema.Models
 		public Directors? Director { get; set; }
 
 
-		public List<Showtime>? Showtimes { get; set; }
+		public List<Showtime>? Showtimes { get; set; } = new List<Showtime>();
 
 
-		public List<ActorsInMovies>? Actors { get; set; }
+		public List<ActorsInMovies>? Actors { get; set; } = new List<ActorsInMovies>();
 
-		public List<CategoriesAndMovies>? Categories { get; set; }
+		public List<CategoriesAndMovies>? Categories { get; set; } = new List<CategoriesAndMovies>();
 	}
 }
 
