@@ -21,21 +21,18 @@ namespace AstroScreen_Cinema.Models
         //	//	Connection between different entities	//	//
 
 
-        public int Director_ID { get; set; }
+        public Guid Director_ID { get; set; }
 
 
-		public Directors Director { get; set; }
+		public Directors? Director { get; set; }
 
 
-		public int Showtime_ID { get; set; }
+		public List<Showtime>? Showtimes { get; set; }
 
 
-		public Showtime Showtime { get; set; }
+		public List<ActorsInMovies>? Actors { get; set; }
 
-
-		public List<ActorsInMovies> Actors { get; set; }
-
-		public List<CategoriesAndMovies> Categories { get; set; }
+		public List<CategoriesAndMovies>? Categories { get; set; }
 	}
 }
 

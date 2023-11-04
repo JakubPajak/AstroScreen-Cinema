@@ -21,7 +21,7 @@ namespace AstroScreen_Cinema.Models
         public int Hall_ID { get; set; }
 
 
-		public CinemaHall CinemaHall { get; set; }
+		public CinemaHall? CinemaHall { get; set; }
 
 
 		public List<Reservation>? Reservations { get; set; }

@@ -89,9 +89,9 @@ namespace AstroScreen_Cinema.DataSeed
                 //.RuleFor(m => m.Film_ID, f => f.IndexFaker)
                 .RuleFor(m => m.Title, f => f.Random.Word())
                 .RuleFor(m => m.Description, f => f.Random.Word())
-                .RuleFor(m => m.Duration, f => f.Random.Int(90, 200))
-                .RuleFor(m => m.Director_ID, f => f.IndexFaker)
-                .RuleFor(m => m.Showtime_ID, f => f.IndexFaker);
+                .RuleFor(m => m.Duration, f => f.Random.Int(90, 200));
+               // .RuleFor(m => m.Director_ID, f => f.IndexFaker);
+                //.RuleFor(m => m.Showtime_ID, f => f.IndexFaker);
 
             return MovieGenerator.Generate(count);
             //return new List<Movie>();

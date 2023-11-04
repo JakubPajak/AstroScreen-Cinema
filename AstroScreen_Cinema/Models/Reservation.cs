@@ -38,13 +38,13 @@ namespace AstroScreen_Cinema.Models
         public int Seat_ID { get; set; }
 
 
-		public Seats Seat { get; set; }
+		public Seats? Seat { get; set; }
 
 
 		public int Showtime_ID { get; set; }
 
 
-		public Showtime Showtime { get; set; }
+		public Showtime? Showtime { get; set; }
 
 
 		public int Account_ID { get; set; }
