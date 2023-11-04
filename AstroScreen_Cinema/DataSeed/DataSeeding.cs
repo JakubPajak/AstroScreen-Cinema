@@ -1,6 +1,8 @@
 ﻿using System;
 using AstroScreen_Cinema.Models;
 using Bogus;
+using Microsoft.IdentityModel.Tokens;
+
 
 namespace AstroScreen_Cinema.DataSeed
 {
@@ -17,6 +19,7 @@ namespace AstroScreen_Cinema.DataSeed
                 .RuleFor(a => a.Password, f => f.Random.Word())
                 .RuleFor(a => a.Birthdate, f => f.Person.DateOfBirth)
                 .RuleFor(a => a.PhoneNum, f => f.Random.Number(111111111, 999999999));
+
 
             return AccountGenerator.Generate(count);
             //return new List<Account>();
@@ -172,6 +175,7 @@ namespace AstroScreen_Cinema.DataSeed
 
             //return new List<CategoriesAndMovies>();
         }
+
     }
 }
 

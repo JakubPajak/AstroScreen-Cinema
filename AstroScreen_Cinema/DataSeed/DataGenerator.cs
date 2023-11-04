@@ -39,24 +39,31 @@ namespace AstroScreen_Cinema
                 var categorymovie = _dataSeeding.GenerateCategoriesAndMovies(count);
                 var reservations = _dataSeeding.GenerateReservation(count);
 
+                _appContext.Database.Migrate();
+
+
                 _appContext.Accounts.AddRange(account);
-                //_appContext.SaveChanges();
+                _appContext.SaveChanges();
                 _appContext.Seats.AddRange(seat);
                 _appContext.Showtimes.AddRange(showtime);
                 _appContext.Reservations.AddRange(reservations);
             
                 _appContext.CinemaHalls.AddRange(hall);
                 _appContext.Actors.AddRange(actors);
-            
 
-            
+            // Wyświetl dane wygenerowane w konsoli
+            foreach (var reservation in reservations)
+            {
+                Console.WriteLine($"Reservation_ID: {reservation.Reservation_ID}, Reservation_date: {reservation.Reservation_date}, Account_ID: {reservation.Account_ID}, Seat_ID: {reservation.Seat_ID}, Showtime_ID: {reservation.Showtime_ID}, Name: {reservation.Name}, Surname: {reservation.Surname}, Email: {reservation.Email}, PhoneNum: {reservation.PhoneNum}");
+            }
+
             _appContext.Directors.AddRange(director);
             _appContext.Movies.AddRange(movie);
             
             _appContext.ActorsInMovies.AddRange(actorsmovie);
             _appContext.Categories.AddRange(category);
             _appContext.CategoriesAndMovies.AddRange(categorymovie);
-            _appContext.SaveChanges();
+            //_appContext.SaveChanges();
         }
 
     }

@@ -12,8 +12,8 @@ builder.Services.AddControllersWithViews();
 //builder.Services.AddDbContext<AppDBContext>();
 builder.Services.AddDbContext<AppDBContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DataBaseMAC"));
-    //options.UseSqlServer(builder.Configuration.GetConnectionString("DataBaseWIN"));
+    //options.UseSqlServer(builder.Configuration.GetConnectionString("DataBaseMAC"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DataBaseWIN"));
 });
 builder.Services.AddScoped<DataSeeding>();
 builder.Services.AddScoped<DataGenerator>();
@@ -48,6 +48,8 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+
 
 //Lukasz ciezko kapuje temat
 //Ale stara sie walczyc

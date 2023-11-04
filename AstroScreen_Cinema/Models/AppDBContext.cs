@@ -101,7 +101,7 @@ namespace AstroScreen_Cinema.Models
 				.HasForeignKey(k => k.Showtime_ID)
                 .OnDelete(DeleteBehavior.NoAction);
 
-
+			 
             modelBuilder.Entity<Movie>()
 				.HasOne(d => d.Director)
 				.WithMany(m => m.Movies)
