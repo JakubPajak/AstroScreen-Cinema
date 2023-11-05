@@ -117,32 +117,26 @@ namespace AstroScreen_Cinema
             var categorymovie = CategoryMovieGenerator.Generate(30);
             var reservations = ReservationGenerator.Generate(100);
 
-            //_appContext.Movies.AddRange(movie);
-            //_appContext.Directors.AddRange(director);
+            _appContext.Movies.AddRange(movie);
+            _appContext.Directors.AddRange(director);
           
-            //_appContext.SaveChanges();
+           
 
-            //_appContext.Accounts.AddRange(account);
-            //_appContext.SaveChanges();
+            _appContext.Accounts.AddRange(account);
+            
             _appContext.Seats.AddRange(seat);
-            _appContext.SaveChanges();
+            
             _appContext.Showtimes.AddRange(showtime);
             _appContext.Reservations.AddRange(reservations);
             
             _appContext.CinemaHalls.AddRange(hall);
             //_appContext.CinemaHalls.AddRange(actors);
 
-            // Wyświetl dane wygenerowane w konsoli
-            //foreach (var reservation in reservations)
-            //{
-            //    Console.WriteLine($"Reservation_ID: {reservation.Reservation_ID}, Reservation_date: {reservation.Reservation_date}, Account_ID: {reservation.Account_ID}, Seat_ID: {reservation.Seat_ID}, Showtime_ID: {reservation.Showtime_ID}, Name: {reservation.Name}, Surname: {reservation.Surname}, Email: {reservation.Email}, PhoneNum: {reservation.PhoneNum}");
-            //}
-
   
             _appContext.ActorsInMovies.AddRange(actorsmovie);
             _appContext.Categories.AddRange(category);
             _appContext.CategoriesAndMovies.AddRange(categorymovie);
-            _appContext.SaveChanges();
+            //_appContext.SaveChanges();
         }
 
     }

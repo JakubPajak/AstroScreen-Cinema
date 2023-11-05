@@ -2,97 +2,167 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - AstroScreen_Cinema</title>
-    @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> *@
-    
-    <link rel="stylesheet" href="~/css/CssTheme.css"/>
+    <title> AstroScreen_Cinema</title>
+    <link rel="stylesheet" href="~/css/CssTheme.css" />
+    @* <link rel="stylesheet" href="~/css/slider.css" /> *@
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet" />
 
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/AstroScreen_Cinema.styles.css" asp-append-version="true" />
+    <style>
+        
+       nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        body {
+            background-image: url('images/SpaceWallpaper.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
+    </style>
+
 </head>
+
 <body>
-    <header>
+    
 
-        <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Navbar</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarColor01">
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">
-                                Home
-                                <span class="visually-hidden">(current)</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Features</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Pricing</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Separated link</a>
-                            </div>
-                        </li>
-                    </ul>
-                    <form class="d-flex">
-                        <input class="form-control me-sm-2" type="search" placeholder="Search">
-                        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-                    </form>
-                </div>
-            </div>
-        </nav>
+    <nav>
+        <b>AstroScreen Cinema</b>
+        <a href="#" id="home-link">Home<span></span></a>
+        <a href="#" id="now-showing-link">Now showing<span></span></a>
+        <a href="#" id="offers-link">Offers<span></span></a>
+        <a href="#" id="login-link">Log In<span></span></a>
 
-        @* <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AstroScreen_Cinema</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+        <!-- jpr nie dziala -->
+        @* <div class="tabs">
+            <input type="radio" class="tabs__radio" name="slider" id="home" />
+            <label for="home" class="tabs__label">Home</label>
+            <div class="tabs__content">
+                CONTENT for Home
             </div>
-        </nav> *@
-    </header>
+            <input type="radio" class="tabs__radio" name="slider" id="NowShowing" />
+            <label for="NowShowing" class="tabs__label">Now Showing</label>
+            <div class="tabs__content">
+                CONTENT for Now Showing
+            </div>
+            <input type="radio" class="tabs__radio" name="slider" id="Offers" />
+            <label for="Offers" class="tabs__label">Now Showing</label>
+            <div class="tabs__content">
+                CONTENT for Offers
+            </div>
+            <input type="radio" class="tabs__radio" name="slider" id="LogIn" />
+            <label for="LogIn" class="tabs__label">Log In</label>
+            <div class="tabs__content">
+                CONTENT for LogIn
+            </div>
+
+
+        </div> *@
+
+    </nav>
     <div class="container">
         <main role="main" class="pb-3">
+            <!-- zdjecia wydupia -->
+            @* <div id="slider">
+            <img class="small" src="~/images/StarWarsNewHope.jpg" alt="Film 1">
+            <img class="large" src="~/images/Mandalorian.jpg" alt="Film 2">
+            <img class="small" src="~/images/c3po.jpg" alt="Film 3">
+            </div> *@
+            
+            @* <button id="prev-button">&#9664;</button>
+            <button id="next-button">&#9654;</button>  *@
+
             @RenderBody()
         </main>
     </div>
+    <!-- To jest chyba najblizej celu ale kij -->
+    @* <script>
+        // Pobieramy linki i zawartość strony
+        const homeLink = document.getElementById('home-link');
+        const nowShowingLink = document.getElementById('now-showing-link');
+        const offersLink = document.getElementById('offers-link');
+        const loginLink = document.getElementById('login-link');
+        const content = document.getElementById('content');
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - AstroScreen_Cinema - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        // Dodajemy obsługę kliknięcia na link "Home"
+        homeLink.addEventListener('click', function (e) {
+            e.preventDefault(); // Zapobiegamy domyślnej nawigacji
+            content.innerHTML = 'Jesteś na stronie głównej'; // Aktualizacja zawartości strony
+        });
+
+        // Dodajemy obsługę kliknięcia na link "Now showing"
+        nowShowingLink.addEventListener('click', function (e) {
+            e.preventDefault(); // Zapobiegamy domyślnej nawigacji
+            content.innerHTML = 'Aktualnie grane filmy'; // Aktualizacja zawartości strony
+        });
+
+        // Dodajemy obsługę kliknięcia na link "Offers"
+        offersLink.addEventListener('click', function (e) {
+            e.preventDefault(); // Zapobiegamy domyślnej nawigacji
+            content.innerHTML = 'Nasze aktualne promocje'; // Aktualizacja zawartości strony
+        });
+
+        // Dodajemy obsługę kliknięcia na link "Log In"
+        loginLink.addEventListener('click', function (e) {
+            e.preventDefault(); // Zapobiegamy domyślnej nawigacji
+            content.innerHTML = 'Zaloguj się na swoje konto'; // Aktualizacja zawartości strony
+        });
+    </script> *@
+
+    <!-- Slidowanie kurde nie chce dzialac -->
+    @* <section>
+        <div class="swiper mySwiper container">
+            <div class="swipper-wrapper content">
+
+                <div class="swiper-slide card">
+                    <div class="card-content">
+                        <div class="image">
+                            <img src="images/c3po.jpg" alt="" />
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide card">
+                    <div class="card-content">
+                        <div class="image">
+                            <img src="images/Mandalorian.jpg" alt="" />
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide card">
+                    <div class="card-content">
+                        <div class="image">
+                            <img src="images/StarWarsNewHope.jpg" alt="" />
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-   @* <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> *@
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+    </section> *@
+
+    @* <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <button id="prev-button">&#9664;</button>
+    <button id="next-button">&#9654;</button>
+    <script src="./slider.js"></script> *@
+
+
+    
+
 </body>
-</html>
 
+</html>
