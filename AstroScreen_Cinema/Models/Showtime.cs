@@ -6,7 +6,7 @@ namespace AstroScreen_Cinema.Models
 	public class Showtime
 	{
         [Key]
-        public int Showtime_ID { get; set; }
+        public Guid Showtime_ID { get; set; }
 
 
 		public DateTime Day { get; set; }
@@ -15,19 +15,19 @@ namespace AstroScreen_Cinema.Models
 		public DateTime Time { get; set; }
 
 
-        //	//	Connection between different entities	//	//
+		//	//	Connection between different entities	//	//
 
 
-        public List<Reservation>? Reservations { get; set; }
+		public List<Reservation>? Reservations { get; set; } = new List<Reservation>();
 
 
-		public int Hall_ID { get; set; }
+		public Guid Hall_ID { get; set; }
 
 
 		public CinemaHall CinemaHall { get; set; }
 
 
-		public int Movie_ID { get; set; }
+		public Guid Movie_ID { get; set; }
 
 
 		public Movie Movie { get; set; }

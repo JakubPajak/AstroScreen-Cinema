@@ -6,7 +6,7 @@ namespace AstroScreen_Cinema.Models
 	public class Seats
 	{
         [Key]
-        public int Seat_ID { get; set; }
+        public Guid Seat_ID { get; set; }
 
 
 		public int RowNum { get; set; }
@@ -18,13 +18,13 @@ namespace AstroScreen_Cinema.Models
 		public bool IsReserved { get; set; }
 
 
-        public int Hall_ID { get; set; }
+        public Guid Hall_ID { get; set; }
 
 
 		public CinemaHall? CinemaHall { get; set; }
 
 
-		public List<Reservation>? Reservations { get; set; }
+		public List<Reservation>? Reservations { get; set; } = new List<Reservation>();
 
 	}
 }

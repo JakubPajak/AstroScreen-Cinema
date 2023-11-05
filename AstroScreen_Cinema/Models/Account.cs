@@ -6,7 +6,7 @@ namespace AstroScreen_Cinema.Models
 	public class Account
 	{
         [Key]
-        public int Account_ID { get; set; }
+        public Guid Account_ID { get; set; }
 
 
 		public string Name { get; set; }
@@ -27,10 +27,10 @@ namespace AstroScreen_Cinema.Models
 		public int PhoneNum { get; set; }
 
 
-        //	//	Connection between different entities	//	//
+		//	//	Connection between different entities	//	//
 
 
-        public List<Reservation>? Reservations { get; set; }
+		public List<Reservation>? Reservations { get; set; } = new List<Reservation>();
 	}
 }
 

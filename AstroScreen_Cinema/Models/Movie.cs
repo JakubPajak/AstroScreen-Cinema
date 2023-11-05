@@ -6,7 +6,7 @@ namespace AstroScreen_Cinema.Models
 	public class Movie
 	{
         [Key]
-        public int Film_ID { get; set; }
+        public Guid Film_ID { get; set; }
 
 
 		public string Title { get; set; }

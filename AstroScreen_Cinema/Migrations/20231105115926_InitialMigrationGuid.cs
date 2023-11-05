@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AstroScreen_Cinema.Migrations
 {
     /// <inheritdoc />
-    public partial class InitFUCKOF : Migration
+    public partial class InitialMigrationGuid : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,8 +15,7 @@ namespace AstroScreen_Cinema.Migrations
                 name: "Accounts",
                 columns: table => new
                 {
-                    Account_ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Account_ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -33,8 +32,7 @@ namespace AstroScreen_Cinema.Migrations
                 name: "Actors",
                 columns: table => new
                 {
-                    Actor_ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Actor_ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FullName = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -46,8 +44,7 @@ namespace AstroScreen_Cinema.Migrations
                 name: "Categories",
                 columns: table => new
                 {
-                    Categorie_ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Categorie_ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -60,8 +57,7 @@ namespace AstroScreen_Cinema.Migrations
                 name: "CinemaHalls",
                 columns: table => new
                 {
-                    Hall_ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Hall_ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     NumOfSeats = table.Column<int>(type: "int", nullable: false),
                     RowNum = table.Column<int>(type: "int", nullable: false),
                     SeatNum = table.Column<int>(type: "int", nullable: false),
@@ -88,12 +84,11 @@ namespace AstroScreen_Cinema.Migrations
                 name: "Seats",
                 columns: table => new
                 {
-                    Seat_ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Seat_ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     RowNum = table.Column<int>(type: "int", nullable: false),
                     SeatNum = table.Column<int>(type: "int", nullable: false),
                     IsReserved = table.Column<bool>(type: "bit", nullable: false),
-                    Hall_ID = table.Column<int>(type: "int", nullable: false)
+                    Hall_ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -109,8 +104,7 @@ namespace AstroScreen_Cinema.Migrations
                 name: "Movies",
                 columns: table => new
                 {
-                    Film_ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Film_ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Duration = table.Column<int>(type: "int", nullable: false),
@@ -130,8 +124,8 @@ namespace AstroScreen_Cinema.Migrations
                 name: "ActorsInMovies",
                 columns: table => new
                 {
-                    Actor_ID = table.Column<int>(type: "int", nullable: false),
-                    Movie_ID = table.Column<int>(type: "int", nullable: false)
+                    Actor_ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Movie_ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -154,8 +148,8 @@ namespace AstroScreen_Cinema.Migrations
                 name: "CategoriesAndMovies",
                 columns: table => new
                 {
-                    Category_ID = table.Column<int>(type: "int", nullable: false),
-                    Movie_ID = table.Column<int>(type: "int", nullable: false)
+                    Category_ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Movie_ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -178,12 +172,11 @@ namespace AstroScreen_Cinema.Migrations
                 name: "Showtimes",
                 columns: table => new
                 {
-                    Showtime_ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Showtime_ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Day = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Time = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Hall_ID = table.Column<int>(type: "int", nullable: false),
-                    Movie_ID = table.Column<int>(type: "int", nullable: false)
+                    Hall_ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Movie_ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -205,8 +198,7 @@ namespace AstroScreen_Cinema.Migrations
                 name: "Reservations",
                 columns: table => new
                 {
-                    Reservation_ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Reservation_ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Reservation_date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNum = table.Column<int>(type: "int", nullable: false),
@@ -214,9 +206,9 @@ namespace AstroScreen_Cinema.Migrations
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Birthdate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsRegistered = table.Column<bool>(type: "bit", nullable: false),
-                    Seat_ID = table.Column<int>(type: "int", nullable: false),
-                    Showtime_ID = table.Column<int>(type: "int", nullable: false),
-                    Account_ID = table.Column<int>(type: "int", nullable: false)
+                    Seat_ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Showtime_ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Account_ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {

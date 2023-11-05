@@ -7,7 +7,7 @@ namespace AstroScreen_Cinema.Models
 	public class Categories
 	{
         [Key]
-        public int Categorie_ID { get; set; }
+        public Guid Categorie_ID { get; set; }
 
 
 		public string Name { get; set; }
@@ -16,7 +16,7 @@ namespace AstroScreen_Cinema.Models
 		public string Description { get; set; }
 
 
-		public List<CategoriesAndMovies>? Movies { get; set; }
+		public List<CategoriesAndMovies>? Movies { get; set; } = new List<CategoriesAndMovies>();
 	}
 }
 

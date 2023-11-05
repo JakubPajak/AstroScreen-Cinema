@@ -24,11 +24,9 @@ namespace AstroScreen_Cinema.Migrations
 
             modelBuilder.Entity("AstroScreen_Cinema.Models.Account", b =>
                 {
-                    b.Property<int>("Account_ID")
+                    b.Property<Guid>("Account_ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Account_ID"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Birthdate")
                         .HasColumnType("datetime2");
@@ -59,11 +57,9 @@ namespace AstroScreen_Cinema.Migrations
 
             modelBuilder.Entity("AstroScreen_Cinema.Models.Actors", b =>
                 {
-                    b.Property<int>("Actor_ID")
+                    b.Property<Guid>("Actor_ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Actor_ID"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("FullName")
                         .IsRequired()
@@ -76,11 +72,11 @@ namespace AstroScreen_Cinema.Migrations
 
             modelBuilder.Entity("AstroScreen_Cinema.Models.ActorsInMovies", b =>
                 {
-                    b.Property<int>("Actor_ID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("Actor_ID")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Movie_ID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("Movie_ID")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Actor_ID", "Movie_ID");
 
@@ -91,11 +87,9 @@ namespace AstroScreen_Cinema.Migrations
 
             modelBuilder.Entity("AstroScreen_Cinema.Models.Categories", b =>
                 {
-                    b.Property<int>("Categorie_ID")
+                    b.Property<Guid>("Categorie_ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Categorie_ID"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -112,11 +106,11 @@ namespace AstroScreen_Cinema.Migrations
 
             modelBuilder.Entity("AstroScreen_Cinema.Models.CategoriesAndMovies", b =>
                 {
-                    b.Property<int>("Category_ID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("Category_ID")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Movie_ID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("Movie_ID")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Category_ID", "Movie_ID");
 
@@ -127,11 +121,9 @@ namespace AstroScreen_Cinema.Migrations
 
             modelBuilder.Entity("AstroScreen_Cinema.Models.CinemaHall", b =>
                 {
-                    b.Property<int>("Hall_ID")
+                    b.Property<Guid>("Hall_ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Hall_ID"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -168,11 +160,9 @@ namespace AstroScreen_Cinema.Migrations
 
             modelBuilder.Entity("AstroScreen_Cinema.Models.Movie", b =>
                 {
-                    b.Property<int>("Film_ID")
+                    b.Property<Guid>("Film_ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Film_ID"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -197,14 +187,12 @@ namespace AstroScreen_Cinema.Migrations
 
             modelBuilder.Entity("AstroScreen_Cinema.Models.Reservation", b =>
                 {
-                    b.Property<int>("Reservation_ID")
+                    b.Property<Guid>("Reservation_ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Reservation_ID"));
-
-                    b.Property<int>("Account_ID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("Account_ID")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Birthdate")
                         .HasColumnType("datetime2");
@@ -226,11 +214,11 @@ namespace AstroScreen_Cinema.Migrations
                     b.Property<DateTime>("Reservation_date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Seat_ID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("Seat_ID")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Showtime_ID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("Showtime_ID")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Surname")
                         .IsRequired()
@@ -249,14 +237,12 @@ namespace AstroScreen_Cinema.Migrations
 
             modelBuilder.Entity("AstroScreen_Cinema.Models.Seats", b =>
                 {
-                    b.Property<int>("Seat_ID")
+                    b.Property<Guid>("Seat_ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Seat_ID"));
-
-                    b.Property<int>("Hall_ID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("Hall_ID")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsReserved")
                         .HasColumnType("bit");
@@ -276,20 +262,18 @@ namespace AstroScreen_Cinema.Migrations
 
             modelBuilder.Entity("AstroScreen_Cinema.Models.Showtime", b =>
                 {
-                    b.Property<int>("Showtime_ID")
+                    b.Property<Guid>("Showtime_ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Showtime_ID"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Day")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Hall_ID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("Hall_ID")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Movie_ID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("Movie_ID")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Time")
                         .HasColumnType("datetime2");

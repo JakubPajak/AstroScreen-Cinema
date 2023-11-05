@@ -6,7 +6,7 @@ namespace AstroScreen_Cinema.Models
 	public class CinemaHall
 	{
         [Key]
-        public int Hall_ID { get; set; }
+        public Guid Hall_ID { get; set; }
 
 
 		public int NumOfSeats { get; set; }
@@ -21,10 +21,10 @@ namespace AstroScreen_Cinema.Models
 		public string City { get; set; }
 
 
-		public List<Seats> Seats { get; set; }
+		public List<Seats> Seats { get; set; } = new List<Seats>();
 
 
-		public List<Showtime> Showtimes { get; set; }
+		public List<Showtime> Showtimes { get; set; } = new List<Showtime>();
 	}
 }
 

@@ -7,13 +7,13 @@ namespace AstroScreen_Cinema.Models
 	public class Actors
 	{
         [Key]
-        public int Actor_ID { get; set; }
+        public Guid Actor_ID { get; set; }
 
 
 		public string FullName { get; set; }
 
 
-		public List<ActorsInMovies> Movies { get; set; }
+		public List<ActorsInMovies> Movies { get; set; } = new List<ActorsInMovies>();
 	}
 }
 
