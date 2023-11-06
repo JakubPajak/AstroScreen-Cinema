@@ -1,9 +1,50 @@
 ﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+<div class="swiper mySwiper container">
+    <div class="swipper-wrapper content-1">
+
+        <div class="swiper-slide card">
+            <div class="card-content">
+                <div class="image">
+                    <img src="images/c3po.jpg" alt="" />
+
+                </div>
+            </div>
+        </div>
+
+        <div class="swiper-slide card">
+            <div class="card-content">
+                <div class="image">
+                    <img src="images/Mandalorian.jpg" alt="" />
+
+                </div>
+            </div>
+        </div>
+
+        <div class="swiper-slide card">
+            <div class="card-content">
+                <div class="image">
+                    <img src="images/StarWarsNewHope.jpg" alt="" />
+
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
+<div class="swiper-button-next"></div>
+<div class="swiper-button-prev"></div>
+<div class="swiper-pagination"></div>
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+<button id="prev-button">&#9664;</button>
+<button id="next-button">&#9654;</button>
+<script src="./slider.js"></script>
+
+<h1>Welcome to the Home Page of our extra-ordinary cinema</h1>
+<h2>Here you can experience what is out of this planet</h2>
