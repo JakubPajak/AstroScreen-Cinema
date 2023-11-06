@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> AstroScreen_Cinema</title>
+    <link rel="stylesheet" href="../css/CssTheme.css" />
+    <link rel="stylesheet" href="../css/slider.css" /> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet" />
+
+    <style>
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        body {
+            background-image: url('../images/SpaceWallpaper.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+    <nav>
+        <b>AstroScreen Cinema</b>
+        <a href=".../Views/Shared/_Layout.cshtml">Home<span></span></a>
+        <a href="NowShowing.html">Now showing<span></span></a>
+        <a href="Offers.html">Offers<span></span></a>
+        <a href="Login.html">Log In<span></span></a>
+
+    </nav>
+    <div class="container">
+
+        <main role="main" class="pb-3">
+
+            <div id="slider">
+                <img class="small" src="../images/StarWarsNewHope.jpg" alt="Film 1">
+            </div>
+
+            <button id="prev-button">&#9664;</button>
+            <button id="next-button">&#9654;</button>  
+
+            @RenderBody()
+        </main>
+    </div>
+</body>
+
+</html>

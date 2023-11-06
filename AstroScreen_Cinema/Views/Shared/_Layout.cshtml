@@ -35,11 +35,11 @@
     <nav>
         <b>AstroScreen Cinema</b>
         <a href="#" id="home-link">Home<span></span></a>
-        <a href="#" id="now-showing-link">Now showing<span></span></a>
-        <a href="#" id="offers-link">Offers<span></span></a>
-        <a href="#" id="login-link">Log In<span></span></a>
+        <a href="~/html/NowShowing.html">Now showing<span></span></a>
+        <a href="~/html/Offers.html">Offers<span></span></a>
+        <a href="~/html/Login.html">Log In<span></span></a>
 
-        <!-- jpr nie dziala -->
+        
         @* <div class="tabs">
             <input type="radio" class="tabs__radio" name="slider" id="home" />
             <label for="home" class="tabs__label">Home</label>
@@ -67,8 +67,9 @@
 
     </nav>
     <div class="container">
+
         <main role="main" class="pb-3">
-            <!-- zdjecia wydupia -->
+            
             @* <div id="slider">
             <img class="small" src="~/images/StarWarsNewHope.jpg" alt="Film 1">
             <img class="large" src="~/images/Mandalorian.jpg" alt="Film 2">
@@ -81,7 +82,7 @@
             @RenderBody()
         </main>
     </div>
-    <!-- To jest chyba najblizej celu ale kij -->
+    
     @* <script>
         // Pobieramy linki i zawartość strony
         const homeLink = document.getElementById('home-link');
@@ -115,7 +116,7 @@
         });
     </script> *@
 
-    <!-- Slidowanie kurde nie chce dzialac -->
+    
     @* <section>
         <div class="swiper mySwiper container">
             <div class="swipper-wrapper content">

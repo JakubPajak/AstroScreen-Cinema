@@ -9,12 +9,12 @@
 
 body {
     display: flex;
-    justify-content: flex-start;
+    justify-content: end;
     align-items: start;
     min-height: 100vh;
 }
 nav b {
-    font-size: 3em;
+    font-size: 2em;
     color: #0ef
 }
 
