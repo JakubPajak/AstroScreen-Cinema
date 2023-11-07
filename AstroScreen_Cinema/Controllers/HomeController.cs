@@ -1,21 +1,25 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using AstroScreen_Cinema.Models;
+using System;
 
 namespace AstroScreen_Cinema.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly AppDBContext _appDbContext;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, AppDBContext appDbContext)
     {
         _logger = logger;
+        _appDbContext = appDbContext;
     }
 
     public IActionResult Index()
     {
-        return View();
+        List<Movie> movies = _appDbContext.Movies.Where(m => m.Duration < 100).ToList();
+        return View(movies);
     }
 
     public IActionResult Privacy()

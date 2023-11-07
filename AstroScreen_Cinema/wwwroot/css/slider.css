@@ -45,16 +45,17 @@ img {
    
 }
 
-    img:hover {
-        transform: translateZ(15px);
-        transition: transform 1s;
-        
-    }
+img:hover {
+    transform: translateZ(15px);
+    transition: transform 1s;
+}
+
+
 
 /*gradient shadows*/
 
-/* .slider::before,
-.slider::after{
+.slider-dissapear::before,
+.slider-dissapear::after {
     background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
     content: '';
     height: 100%;
@@ -63,13 +64,13 @@ img {
     z-index: 2;
 }
 
-.slider::before{
+.slider-dissapear::before {
     left: 0;
     top: 0;
 }
 
-.slider::after{
+.slider-dissapear::after {
     right: 0;
     top: 0;
     transform: rotateZ(180deg);
-} */
+} 

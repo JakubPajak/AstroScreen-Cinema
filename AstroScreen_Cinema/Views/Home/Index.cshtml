@@ -2,10 +2,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Home Page";
 }
+@model List<Movie> 
+
+
+
 <!--Slider functionality-->
 <div class="slider">
 
-    <div class="slide-track">
+    <div class="slide-track slider-dissapear">
         
         <!--6 slides-->
 
@@ -64,8 +68,62 @@
 </div>
 <!--End of Slider-->
 
-<footer>
-    <h1>Welcome to the Home Page of our extra-ordinary cinema</h1>
-    <h2>Here you can experience what is out of this planet</h2>
-</footer>
- 
+<section class="home--soon_in_cinemas">
+
+    @foreach (var movie in Model)
+    {
+        <h1>@movie.Title</h1>
+        <h3>@movie.Duration</h3>
+        <h3>@movie.Film_ID</h3>
+        <h3>@movie.Director_ID</h3>
+        <p>-----------------------------</p>
+    }
+
+    <h2>Soon in our cinemas</h2>
+    <div class="home--movies_container">
+        <div class="row">
+            <div class="home--soon_content">
+                <img />
+                <h3></h3>
+            </div>
+            <div class="home--soon_content">
+                <img />
+                <h3></h3>
+            </div>
+            <div class="home--soon_content">
+                <img />
+                <h3></h3>
+            </div>
+            <div class="home--soon_content">
+                <img />
+                <h3></h3>
+            </div>
+            <div class="home--soon_content">
+                <img />
+                <h3></h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="home--soon_content">
+                <img />
+                <h3></h3>
+            </div>
+            <div class="home--soon_content">
+                <img />
+                <h3></h3>
+            </div>
+            <div class="home--soon_content">
+                <img />
+                <h3></h3>
+            </div>
+            <div class="home--soon_content">
+                <img />
+                <h3></h3>
+            </div>
+            <div class="home--soon_content">
+                <img />
+                <h3></h3>
+            </div>
+        </div>
+    </div>
+</section>
