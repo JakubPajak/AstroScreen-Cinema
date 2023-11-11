@@ -1,0 +1,68 @@
+﻿.SoonInCinemas {
+    width: 90%;
+    height: auto;
+    background-color: rgba(43, 43, 43, 0.7); 
+    position: absolute;
+    top: 100%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 500px;
+    padding: 20px; 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+}
+
+.SoonTitle {
+    color: #FFF;
+    text-align: center;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 20px; 
+}
+
+.Posters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+}
+
+.Poster {
+    width: 200px;
+    margin: 10px;
+    margin-bottom: 50px;
+    margin-left: 25px; 
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s;
+    text-align: center;
+}
+
+    .Poster img {
+        max-width: 100%;
+        height: auto;
+        transition: transform 0.3s; 
+    }
+
+    .Poster figurecaption {
+        text-align: center; 
+        font-size: 18px; 
+        margin-top: 10px; 
+        color: #FFF;
+        overflow: hidden;
+        text-overflow: ellipsis; /* Dodanie elipsy, gdy tekst jest za długi */
+        display: -webkit-box;
+        -webkit-line-clamp: 3; /* Maksymalna liczba linii tekstu przed zastosowaniem elipsy */
+        -webkit-box-orient: vertical;
+    }
+
+    .Poster:hover {
+        transform: scale(1.1); 
+    }
+
+        .Poster:hover img {
+            transform: translateZ(15px);
+        }
+

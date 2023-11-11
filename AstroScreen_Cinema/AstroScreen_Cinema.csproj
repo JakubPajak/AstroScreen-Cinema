@@ -29,7 +29,6 @@
   <ItemGroup>
     <Folder Include="Models\Config\" />
     <Folder Include="DataSeed\" />
-    <Folder Include="wwwroot\images\" />
     <Folder Include="Services\" />
     <Folder Include="Models\EntitiesDto\" />
     <Folder Include="Models\DbModelEntities\" />
