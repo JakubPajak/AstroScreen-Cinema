@@ -1,6 +1,7 @@
 ﻿using AstroScreen_Cinema;
 using AstroScreen_Cinema.DataSeed;
 using AstroScreen_Cinema.Models;
+using AstroScreen_Cinema.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,7 +23,7 @@ builder.Services.AddDbContext<AppDBContext>(options =>
 });
 builder.Services.AddScoped<DataSeeding>();
 builder.Services.AddScoped<DataGenerator>();
-
+builder.Services.AddScoped<LoginService>();
 
 var app = builder.Build();
 

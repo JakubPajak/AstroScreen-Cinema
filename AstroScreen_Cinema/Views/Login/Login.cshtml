@@ -1,0 +1,35 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Login Page";
+
+}
+
+@model AstroScreen_Cinema.Models.EntitiesDto.LoginDto
+
+<link rel="stylesheet" href="~/wwwroot/css/login.css"/>
+<link rel="stylesheet" href="~/wwwroot/css/site.css" />
+
+<form asp-action="Login" asp-controller="Login" method="post">
+
+    @Html.AntiForgeryToken();
+
+    <div class="login--main_container">
+        <div class="login--main_label">
+            <h2 class="login--main-label_text">Log Into your account</h2>
+        </div>
+        <div class="login--input_area">
+            <div class="login--input">
+                <label asp-for="Login">Login:</label>
+                <input type="text" asp-for="Login" required />
+            </div>
+            <div class="login--input">
+                <label asp-for="Password">Password:</label>
+                <input type="text" asp-for="Password" required/>
+            </div>
+            <div class="login--submit_btn">
+                <button type="submit" value="Login">Login</button>
+            </div>
+        </div>
+    </div>
+</form>
