@@ -5,14 +5,13 @@
 
 }
 
+
 @model AstroScreen_Cinema.Models.EntitiesDto.LoginDto
 
-<link rel="stylesheet" href="~/wwwroot/css/login.css"/>
-<link rel="stylesheet" href="~/wwwroot/css/site.css" />
 
-<form asp-action="Login" asp-controller="Login" method="post">
+<form asp-action="Login" asp-controller="Login" method="post" class="login--form_main">
 
-    @Html.AntiForgeryToken();
+    @Html.AntiForgeryToken()
 
     <div class="login--main_container">
         <div class="login--main_label">
@@ -20,15 +19,19 @@
         </div>
         <div class="login--input_area">
             <div class="login--input">
-                <label asp-for="Login">Login:</label>
-                <input type="text" asp-for="Login" required />
+                <div class="login--label">
+                    <label asp-for="Login">Login:</label>
+                </div>
+                <input type="text" asp-for="Login" required class="login--input" />
             </div>
             <div class="login--input">
-                <label asp-for="Password">Password:</label>
-                <input type="text" asp-for="Password" required/>
+                <div class="login--label">
+                    <label asp-for="Password">Password:</label>
+                </div>
+                <input type="text" asp-for="Password" class="login--input" required/>
             </div>
-            <div class="login--submit_btn">
-                <button type="submit" value="Login">Login</button>
+            <div class="login--submit_btn_container">
+                <button type="submit" value="Login" class="login--submit_btn">Login</button>
             </div>
         </div>
     </div>

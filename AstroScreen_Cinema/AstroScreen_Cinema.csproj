@@ -25,6 +25,7 @@
     <None Remove="Models\EntitiesDto\" />
     <None Remove="Models\DbModelEntities\" />
     <None Remove="Views\Login\" />
+    <None Remove="Views\NowShowing\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\Config\" />
@@ -33,6 +34,8 @@
     <Folder Include="Models\EntitiesDto\" />
     <Folder Include="Models\DbModelEntities\" />
     <Folder Include="Views\Login\" />
+    <Folder Include="wwwroot\css\Login\" />
+    <Folder Include="Views\NowShowing\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Models\Config\EntitiesConfig\CustomerConfig.cs" />
@@ -45,5 +48,8 @@
     <Compile Remove="Models\Config\EntitiesConfig\DirectorsConfig.cs" />
     <Compile Remove="Models\Config\EntitiesConfig\MovieConfig.cs" />
     <Compile Remove="Models\Config\EntitiesConfig\ShowtimeConfig.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\css\Login\" />
   </ItemGroup>
 </Project>

@@ -1,0 +1,56 @@
+﻿body {
+    background-image: url('/images/HomeBackground/SpaceWallpaper.png');
+}
+
+
+.login--form_main{
+    width: 100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.login--main_container {
+    width: 50%;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(24, 21, 23, 0.35);
+    border-radius: 15px;
+}
+
+.login--main_label {
+    text-align: center;
+    padding: 20px 20px;
+}
+
+.login--input_area {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 30px 30px;
+}
+
+.login--input {
+    align-items: center;
+    font-size: 20px;
+}
+
+.login--label{
+    width: 100px;
+}
+
+.login--input {
+    width: 120px;
+    padding: 5px 0px 5px 0px;
+}
+
+login--submit_btn{
+    width: 50px;
+    background-color: blue;
+    border-radius: 15px;
+    font-size: 20px;
+}
