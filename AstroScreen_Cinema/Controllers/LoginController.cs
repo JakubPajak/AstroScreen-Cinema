@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AstroScreen_Cinema.Models;
+using AstroScreen_Cinema.Models.EntitiesDto;
 using AstroScreen_Cinema.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,18 +32,32 @@ namespace AstroScreen_Cinema.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Login(string login, string pass)
+        public IActionResult Login(string login, string password)
         {
-            var user = _loginService.GetLogin(login, pass);
-            if (user.IsLogged)
+            var user = _loginService.GetLogin(login, password);
+
+            if (user.IsLogged.Equals("TRUE"))
             {
-                return RedirectToAction("Index", "Home");
+                ViewData["LoginSuccess"] = true;
+                ViewData["UserName"] = user.Login; // Set the actual username
             }
             else
             {
-                return RedirectToAction("LoginFailed", "Login");
+                ViewData["LoginSuccess"] = false;
             }
+
+            return View();
         }
+
+        [HttpGet]
+        [ValidateAntiForgeryToken]
+        public IActionResult LoginOut(string login)
+        {
+            var user = _loginService.UserLogOut(login);
+
+            return View(user);
+        }
+
     }
 }
 

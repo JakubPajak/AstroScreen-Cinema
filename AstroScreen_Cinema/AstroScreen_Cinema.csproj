@@ -26,6 +26,7 @@
     <None Remove="Models\DbModelEntities\" />
     <None Remove="Views\Login\" />
     <None Remove="Views\NowShowing\" />
+    <None Remove="Views\MyAccount\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\Config\" />
@@ -36,6 +37,7 @@
     <Folder Include="Views\Login\" />
     <Folder Include="wwwroot\css\Login\" />
     <Folder Include="Views\NowShowing\" />
+    <Folder Include="Views\MyAccount\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Models\Config\EntitiesConfig\CustomerConfig.cs" />

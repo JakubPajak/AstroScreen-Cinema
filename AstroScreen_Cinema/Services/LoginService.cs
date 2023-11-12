@@ -28,14 +28,36 @@ namespace AstroScreen_Cinema.Services
 
 				if (userDto.Password.Equals(_pass))
 				{
-					userDto.IsLogged = true;
+					userDto.IsLogged = "TRUE";
 					return userDto;
 				}
 				else
 				{
-					userDto.IsLogged = false;
+					userDto.IsLogged = "FALSE";
 					return userDto;
 				}
+
+			}
+			else
+			{
+				return new LoginDto();
+			}
+		}
+
+		public LoginDto UserLogOut(string _login)
+		{
+			var getUser = _appDBContext.Accounts.FirstOrDefault(a => a.Email.Equals(_login));
+
+			if (getUser != null)
+			{
+				var userDto = new LoginDto()
+				{
+					Login = getUser.Email,
+					Password = getUser.Password,
+				};
+
+				userDto.IsLogged = "FALSE";
+				return userDto;
 
 			}
 			else

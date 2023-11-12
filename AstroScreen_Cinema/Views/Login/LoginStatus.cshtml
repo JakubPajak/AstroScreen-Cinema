@@ -1,0 +1,51 @@
+﻿@namespace AstroScreen_Cinema.Views.Login
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model AstroScreen_Cinema.Models.EntitiesDto.LoginDto;
+
+
+
+@if (Convert.ToBoolean(ViewData["LoginSuccess"]))
+{
+    <div id="loginSuccessModal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Login Success</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Welcome, @ViewData["UserName"]!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>$(document).ready(function () {
+            $('#loginSuccessModal').modal('show');
+        });</script>
+}
+else if (Convert.ToBoolean(ViewData["LoginSuccess"]) == false)
+{
+    <div id="loginFailureModal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Login Failed</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Invalid username or password. Please try again.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>$(document).ready(function () {
+            $('#loginFailureModal').modal('show');
+        });</script>
+}

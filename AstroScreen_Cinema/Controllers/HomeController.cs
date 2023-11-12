@@ -18,7 +18,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        List<Movie> movies = _appDbContext.Movies.Where(m => m.Duration < 100).ToList();
+       List<Movie> movies = _appDbContext.Movies.Where(m => m.Duration < 100).ToList();
         return View(movies);
     }
 

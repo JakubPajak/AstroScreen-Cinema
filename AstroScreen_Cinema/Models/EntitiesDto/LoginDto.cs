@@ -8,7 +8,8 @@ namespace AstroScreen_Cinema.Models.EntitiesDto
 
 		public string Password { get; set; }
 
-		public bool IsLogged { get; set; }
+
+		public string IsLogged { get; set; } = "NOTLOGGED";
 	}
 }
 
