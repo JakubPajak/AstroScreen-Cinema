@@ -36,6 +36,7 @@
     <Folder Include="Views\Login\" />
     <Folder Include="wwwroot\css\Login\" />
     <Folder Include="Views\NowShowing\" />
+    <Folder Include="wwwroot\js\Home\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Models\Config\EntitiesConfig\CustomerConfig.cs" />

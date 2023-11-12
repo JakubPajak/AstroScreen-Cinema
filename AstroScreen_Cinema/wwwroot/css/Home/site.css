@@ -106,3 +106,20 @@ nav a:hover span {
     padding: 8px 40px;
     transition: .5s;
 }
+
+
+/* Style for the slider */
+.slider {
+    margin-bottom: 20px; /* Add some bottom margin to create space */
+}
+
+/* Style for the soon in cinemas section */
+.SoonInCinemas {
+    margin-bottom: 20px; /* Add some bottom margin to create space */
+}
+
+/* Style for the events section */
+/*.Events {
+    margin-bottom: 20px;*/ /* Add some bottom margin to create space */
+/*}*/
+

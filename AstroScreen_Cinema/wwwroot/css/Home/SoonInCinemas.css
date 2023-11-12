@@ -1,17 +1,33 @@
-﻿.SoonInCinemas {
+﻿/*.SoonInCinemas {
     width: 90%;
     height: auto;
     background-color: rgba(43, 43, 43, 0.7); 
-    position: absolute;
+    position: relative;
     top: 100%; 
     left: 50%;
     transform: translate(-50%, -50%);
-    margin-top: 500px;
-    padding: 20px; 
+    margin-top: auto;*/ /*powinno być auto*/
+    /*padding: 20px; 
     display: flex;
     flex-wrap: wrap;
     justify-content: center; 
+}*/
+
+.SoonInCinemas {
+    width: 90%;
+    margin: auto;  
+    padding: 20px;
+    background-color: rgba(43, 43, 43, 0.7);
 }
+
+.SoonTitleContainer {
+    border: 2px solid;
+    border-color: rgba(43, 43, 43);
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: rgba(43, 43, 43, 0.5);
+}
+
 
 .SoonTitle {
     color: #FFF;
@@ -26,20 +42,24 @@
 .Posters {
     display: flex;
     flex-wrap: wrap;
-    justify-content: start;
+    justify-content: center;
 }
 
 .Poster {
-    width: 200px;
-    margin: 10px;
+    width: 200px; /* Zmniejszenie szerokości obrazu i dostosowanie odstępów */
+    margin: 20px;
     margin-bottom: 50px;
-    margin-left: 25px; 
     position: relative;
     overflow: hidden;
     transition: transform 0.3s;
     text-align: center;
 }
 
+    @media screen and (max-width: 768px) {
+    .Poster {
+        width: calc(33.333% - 20px);  Dostosowanie szerokości na mniejszych ekranach 
+        }
+    }
     .Poster img {
         max-width: 100%;
         height: auto;
@@ -52,9 +72,9 @@
         margin-top: 10px; 
         color: #FFF;
         overflow: hidden;
-        text-overflow: ellipsis; /* Dodanie elipsy, gdy tekst jest za długi */
+        text-overflow: ellipsis; 
         display: -webkit-box;
-        -webkit-line-clamp: 3; /* Maksymalna liczba linii tekstu przed zastosowaniem elipsy */
+        -webkit-line-clamp: 3; 
         -webkit-box-orient: vertical;
     }
 
@@ -66,3 +86,67 @@
             transform: translateZ(15px);
         }
 
+
+/*Popup implementation*/
+.SoonInCinemas .popup-image-soon {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    width: 100%;
+    z-index: 100;
+    display: none;
+    backdrop-filter: blur(10px);
+}
+
+    .SoonInCinemas .popup-image-soon .popup-close {
+        position: absolute;
+        top: 0;
+        right: 10px;
+        font-size: 60px;
+        font-weight: bolder;
+        color: #fff;
+        cursor: pointer;
+        z-index: 100;
+    }
+
+    .SoonInCinemas .popup-image-soon .popup-img-soon {
+        position: absolute;
+        top: 50%;
+        left: 30%;
+        transform: translate(-50%, -50%);
+        border: 5px solid #fff;
+        border-radius: 5px;
+        width: 500px;
+        object-fit: cover;
+    }
+
+    .SoonInCinemas .popup-image-soon .popup-content-soon {
+        position: absolute;
+        top: 50%;
+        left: 60%;
+        transform: translate(-50%, -50%);
+        max-width: 30%;
+        white-space: normal;
+        color: #fff;
+        margin-left: 20px;
+        padding: 10px;
+        background: rgba(0, 0, 0, 0.8);
+        border-radius: 10px;
+    }
+
+        .SoonInCinemas .popup-image-soon .popup-content-soon .popup-title-soon {
+            font-size: 40px;
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        .SoonInCinemas .popup-image-soon .popup-content-soon .popup-description-soon {
+            margin: 0;
+            font-size: 20px;
+        }
+
+.SoonInCinemas .Posters .Poster img:hover {
+    transform: translateZ(15px);
+}

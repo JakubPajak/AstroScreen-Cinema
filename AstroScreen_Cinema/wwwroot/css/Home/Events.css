@@ -1,1 +1,139 @@
 ﻿
+.Events {
+    width: 90%;
+    margin: auto;
+    padding: 20px;
+    background-color: rgba(43, 43, 43, 0.7);
+}
+
+.EventTitleContainer {
+    border: 2px solid; 
+    border-color: rgba(43, 43, 43);
+    padding: 10px; 
+    margin-bottom: 20px; 
+    background-color: rgba(43, 43, 43, 0.5); 
+}
+
+.EventTitle {
+    color: #FFF;
+    text-align: center;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 20px;
+}
+
+.EventPosters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.EventPoster {
+    width: 200px; 
+    margin: 20px;
+    margin-bottom: 50px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s;
+    text-align: center;
+}
+
+    @media screen and (max-width: 768px) {
+    .Poster {
+        width: calc(33.333% - 20px);  Dostosowanie szerokości na mniejszych ekranach 
+          }
+    }
+    .EventPoster img {
+        max-width: 100%;
+        height: auto;
+        transition: transform 0.3s;
+    }
+
+    .EventPoster figurecaption {
+        text-align: center;
+        font-size: 18px;
+        margin-top: 10px;
+        color: #fff;
+        overflow: hidden;
+        text-overflow: ellipsis; /* Dodanie elipsy, gdy tekst jest za długi */
+        display: -webkit-box;
+        -webkit-line-clamp: 3; /* Maksymalna liczba linii tekstu przed zastosowaniem elipsy */
+        -webkit-box-orient: vertical;
+    }
+
+    .EventPoster:hover {
+        transform: scale(1.1);
+    }
+
+        .EventPoster:hover img {
+            transform: translateZ(15px);
+        }
+
+
+/*POPUP FUNCTIONALITY*/
+.Events .popup-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5); 
+    height: 100%;
+    width: 100%;
+    z-index: 100;
+    display: none;
+    backdrop-filter: blur(10px); 
+}
+
+    .Events .popup-image span {
+        position: absolute;
+        top: 0;
+        right: 10px;
+        font-size: 60px;
+        font-weight: bolder;
+        color: #fff;
+        cursor: pointer;
+        z-index: 100;
+    }
+
+    .Events .popup-image img {
+        position: absolute;
+        top: 50%;
+        left: 30%;
+        transform: translate(-50%,-50%);
+        border: 5px solid #fff;
+        border-radius: 5px;
+        width: 500px;
+        object-fit: cover;
+    }
+
+.Events .popup-content {
+    position: absolute;
+    top: 50%;
+    left: 60%; 
+    transform: translate(-50%, -50%);
+    max-width: 30%; 
+    white-space: normal; 
+    color: #fff;
+    margin-left: 20px; 
+    padding: 10px; 
+    background: rgba(0, 0, 0, 0.8); 
+    border-radius: 10px; 
+}
+
+.Events .popup-title {
+    font-size: 40px; 
+    font-weight: bold; 
+    margin-bottom: 7px; 
+}
+
+.Events .popup-description {
+    margin: 0; 
+    font-size: 20px; 
+}
+
+@media(max-width:768px) {
+    .Events .popup-image img {
+        width:95%;
+    }
+}

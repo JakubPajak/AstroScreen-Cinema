@@ -2,8 +2,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Home Page";
 }
-@model List<Movie> 
+@model List<Movie>
 
+<link rel="stylesheet" href="~/css/Home/site.css" />
+<link rel="stylesheet" href="~/css/Home/slider.css" />
+<link rel="stylesheet" href="~/css/Home/SoonInCinemas.css" />
+<link rel="stylesheet" href="~/css/Home/Events.css" />
 
 
 <!--Slider functionality-->
@@ -68,73 +72,263 @@
 </div>
 <!--End of Slider-->
 
+
 <!--SoonInCinemas-->
 <div class="SoonInCinemas">
 
-    <div class="SoonTitle">
-        <h1>Soon in our cinemas!</h1>
+    <div class="SoonTitleContainer">
+        <div class="SoonTitle">
+            <h1>SOON IN OUR CINEMAS!</h1>
+        </div>
     </div>
+    
     <div class="Posters">
 
-        <figure class="Poster">
+        <figure class="Poster" data-title="Avatar: The way of water">
             <img src="images/SoonInCinemas/avatar810x1200.jpeg" />
             @* <figurecaption>@movie.Title</figurecaption> *@
             <figurecaption>Avatar: The way of water</figurecaption>
         </figure>
-        <figure class="Poster">
+        <figure class="Poster" data-title="Barbie">
             <img src="images/SoonInCinemas/Barbie810x1200.jpg" />
             @* <figurecaption>@movie.Title</figurecaption> *@
             <figurecaption>Barbie</figurecaption>
         </figure>
-        <figure class="Poster">
+        <figure class="Poster" data-title="Batman: The Dark Knight">
             <img src="images/SoonInCinemas/Batman810x1200.jpg" />
             @* <figurecaption>@movie.Title</figurecaption> *@
             <figurecaption>Batman: The Dark Knight</figurecaption>
         </figure>
-        <figure class="Poster">
+        <figure class="Poster" data-title="Black Widow">
             <img src="images/SoonInCinemas/black-widow810x1200.jpg" />
             @* <figurecaption>@movie.Title</figurecaption> *@
             <figurecaption>Black Widow</figurecaption>
         </figure>
-        <figure class="Poster">
+        <figure class="Poster" data-title="Cruella">
             <img src="images/SoonInCinemas/Cruella810x1200.jpg" />
             @* <figurecaption>@movie[1].Title</figurecaption> *@
             <figurecaption>Cruella</figurecaption>
         </figure>
-        <figure class="Poster">
+        <figure class="Poster" data-title="The Lord of The Rings: Return of The King">
             <img src="images/SoonInCinemas/LOTR810x1200.jpg" />
             @* <figurecaption>@movie.Title</figurecaption> *@
             <figurecaption>The Lord of The Rings: Return of The King</figurecaption>
         </figure>
-        <figure class="Poster">
+        <figure class="Poster" data-title="The Nun 2">
             <img src="images/SoonInCinemas/Nun810x1200.jpg" />
             @* <figurecaption>@movie.Title</figurecaption> *@
             <figurecaption>The Nun 2</figurecaption>
         </figure>
-        <figure class="Poster">
+        <figure class="Poster" data-title="Oppenheimer">
             <img src="images/SoonInCinemas/oppenheimer810x1200.jpg" />
             @* <figurecaption>@movie.Title</figurecaption> *@
             <figurecaption>Oppenheimer</figurecaption>
         </figure>
-        <figure class="Poster">
+        <figure class="Poster" data-title="Spider-Man: Across the spider-verse">
             <img src="images/SoonInCinemas/Spiderman_across_the_spiderverse810x1200.jpg" />
             @* <figurecaption>@movie.Title</figurecaption> *@
             <figurecaption>Spider-Man: Across the spider-verse</figurecaption>
         </figure>
-        <figure class="Poster">
+        <figure class="Poster" data-title="Thor: Love and Thunder">
             <img src="images/SoonInCinemas/thor810x1200.jpeg" />
             @* <figurecaption>@movie.Title</figurecaption> *@
             <figurecaption>Thor: Love and Thunder</figurecaption>
         </figure>
     </div>
+
+    <div class="popup-image-soon">
+        <span class="popup-close">&times;</span>
+        <div class="popup-content-soon">
+            <h1 class="popup-title-soon">Default Text</h1>
+            <p class="popup-description-soon">Default Description</p>
+        </div>
+        <img class="popup-img-soon" />
+    </div>
+
 </div>
+    <!--ScriptforPOPUPsoonincinemas-->
+<script>
+    document.querySelectorAll('.SoonInCinemas .Posters .Poster img').forEach(image => {
+        image.onclick = () => {
+            const title = image.parentElement.getAttribute('data-title');
+            const { title: popupTitle, description: popupDescription } = getMovieDescription(title);
+
+            const popupImage = document.querySelector('.SoonInCinemas .popup-image-soon');
+            const popupContent = popupImage.querySelector('.popup-content-soon');
+            const popupImgElement = popupImage.querySelector('.popup-img-soon');
+
+            popupImage.style.display = 'block';
+            popupContent.querySelector('.popup-title-soon').textContent = popupTitle;
+            popupContent.querySelector('.popup-description-soon').textContent = popupDescription;
+            popupImgElement.src = image.getAttribute('src');
+        }
+    });
+
+    document.querySelector('.SoonInCinemas .popup-image-soon .popup-close').onclick = () => {
+        document.querySelector('.SoonInCinemas .popup-image-soon').style.display = 'none';
+    }
+    function getMovieDescription(title) {
+        switch (title) {
+            case "Avatar: The way of water":
+                return {
+                    title: "Title for Avatar: The way of water",
+                    description: "Description for Avatar: The way of water"
+                };
+            case "Barbie":
+                return {
+                    title: "Title for Barbie",
+                    description: "Description for Barbie"
+                };
+            case "Batman: The Dark Knight":
+                return {
+                    title: "Title for Batman: The Dark Knight",
+                    description: "Description for Batman: The Dark Knight"
+                }
+            case "Black Widow":
+                return {
+                    title: "Title for Black Widow",
+                    description: "Description for Black Widow"
+                }
+            case "Cruella":
+                return {
+                    title: "Title for Cruella",
+                    description: "Description for Cruella"
+                }
+            case "The Lord of The Rings: Return of The King":
+                return {
+                    title: "Title for The Lord of The Rings: Return of The King",
+                    description: "Description for The Lord of The Rings: Return of The King"
+                }
+            case "The Nun 2":
+                return {
+                    title: "Title for ",
+                    description: "Description for "
+                }
+            case "Oppenheimer":
+                return {
+                    title: "Title for Oppenheimer",
+                    description: "Description for Oppenheimer"
+                }
+            case "Spider-Man: Across the spider-verse":
+                return {
+                    title: "Title for Spider-Man: Across the spider-verse",
+                    description: "Description for Spider-Man: Across the spider-verse"
+                }
+            case "Thor: Love and Thunder":
+                return {
+                    title: "Title for Thor: Love and Thunder",
+                    description: "Description for Thor: Love and Thunder"
+                }
+            default:
+                return {
+                    title: "Default title",
+                    description: "Default description"
+                };
+        }
+    }
+</script>
 <!--EndOfSoonInCinemas-->
 
+
 <!--Events-->
-@* <div class="Events">
-    <div class="EventTitle">
-        <h1>Incoming events!</h1>
+<div class="Events">
+    <div class="EventTitleContainer">
+        <div class="EventTitle">
+            <h1>EVENTS!</h1>
+        </div>
     </div>
-</div> *@
-<!--EndOfEvents
--->
+    <div class="EventPosters">
+        <figure class="EventPoster" data-title="Wheel of Fortune and Fantasy">
+            <img src="images/Events/Asian810x1200.jpeg" alt=""/>
+            <figurecaption>Wheel of Fortune and Fantasy</figurecaption>
+        </figure>
+        <figure class="EventPoster" data-title="Barbenheimer">
+            <img src="images/Events/barbenheimer-810x1200.jpg" alt=""/>
+            <figurecaption>Barbenheimer</figurecaption>
+        </figure>
+        <figure class="EventPoster" data-title="Fallen Leaves">
+            <img src="images/Events/fallenleaves01-810x1200.jpg" alt=""/>
+            <figurecaption>Fallen Leaves</figurecaption>
+        </figure>
+        <figure class="EventPoster" data-title="Harlem">
+            <img src="images/Events/Harlem810x1200.jpg" alt=""/>
+            <figurecaption>Harlem</figurecaption>
+        </figure>
+        <figure class="EventPoster" data-title="John Lewis: Good Trouble">
+            <img src="images/Events/JohnLewis810x1200.jpg" alt=""/>
+            <figurecaption>John Lewis: Good Trouble</figurecaption>
+        </figure>
+    </div>
+
+    <div class="popup-image">
+        <span>&times;</span>
+        <div class="popup-content">
+            <h1 class="popup-title">Default Text</h1>
+            <p class="popup-description">Default Description</p>
+        </div>
+        <img />
+    </div>
+
+</div>
+    <!--ScriptforPOPUPevents-->
+<script>
+    document.querySelectorAll('.EventPosters img').forEach(image => {
+        image.onclick = () => {
+            const title = image.parentElement.getAttribute('data-title');
+            const { title: popupTitle, description: popupDescription } = getTitleDescription(title);
+
+            const popupImage = document.querySelector('.popup-image');
+            const popupContent = popupImage.querySelector('.popup-content');
+            const popupImgElement = popupImage.querySelector('img');
+
+            popupImage.style.display = 'block';
+            popupContent.querySelector('.popup-title').textContent = popupTitle;
+            popupContent.querySelector('.popup-description').textContent = popupDescription;
+            popupImgElement.src = image.getAttribute('src');
+        }
+    });
+
+    document.querySelector('.popup-image span').onclick = () => {
+        document.querySelector('.popup-image').style.display = 'none';
+    }
+
+    // Replace this function with your own logic to get personalized text based on the title
+    function getTitleDescription(title) {
+        // Example: Return a static description based on the title
+        switch (title) {
+            case "Wheel of Fortune and Fantasy":
+                return {
+                    title: "Wheel of Fortune and Fantasy",
+                    description: "In the film 'Wheel of Fortune and Fantasy,' you'll discover a world full of twists and turns, where the destinies of characters intertwine in an unpredictable way. Is it just coincidence, or is there something more?"
+                };
+            case "Barbenheimer":
+                return {
+                    title: "Barbenheimer",
+                    description: "Barbenheimer is a touching story of an extraordinary friendship between two unique souls. When fate throws challenges their way, they must face adversity to preserve their dreams and values."
+                };
+            case "Fallen Leaves":
+                return {
+                    title: "Fallen Leaves",
+                    description: "Fallen Leaves' tells a moving tale of a magical world where autumn doesn't signify an end but a new beginning. The film explores the secrets of nature and human hearts hidden beneath falling leaves."
+                };
+            case "Harlem":
+                return {
+                    title: "Harlem",
+                    description: "Harlem is a vibrant city where dreams are born and realized against the backdrop of jazz rhythms. Experience unforgettable moments in the heart of the cultural pulse of this exceptional place."
+                };
+            case "John Lewis: Good Trouble":
+                return {
+                    title: "John Lewis: Good Trouble",
+                    description: "Live extraordinary moments with John Lewis, a hero in the fight for justice and civil rights. The film 'John Lewis: Good Trouble' is an inspiring journey through the life of an unwavering activist and his impact on history."
+                };
+            default:
+                return {
+                    title: "Default title",
+                    description: "Default description"
+                };
+        }
+    }
+
+  
+</script>
+<!--EndOfEvents-->
