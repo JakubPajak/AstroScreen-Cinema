@@ -17,6 +17,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.13" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Models\Config\" />
@@ -27,6 +28,7 @@
     <None Remove="Views\Login\" />
     <None Remove="Views\NowShowing\" />
     <None Remove="Views\MyAccount\" />
+    <None Remove="AuthorizationAuthentication\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\Config\" />
@@ -38,6 +40,8 @@
     <Folder Include="wwwroot\css\Login\" />
     <Folder Include="Views\NowShowing\" />
     <Folder Include="Views\MyAccount\" />
+    <Folder Include="wwwroot\css\MyAccount\" />
+    <Folder Include="AuthorizationAuthentication\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Models\Config\EntitiesConfig\CustomerConfig.cs" />
@@ -53,5 +57,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\css\Login\" />
+    <Content Remove="wwwroot\css\MyAccount\" />
   </ItemGroup>
 </Project>

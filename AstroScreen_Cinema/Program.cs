@@ -1,13 +1,39 @@
-﻿using AstroScreen_Cinema;
+﻿using System.Text;
+using AstroScreen_Cinema;
+using AstroScreen_Cinema.AuthorizationAuthentication;
 using AstroScreen_Cinema.DataSeed;
 using AstroScreen_Cinema.Models;
 using AstroScreen_Cinema.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
+var authenticationSettings = new AuthenticationSettings();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Configuration.GetSection("Authentication").Bind(authenticationSettings);
+
+// Add services to the container.
+
+builder.Services.AddAuthentication(option =>
+{
+    option.DefaultAuthenticateScheme = "Bearer";
+    option.DefaultScheme = "Bearer";
+    option.DefaultChallengeScheme = "Bearer";
+}).AddJwtBearer(config =>
+{
+    config.RequireHttpsMetadata = false;
+    config.SaveToken = true;
+    config.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+    {
+        ValidIssuer = authenticationSettings.JwtIssuer,
+        ValidAudience = authenticationSettings.JwtIssuer,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authenticationSettings.JwtKey)),
+    };
+});
 
 
 builder.Services.Configure<Microsoft.AspNetCore.Mvc.JsonOptions>(options =>
@@ -15,7 +41,8 @@ builder.Services.Configure<Microsoft.AspNetCore.Mvc.JsonOptions>(options =>
     options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
 });
 
-//builder.Services.AddDbContext<AppDBContext>();
+
+builder.Services.AddScoped<IAuthorizationHandler, DataDisplayRequirementHandler>();
 builder.Services.AddDbContext<AppDBContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DataBaseMAC"));

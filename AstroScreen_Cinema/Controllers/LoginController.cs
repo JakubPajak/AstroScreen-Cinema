@@ -30,6 +30,8 @@ namespace AstroScreen_Cinema.Controllers
             return View();
         }
 
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Login(string login, string password)
@@ -38,16 +40,16 @@ namespace AstroScreen_Cinema.Controllers
 
             if (user.IsLogged.Equals("TRUE"))
             {
-                ViewData["LoginSuccess"] = true;
-                ViewData["UserName"] = user.Login; // Set the actual username
+                return RedirectToAction("Index", "Home");
             }
             else
             {
-                ViewData["LoginSuccess"] = false;
+                ViewBag.LoginStatus = 0;
             }
 
-            return View();
+            return View(user);
         }
+
 
         [HttpGet]
         [ValidateAntiForgeryToken]
