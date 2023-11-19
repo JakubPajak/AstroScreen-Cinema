@@ -9,6 +9,17 @@
     <link rel="stylesheet" href="~/css/Login/login.css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet" />
 
+    <style>
+        nav img.logo {
+            max-width: 20vw; /* Możesz dostosować maksymalną szerokość do preferencji */
+            height: auto;
+        }
+
+        nav a{
+            display: inline-block;
+            margin-right: 35px; /* Dodaj odstęp między elementami nawigacji */
+        }
+    </style>
 
 </head>
 
@@ -18,12 +29,13 @@
         @*Adding header img*@
         <img src="~/images/HomeBackground/Header.jpg" />
 
+
         @*Adding navigation*@
         <nav>
             <ul>
-                <li><b>AstroScreen Cinema</b></li>
+                <li><img class="logo" src="~/images/Logo/favlogo.png" /></li>
                 <li><a id="home-link" asp-area="" asp-controller="Home" asp-action="Index">Home<span></span></a></li>
-                <li><a id="home-link" asp-area="" asp-controller="Home" asp-action="NowShowing">Now Showing<span></span></a></li>
+                <li><a id="home-link" asp-area="" asp-controller="NowShowing" asp-action="Nowshowing">Now Showing<span></span></a></li>
                 <li><a id="home-link" asp-area="" asp-controller="Login" asp-action="Login">Login<span></span></a></li>
             </ul>
         </nav>

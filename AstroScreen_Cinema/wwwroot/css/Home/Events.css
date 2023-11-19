@@ -42,7 +42,7 @@
 
     @media screen and (max-width: 768px) {
     .Poster {
-        width: calc(33.333% - 20px);  Dostosowanie szerokości na mniejszych ekranach 
+        width: calc(33.333% - 20px);  /*Dostosowanie szerokości na mniejszych ekranach*/ 
           }
     }
     .EventPoster img {
@@ -77,12 +77,12 @@
     position: fixed;
     top: 0;
     left: 0;
-    background: rgba(0, 0, 0, 0.5); 
+    background: rgba(0, 0, 0, 0.5);
     height: 100%;
     width: 100%;
     z-index: 100;
     display: none;
-    backdrop-filter: blur(10px); 
+    backdrop-filter: blur(10px);
 }
 
     .Events .popup-image span {
@@ -98,42 +98,48 @@
 
     .Events .popup-image img {
         position: absolute;
-        top: 50%;
-        left: 30%;
-        transform: translate(-50%,-50%);
+        top: 10%;
+        left: 50%; /* Zmieniłem wartość left na 10% */
         border: 5px solid #fff;
         border-radius: 5px;
-        width: 500px;
+        width: 30vw; /* Zmiana szerokości na procent viewportu */
+        max-width: 500px; /* Dodanie maksymalnej szerokości */
         object-fit: cover;
     }
 
 .Events .popup-content {
     position: absolute;
     top: 50%;
-    left: 60%; 
+    left: 30%;
     transform: translate(-50%, -50%);
-    max-width: 30%; 
-    white-space: normal; 
+    max-width: 30vw; 
+    white-space: normal;
     color: #fff;
-    margin-left: 20px; 
-    padding: 10px; 
-    background: rgba(0, 0, 0, 0.8); 
-    border-radius: 10px; 
+    margin-right: 50px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
 }
 
 .Events .popup-title {
-    font-size: 40px; 
-    font-weight: bold; 
-    margin-bottom: 7px; 
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 7px;
 }
 
 .Events .popup-description {
-    margin: 0; 
-    font-size: 20px; 
+    margin: 0;
+    font-size: 20px;
 }
 
-@media(max-width:768px) {
+@media (max-width: 768px) {
     .Events .popup-image img {
-        width:95%;
+        width: 95%;
+    }
+
+    .Events .popup-content {
+        width: 95%;
+        max-width: none; /* usuń maksymalną szerokość na mniejszych ekranach */
     }
 }
+

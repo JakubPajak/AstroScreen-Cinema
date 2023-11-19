@@ -35,7 +35,6 @@
     <Folder Include="Models\DbModelEntities\" />
     <Folder Include="Views\Login\" />
     <Folder Include="wwwroot\css\Login\" />
-    <Folder Include="Views\NowShowing\" />
     <Folder Include="wwwroot\js\Home\" />
   </ItemGroup>
   <ItemGroup>

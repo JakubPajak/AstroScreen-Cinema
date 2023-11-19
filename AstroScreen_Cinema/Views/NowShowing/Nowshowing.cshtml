@@ -1,0 +1,80 @@
+﻿@namespace AstroScreen_Cinema.Views.NowShowing
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "NowShowing";
+}
+
+<link rel="stylesheet" href="~/css/Home/site.css" />
+<link rel="stylesheet" href="~/css/NowShowing/Repertoire.css" />
+
+<div class="nowshowing">
+    <header>
+        <h1>Repertoire</h1>
+    </header>
+
+    <main>
+        <section class="selections">
+            <div class="city-selection">
+                <label for="city">Select City:</label>
+                <select id="city" name="city">
+                    <option value="city1">City 1</option>
+                    <option value="city2">City 2</option>
+                    <!-- Dodaj więcej opcji miast według potrzeb -->
+                </select>
+            </div>
+
+            <div class="date-selection">
+                <label for="date">Date selection:</label>
+                <input type="date" id="date" name="date" />
+            </div>
+        </section>
+
+        <section class="movie-schedule">
+            <!-- Film 1 -->
+            <div class="movie">
+                <img src="~/images/SoonInCinemas/avatar810x1200.jpeg" alt="Movie 1">
+                <div class="details">
+                    <div class="Title">
+                        <p>Avatar: The Way of Water</p>
+                    </div>
+                    <div class="additional-info">
+                        <p>Duration: 2h 30min</p>
+                        <p>Categories: Action, Adventure, Sci-Fi</p>
+                    </div>
+                    <div class="schedule">
+                        <p>Hours:</p>
+                        <ul>
+                            <li><a id="home-link" asp-area="" asp-controller="Halls" asp-action="Hall_1">14:00<span></span></a></li>
+                            <li>17:30</li>
+                            <li>20:45</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Film 2 -->
+            <div class="movie">
+                <img src="~/images/SoonInCinemas/Barbie810x1200.jpg" alt="Movie 2">
+                <div class="details">
+                    <div class="Title">
+                        <p>Barbie</p>
+                    </div>
+                    <div class="additional-info">
+                        <p>Duration: 1h 45min</p>
+                        <p>Categories: Comedy, Family</p>
+                    </div>
+                    <div class="schedule">
+                        <p>Hours:</p>
+                        <ul>
+                            <li>15:15</li>
+                            <li>18:45</li>
+                            <li>21:30</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>

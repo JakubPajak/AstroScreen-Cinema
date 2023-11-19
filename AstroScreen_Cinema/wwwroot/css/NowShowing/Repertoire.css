@@ -1,0 +1,119 @@
+﻿.nowshowing {
+    display:center;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    /*background-color: rgba(0, 0, 0, 0.54);
+    backdrop-filter: blur(2px);*/
+}
+
+header {
+    
+    color: #fff;
+    text-align: center;
+    padding: 1em 0;
+}
+
+main {
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+
+.selections {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    background: rgba(0, 0, 0, 0.54);
+    backdrop-filter: blur(2px);
+    width: 100%;
+    padding: 20px; /* Dostosuj padding według potrzeb */
+    border-radius: 20px; /* Dodaj zaokrąglenie */
+}
+
+.city-selection,
+.date-selection {
+    margin-right: 20px;
+    color:azure;
+    font-size:20px;
+
+}
+
+    .city-selection label,
+    .date-selection label {
+        margin-right: 10px;
+    }
+
+    .city-selection select,
+    .date-selection input[type="date"] {
+        padding: 8px; /* Zwiększam padding */
+        border: 1px solid #4a4a4a; /* Ciemniejszy kolor obramowania */
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.3); /* Przeźroczyste białe tło */
+        color: aqua; /* Jasny kolor czcionki */
+        outline: none; /* Usuwam obramowanie dla aktywnego stanu */
+        transition: border-color 0.3s ease; /* Dodaj płynne przejście dla obramowania */
+    }
+    .date-selection input[type="date"]:hover, select:hover {
+        border-color: #fff; /* Zmiana koloru obramowania po najechaniu */
+    }   
+.movie {
+    display: flex;
+    margin-bottom: 20px;
+    position: relative;
+    background: rgba(0, 0, 0, 0.54);
+    backdrop-filter: blur(2px);
+    width: 100%;
+    padding: 20px; /* Dostosuj padding według potrzeb */
+    border-radius: 20px; /* Dodaj zaokrąglenie */
+}
+
+    .movie img {
+        max-width: 200px;
+        height: auto;
+        margin-right: 20px;
+        border-radius: 20px; /* Dodaj zaokrąglenie */
+    }
+
+
+.details {
+    flex-grow: 1;
+
+}
+
+.Title {
+    font-size: 30px;
+    font-weight: bold;
+    color:aqua;
+}
+
+.schedule a,.schedule, .additional-info {
+    color: azure;
+    text-decoration: none; /* Usunięcie domyślnego podkreślenia odnośników */
+    display: block; /* Ustawienie odnośnika jako blokowego dla pełnego obszaru klikalnego */
+}
+
+    
+
+    .schedule ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .schedule li {
+        margin-bottom: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 8px;
+        transition: border-color 0.3s ease, transform 0.3s ease, background-color 0.1s ease; 
+    }
+        .schedule li:hover {
+            border-color: #fff; 
+            transform: scale(1.1);
+        }
+        .schedule li:active {
+            background-color: #fff; 
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); 
+        }
+    

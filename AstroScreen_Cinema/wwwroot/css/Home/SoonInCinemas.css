@@ -113,24 +113,25 @@
 
     .SoonInCinemas .popup-image-soon .popup-img-soon {
         position: absolute;
-        top: 50%;
-        left: 30%;
-        transform: translate(-50%, -50%);
+        top: 10%;
+        left: 50%;
+        /*transform: translate(-50%, -50%);*/
         border: 5px solid #fff;
         border-radius: 5px;
-        width: 500px;
+        width: 30vw; /* Zmiana szerokości na procent viewportu */
+        max-width: 500px; /* Dodanie maksymalnej szerokości */
         object-fit: cover;
     }
 
     .SoonInCinemas .popup-image-soon .popup-content-soon {
         position: absolute;
         top: 50%;
-        left: 60%;
+        left: 30%;
         transform: translate(-50%, -50%);
-        max-width: 30%;
+        max-width: 30vw;
         white-space: normal;
         color: #fff;
-        margin-left: 20px;
+        margin-right: 50px;
         padding: 10px;
         background: rgba(0, 0, 0, 0.8);
         border-radius: 10px;
