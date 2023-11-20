@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using AstroScreen_Cinema.Models;
 using System;
+using AstroScreen_Cinema.Services;
 
 namespace AstroScreen_Cinema.Controllers;
 
@@ -9,17 +10,19 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private readonly AppDBContext _appDbContext;
+    private readonly HomeService _homeService;
 
-    public HomeController(ILogger<HomeController> logger, AppDBContext appDbContext)
+    public HomeController(ILogger<HomeController> logger, AppDBContext appDbContext, HomeService homeService)
     {
         _logger = logger;
         _appDbContext = appDbContext;
+        _homeService = homeService;
     }
 
     public IActionResult Index()
     {
-       List<Movie> movies = _appDbContext.Movies.Where(m => m.Duration < 100).ToList();
-        return View(movies);
+        _homeService.IndexTokens();
+        return View();
     }
 
     public IActionResult Privacy()

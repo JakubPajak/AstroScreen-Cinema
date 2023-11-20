@@ -9,7 +9,7 @@ namespace AstroScreen_Cinema.Controllers
 		{
 		}
 
-		public IActionResult MyAccount()
+		public IActionResult Account()
 		{
 			return View();
 		}

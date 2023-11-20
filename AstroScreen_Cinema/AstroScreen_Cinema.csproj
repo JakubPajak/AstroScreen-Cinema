@@ -18,6 +18,8 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.9" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.13" />
+    <PackageReference Include="System.Security.Claims" Version="4.3.0" />
+    <PackageReference Include="FluentValidation" Version="11.8.0" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Models\Config\" />
@@ -29,6 +31,7 @@
     <None Remove="Views\NowShowing\" />
     <None Remove="Views\MyAccount\" />
     <None Remove="AuthorizationAuthentication\" />
+    <None Remove="Exceptions\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\Config\" />
@@ -42,6 +45,7 @@
     <Folder Include="Views\MyAccount\" />
     <Folder Include="wwwroot\css\MyAccount\" />
     <Folder Include="AuthorizationAuthentication\" />
+    <Folder Include="Exceptions\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Models\Config\EntitiesConfig\CustomerConfig.cs" />

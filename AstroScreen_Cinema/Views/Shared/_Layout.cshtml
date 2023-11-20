@@ -16,6 +16,10 @@
 
 </head>
 
+@{
+    var userRole = User.Claims;
+}
+
 <body>
 
     <header>
@@ -28,9 +32,15 @@
                 <li><b>AstroScreen Cinema</b></li>
                 <li><a id="home-link" asp-area="" asp-controller="Home" asp-action="Index">Home<span></span></a></li>
                 <li><a id="home-link" asp-area="" asp-controller="Home" asp-action="NowShowing">Now Showing<span></span></a></li>
-
+                @if(!userRole.Equals("Logged"))
+                    {
                 <li><a id="home-link" asp-area="" asp-controller="Login" asp-action="Login">Log In<span></span></a></li>
+                    }
+
+                @if (userRole != null && userRole.Equals("Logged"))
+                    {
                 <li><a id="home-link" asp-area="" asp-controller="MyAccount" asp-action="Account">My Account<span></span></a></li>
+                    }
             </ul>
         </nav>
     </header>
