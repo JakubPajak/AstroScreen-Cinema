@@ -6,6 +6,7 @@ using AstroScreen_Cinema.Models;
 using AstroScreen_Cinema.Models.EntitiesDto;
 using AstroScreen_Cinema.Services;
 using Azure.Core;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -35,12 +36,13 @@ namespace AstroScreen_Cinema.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public IActionResult Login(string login, string password)
         {
             var token = _loginService.GetLogin(login, password);
 
-
             HttpContext.Session.SetString("AccessToken", token);
+            var claims = HttpContext.User.Claims;
 
             return RedirectToAction("Index", "Home");
         }

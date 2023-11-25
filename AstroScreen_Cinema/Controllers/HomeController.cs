@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using AstroScreen_Cinema.Models;
 using System;
 using AstroScreen_Cinema.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AstroScreen_Cinema.Controllers;
 
@@ -19,9 +20,14 @@ public class HomeController : Controller
         _homeService = homeService;
     }
 
+    //[Authorize]
     public IActionResult Index()
     {
-        _homeService.IndexTokens();
+
+        _homeService.IndexAuthorize();
+
+        var token = HttpContext.Session.GetString("AccessToken");
+        ViewBag.AccessToken = token;
         return View();
     }
 

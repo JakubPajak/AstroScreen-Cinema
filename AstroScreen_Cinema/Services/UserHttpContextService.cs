@@ -15,8 +15,19 @@ namespace StackoveflowClone.Services
 
         public ClaimsPrincipal User => _contextAccessor.HttpContext?.User;
 
-        public int? GetUserId => User is null ? null : int.Parse(User.FindFirst(u =>
-        u.Type == ClaimTypes.NameIdentifier).Value);
+        public int? GetUserId
+        {
+            get
+            {
+                var userIdClaim = User?.FindFirst(u => u.Type == ClaimTypes.NameIdentifier);
 
+                if (userIdClaim != null && int.TryParse(userIdClaim.Value, out var userId))
+                {
+                    return userId;
+                }
+
+                return null;
+            }
+        }
     }
 }

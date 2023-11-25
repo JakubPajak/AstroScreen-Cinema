@@ -25,9 +25,6 @@ builder.Services.AddAuthentication(option =>
     option.DefaultAuthenticateScheme = "Bearer";
     option.DefaultScheme = "Bearer";
     option.DefaultChallengeScheme = "Bearer";
-    option.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    option.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    option.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 }).AddJwtBearer(config =>
 {
     config.RequireHttpsMetadata = false;

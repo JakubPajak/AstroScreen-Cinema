@@ -9,17 +9,20 @@
     <link rel="stylesheet" href="~/css/Home/slider.css" />
     <link rel="stylesheet" href="~/css/Home/SoonInCinemas.css" />
     <link rel="stylesheet" href="~/css/Login/login.css" />
-    <link rel="stylesheet" href="~/css/MyAccount/myaccount.css"/>
+    <link rel="stylesheet" href="~/css/MyAccount/myaccount.css" />
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet" />
 
+    @*@if (ViewBag.AccessToken != null)
+    {
+        <meta name="access-token" content="@ViewBag.AccessToken" />
+    }*@
+
+    @{
+        var user = User.Claims;
+    }
 
 </head>
-
-@{
-    var userRole = User.Claims;
-}
-
 <body>
 
     <header>
@@ -32,12 +35,12 @@
                 <li><b>AstroScreen Cinema</b></li>
                 <li><a id="home-link" asp-area="" asp-controller="Home" asp-action="Index">Home<span></span></a></li>
                 <li><a id="home-link" asp-area="" asp-controller="Home" asp-action="NowShowing">Now Showing<span></span></a></li>
-                @if(!userRole.Equals("Logged"))
+                @if(true)
                     {
                 <li><a id="home-link" asp-area="" asp-controller="Login" asp-action="Login">Log In<span></span></a></li>
                     }
 
-                @if (userRole != null && userRole.Equals("Logged"))
+                @if (true)
                     {
                 <li><a id="home-link" asp-area="" asp-controller="MyAccount" asp-action="Account">My Account<span></span></a></li>
                     }

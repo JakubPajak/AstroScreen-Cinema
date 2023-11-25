@@ -5,7 +5,9 @@ using System.Text;
 using AstroScreen_Cinema.AuthorizationAuthentication;
 using AstroScreen_Cinema.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using StackoveflowClone.Exceptions;
 
 namespace AstroScreen_Cinema.Services
 {
@@ -25,31 +27,18 @@ namespace AstroScreen_Cinema.Services
             _userHttpContext = userHttpContext;
         }
 
-        public string IndexTokens()
+        public string IndexAuthorize()
         {
+            var user = _userHttpContext.GetUserId;
+            //var user = _context.Accounts.FirstOrDefault(a => a.Account_ID == Id);
 
-            var claims = new List<Claim>()
-            {
-                new Claim(ClaimTypes.Role, "NULL"),
-                new Claim(ClaimTypes.NameIdentifier, "1"),
-                new Claim(ClaimTypes.Name, "Default"),
-                new Claim(ClaimTypes.MobilePhone, "xxx")
-            };
+            var authorizatonResult = _authorizationServiece.AuthorizeAsync(_userHttpContext.User, user,
+                new DataDisplayRequirement(ResourceOperation.MyAccount)).Result;
 
-
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_authenticationSettings.JwtKey));
-            var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var expires = DateTime.Now.AddDays(double.Parse(_authenticationSettings.JwtExpireDays));
-
-            var token = new JwtSecurityToken(_authenticationSettings.JwtIssuer, _authenticationSettings.JwtIssuer
-                , claims
-                , expires: expires
-                , signingCredentials: cred);
-
-
-            var tokenHandler = new JwtSecurityTokenHandler();
-
-            return tokenHandler.WriteToken(token);
+            if (authorizatonResult.Succeeded)
+                return authorizatonResult.Succeeded.ToString();
+            else
+                return authorizatonResult.Failure.ToString();
         }
 	}
 }
