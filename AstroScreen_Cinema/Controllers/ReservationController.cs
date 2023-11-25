@@ -3,12 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using AstroScreen_Cinema.Models;
 using System;
 
-
 namespace AstroScreen_Cinema.Controllers
 {
-    public class Hall : Controller
+    public class ReservationController : Controller
     {
-        public IActionResult Hall_1()
+        public IActionResult Reservations()
         {
             return View();
         }

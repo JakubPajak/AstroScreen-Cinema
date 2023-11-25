@@ -3,15 +3,15 @@
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    /*background-color: rgba(0, 0, 0, 0.54);
-    backdrop-filter: blur(2px);*/
+    
 }
 
-header {
-    
+.Repertoire {
     color: #fff;
     text-align: center;
     padding: 1em 0;
+    font-size: 30px;
+    font-weight: bold;
 }
 
 main {
@@ -28,8 +28,8 @@ main {
     background: rgba(0, 0, 0, 0.54);
     backdrop-filter: blur(2px);
     width: 100%;
-    padding: 20px; /* Dostosuj padding według potrzeb */
-    border-radius: 20px; /* Dodaj zaokrąglenie */
+    padding: 20px; 
+    border-radius: 20px; 
 }
 
 .city-selection,
@@ -47,16 +47,16 @@ main {
 
     .city-selection select,
     .date-selection input[type="date"] {
-        padding: 8px; /* Zwiększam padding */
-        border: 1px solid #4a4a4a; /* Ciemniejszy kolor obramowania */
+        padding: 8px; 
+        border: 1px solid #4a4a4a; 
         border-radius: 5px;
-        background-color: rgba(255, 255, 255, 0.3); /* Przeźroczyste białe tło */
-        color: aqua; /* Jasny kolor czcionki */
-        outline: none; /* Usuwam obramowanie dla aktywnego stanu */
-        transition: border-color 0.3s ease; /* Dodaj płynne przejście dla obramowania */
+        background-color: rgba(255, 255, 255, 0.3); 
+        color: aqua; 
+        outline: none; 
+        transition: border-color 0.3s ease; 
     }
     .date-selection input[type="date"]:hover, select:hover {
-        border-color: #fff; /* Zmiana koloru obramowania po najechaniu */
+        border-color: #fff; 
     }   
 .movie {
     display: flex;
@@ -65,15 +65,15 @@ main {
     background: rgba(0, 0, 0, 0.54);
     backdrop-filter: blur(2px);
     width: 100%;
-    padding: 20px; /* Dostosuj padding według potrzeb */
-    border-radius: 20px; /* Dodaj zaokrąglenie */
+    padding: 20px; 
+    border-radius: 20px; 
 }
 
     .movie img {
         max-width: 200px;
         height: auto;
         margin-right: 20px;
-        border-radius: 20px; /* Dodaj zaokrąglenie */
+        border-radius: 20px; 
     }
 
 
@@ -90,8 +90,8 @@ main {
 
 .schedule a,.schedule, .additional-info {
     color: azure;
-    text-decoration: none; /* Usunięcie domyślnego podkreślenia odnośników */
-    display: block; /* Ustawienie odnośnika jako blokowego dla pełnego obszaru klikalnego */
+    text-decoration: none; 
+    display: block; 
 }
 
     

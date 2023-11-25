@@ -1,23 +1,12 @@
-﻿/*.SoonInCinemas {
-    width: 90%;
-    height: auto;
-    background-color: rgba(43, 43, 43, 0.7); 
-    position: relative;
-    top: 100%; 
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin-top: auto;*/ /*powinno być auto*/
-    /*padding: 20px; 
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center; 
-}*/
+﻿
 
 .SoonInCinemas {
     width: 90%;
-    margin: auto;  
+    margin: auto;
     padding: 20px;
-    background-color: rgba(43, 43, 43, 0.7);
+    background-color: rgba(30, 43, 43, 0.28);
+    background-image: linear-gradient(360deg, rgba(30, 43, 43, 0.28) 0%, rgba(0, 13, 22, 0.76) 100%);
+    border-radius: 20px;
 }
 
 .SoonTitleContainer {
@@ -25,7 +14,10 @@
     border-color: rgba(43, 43, 43);
     padding: 10px;
     margin-bottom: 20px;
-    background-color: rgba(43, 43, 43, 0.5);
+    /*background-color: rgba(43, 43, 43, 0.5);*/
+    background-color: rgba(30, 43, 43, 0.28);
+    background-image: linear-gradient(360deg, rgba(30, 43, 43, 0.28) 0%, rgba(0, 13, 22, 0.76) 100%);
+    border-radius: 20px;
 }
 
 
@@ -36,7 +28,8 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
+    text-shadow: 0px 7px 16px rgba(66, 68, 90, 1);
 }
 
 .Posters {
@@ -53,11 +46,14 @@
     overflow: hidden;
     transition: transform 0.3s;
     text-align: center;
+    -webkit-box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
+    -moz-box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
+    box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
 }
 
     @media screen and (max-width: 768px) {
     .Poster {
-        width: calc(33.333% - 20px);  Dostosowanie szerokości na mniejszych ekranach 
+        width: calc(33.333% - 20px);  
         }
     }
     .Poster img {
@@ -66,17 +62,18 @@
         transition: transform 0.3s; 
     }
 
-    .Poster figurecaption {
-        text-align: center; 
-        font-size: 18px; 
-        margin-top: 10px; 
-        color: #FFF;
-        overflow: hidden;
-        text-overflow: ellipsis; 
-        display: -webkit-box;
-        -webkit-line-clamp: 3; 
-        -webkit-box-orient: vertical;
-    }
+.Poster figurecaption {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 10px;
+    color: #FFF;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    text-shadow: 0px 7px 16px rgba(66, 68, 90, 1);
+}
 
     .Poster:hover {
         transform: scale(1.1); 
@@ -150,4 +147,18 @@
 
 .SoonInCinemas .Posters .Poster img:hover {
     transform: translateZ(15px);
+}
+
+.popup-video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* Proporcja 16:9 dla responsywnego odtwarzacza wideo */
+}
+
+.popup-video-soon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }

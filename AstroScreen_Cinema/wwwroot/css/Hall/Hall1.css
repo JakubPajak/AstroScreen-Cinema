@@ -1,0 +1,219 @@
+﻿.SeatSelector {
+    margin-top:20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    padding: 0;
+}
+
+.SelectorTitle {
+    color: #fff;
+    text-align: center;
+    padding: 1em 0;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+h1 {
+    
+    color: #fff;
+    text-align: center;
+    padding: 1em 0;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.hall-legend {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.seat-legend {
+    margin: 0 10px;
+    padding: 5px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    cursor: default;
+    color: azure;
+}
+
+    .seat-legend.vip {
+        background-color: #ffcc00;
+    }
+
+    .seat-legend.selected {
+        background-color: #3498db;
+    }
+
+    .seat-legend.taken {
+        background-color: #ff0000;
+    }
+
+/* Style for left and right */
+.seat-selector-container {
+    display: flex;
+}
+
+.left-section .hall-scheme-row {
+    justify-content: center;
+}
+
+.left-section,
+.right-section {
+    flex: 1;
+}
+
+.right-section {
+    margin-left: 40px;
+    flex: 0 0 30%; 
+    overflow: auto; 
+    display: flex;
+    flex-direction: column; 
+}
+
+.total-section {
+    order: 1; 
+}
+
+.Reservation {
+    padding: 10px;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    cursor: pointer;
+    
+    order: 2; 
+    background-color: aqua; 
+    
+}
+    .Reservation a {
+        text-decoration: none;
+        display: block;
+        color: #000;
+        width: 100%;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .Reservation:hover {
+        background-color: #2980b9; /* Kolor tła przycisku po najechaniu myszą */
+    }
+
+
+
+
+.hall-container,
+.seat-selected {
+    background: rgba(0, 0, 0, 0.54);
+    backdrop-filter: blur(2px);
+    width: 100%;
+    padding: 20px;
+    border-radius: 20px;
+    position: relative;
+    z-index: 0;
+    top: 50px;
+    margin: 0 10px;
+}
+
+.hall-scheme-row,
+.selected-scheme-row {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.screen {
+    left: -7px;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    position: absolute;
+    top: -60px;
+    width: 100%;
+    text-align: center;
+    transform: perspective(200px) rotateX(-20deg);
+    margin-bottom: 20px;
+    z-index: 1;
+}
+
+.seat,
+.selected-seat {
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #fff;
+}
+
+    .seat.taken {
+        background-color: #ff0000;
+        pointer-events: none;
+    }
+
+.vip {
+    background-color: #ffcc00;
+    color: #000;
+}
+
+
+.seat.copied {
+    background-color: #3498db;
+    color: #fff;
+}
+
+
+.seat.copied-vip {
+    background-color: #ffcc00;
+    color: #000;
+}
+
+.seat.copied,
+.seat.copied-vip {
+    display: inline-block;
+    margin-right: 5px; /* Opcjonalny margines między sklonowanymi miejscami */
+    flex-wrap: wrap; /* Miejsca przechodzą do nowej linii, gdy brakuje miejsca */
+}
+
+.selected-seats .cloned {
+    background-color: #3498db;
+    color: #fff;
+}
+
+/*Selected*/
+.selected {
+    background-color: #3498db;
+    color: #fff;
+}
+/*Cancel Selection*/
+.cancel-selection-frame {
+    padding: 10px;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #fff;
+    text-align: center;
+}
+    .cancel-selection-frame:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+.selected-seats {
+    padding: 10px;
+    color: #fff;
+    text-align: center;
+}
+
+.total-section{
+    color: #fff;
+}
+
+
