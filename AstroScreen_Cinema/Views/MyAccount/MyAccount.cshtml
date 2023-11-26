@@ -1,0 +1,71 @@
+﻿@namespace AstroScreen_Cinema.Views.MyAccount
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div class="myacount--main_container">
+    <div class="myaccount--major_container">
+        <div class="myaccount--left_nav">
+            <div class="myaccount-menu_content" id="tab1">
+                <h3>My Account</h3>
+            </div>
+            <div class="myaccount-menu_content" id="tab2">
+                <h3>Change My Data</h3>
+            </div>
+            <div class="myaccount-menu_content" id="tab3">
+                <h3>Viewing History</h3>
+            </div>
+            <div class="myaccount-menu_content" id="tab4">
+                <h3>Wish List</h3>
+            </div>
+        </div>
+        <div class="myaccount--minor_content">
+            <div class="tab-content" id="content1">
+                <div class="myaccount--content_div">
+                    <h2 class="myaccount--header">Account Details</h2>
+                    <div class="myaccount--content_details">
+                        <div class="myaccount--content_label">
+                            Name:
+                        </div>
+                        <div class="myaccount--content_label">
+                            Second Name:
+                        </div>
+                        <div class="myaccount--content_label">
+                            Phone Number:
+                        </div>
+                        <div class="myaccount--content_label">
+                            Email Adress:
+                        </div>
+                        <div class="myaccount--content_label">
+                            Birth Date:
+                        </div>
+                        <div class="myaccount--content_label hidden"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content" id="content2">
+                <p>TAB2</p>
+            </div>
+            <div class="tab-content" id="content3">
+                <p>TAB3</p>
+            </div>
+            <div class="tab-content" id="content4">
+                <p>TAB4</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>document.addEventListener('DOMContentLoaded', function () {
+        var tabs = document.querySelectorAll('.myaccount-menu_content');
+        var tabContents = document.querySelectorAll('.myaccount--minor_content .tab-content');
+
+        tabs.forEach(function (tab, index) {
+            tab.addEventListener('click', function () {
+                tabContents.forEach(function (content) {
+                    content.classList.remove('active');
+                });
+
+                tabContents[index].classList.add('active');
+            });
+        });
+    });</script>

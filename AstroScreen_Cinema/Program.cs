@@ -1,29 +1,59 @@
 ﻿using AstroScreen_Cinema;
+using AstroScreen_Cinema.AuthorizationAuthentication;
 using AstroScreen_Cinema.DataSeed;
 using AstroScreen_Cinema.Models;
 using AstroScreen_Cinema.Services;
 using Microsoft.EntityFrameworkCore;
+using StackoveflowClone.Services;
+using System.IdentityModel.Tokens.Jwt;
 
 var builder = WebApplication.CreateBuilder(args);
+var authenticationSettings = new AuthenticationSettings();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Configuration.GetSection("Authentication").Bind(authenticationSettings);
+
+// Add services to the container.
+
+builder.Services.AddAuthentication(option =>
+{
+    option.DefaultAuthenticateScheme = "Bearer";
+    option.DefaultScheme = "Bearer";
+    option.DefaultChallengeScheme = "Bearer";
+}).AddJwtBearer(config =>
+{
+    config.RequireHttpsMetadata = false;
+    config.SaveToken = true;
+    config.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+    {
+        ValidIssuer = authenticationSettings.JwtIssuer,
+        ValidAudience = authenticationSettings.JwtIssuer,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authenticationSettings.JwtKey)),
+    };
+});
 
 builder.Services.Configure<Microsoft.AspNetCore.Mvc.JsonOptions>(options =>
 {
     options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
 });
 
+
 //builder.Services.AddDbContext<AppDBContext>();
 builder.Services.AddDbContext<AppDBContext>(options =>
 {
-    //options.UseSqlServer(builder.Configuration.GetConnectionString("DataBaseMAC"));
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DataBaseWIN"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DataBaseMAC"));
+    //soptions.UseSqlServer(builder.Configuration.GetConnectionString("DataBaseWIN"));
 });
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddSingleton(authenticationSettings);
 builder.Services.AddScoped<DataSeeding>();
 builder.Services.AddScoped<DataGenerator>();
 builder.Services.AddScoped<LoginService>();
+builder.Services.AddScoped<IUserHttpContextService, UserHttpContextService>();
+builder.Services.AddScoped<HomeService>();
 
 var app = builder.Build();
 

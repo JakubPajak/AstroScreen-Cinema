@@ -28,11 +28,29 @@
                 <div class="login--label">
                     <label asp-for="Password">Password:</label>
                 </div>
-                <input type="text" asp-for="Password" class="login--input" required/>
+                <input type="text" asp-for="Password" class="login--input" required />
             </div>
+
+            @{
+                if (ViewBag.LoginStatus != null)
+                {
+                    if (ViewBag.LoginStatus == 0)
+                    {
+                        <div class="login--error">
+                            <p>Login failed. Pleas check your credentials</p>
+                        </div>
+                    }
+                }
+            }
             <div class="login--submit_btn_container">
                 <button type="submit" value="Login" class="login--submit_btn">Login</button>
             </div>
         </div>
     </div>
 </form>
+
+<div id="messageContainer"></div>
+
+
+
+@*@Html.Partial("LoginStatus");*@

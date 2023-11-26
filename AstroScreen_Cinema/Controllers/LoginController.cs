@@ -33,15 +33,9 @@ namespace AstroScreen_Cinema.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Login(string login, string pass)
         {
-            var user = _loginService.GetLogin(login, pass);
-            if (user.IsLogged)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-            else
-            {
-                return RedirectToAction("LoginFailed", "Login");
-            }
+            _loginService.GetLogin(login, pass);
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

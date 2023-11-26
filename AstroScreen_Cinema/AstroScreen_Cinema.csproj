@@ -26,6 +26,9 @@
     <None Remove="Models\DbModelEntities\" />
     <None Remove="Views\Login\" />
     <None Remove="Views\NowShowing\" />
+    <None Remove="AuthorizatonAuthentication\" />
+    <None Remove="Views\MyAccount\" />
+    <None Remove="Exceptions\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\Config\" />
@@ -36,6 +39,10 @@
     <Folder Include="Views\Login\" />
     <Folder Include="wwwroot\css\Login\" />
     <Folder Include="wwwroot\js\Home\" />
+    <Folder Include="AuthorizatonAuthentication\" />
+    <Folder Include="Views\MyAccount\" />
+    <Folder Include="wwwroot\css\MyAccount\" />
+    <Folder Include="Exceptions\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Models\Config\EntitiesConfig\CustomerConfig.cs" />
@@ -51,5 +58,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\css\Login\" />
+    <Content Remove="wwwroot\css\MyAccount\" />
   </ItemGroup>
 </Project>

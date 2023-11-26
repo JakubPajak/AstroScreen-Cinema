@@ -1,0 +1,75 @@
+﻿h3 {
+    font-size: 20px;
+    color: whitesmoke;
+}
+
+.myacount--main_container {
+    display: flex;
+    flex-direction: column;
+    height: 600px; /* Adjust the height as needed */
+}
+
+.myaccount--major_container {
+    display: flex;
+    flex: 1;
+    background-color: rgba(24, 21, 23, 0.55);
+    border-radius: 20px;
+    border: solid 1px white;
+}
+
+.myaccount--left_nav {
+    width: 30%; /* Adjust the width as needed */
+    border-right: solid 1px white;
+    margin: 0px;
+}
+
+.myaccount-menu_content {
+    margin-bottom: 10px;
+    border-bottom: solid 1px white;
+}
+
+.myaccount--minor_content {
+    flex: 1;
+    padding: 20px;
+}
+
+.myaccount--display_data {
+    /* Your styles for display_data */
+}
+
+.tab-content {
+    display: none;
+}
+
+.active {
+    display: block;
+}
+
+.hidden {
+    opacity: 0;
+}
+
+.myaccount--content_div {
+    width: 100%;
+    display: block;
+}
+
+.myaccount--header {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.myaccount--content_details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+
+.myaccount--content_label {
+    font-size: 20px;
+    background-color: rgba(225, 225, 225, 0.55);
+    padding: 10px;
+    border-radius: 15px;
+    border: none;
+    flex: 1 1 calc(40% - 30px);
+}
