@@ -17,6 +17,10 @@ namespace AstroScreen_Cinema.Models
 
 		public int Duration { get; set; }
 
+        public string? PosterPath { get; set; }
+
+        //public string? TrailerPath { get; set; }
+
 
         //	//	Connection between different entities	//	//
 

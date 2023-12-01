@@ -38,7 +38,7 @@ public class HomeController : Controller
             activeUser.Password = "anonymous";
         }
 
-        ViewBag["LoginStatus", loginStatus];
+        //ViewBag["LoginStatus", loginStatus];
 
         return View(activeUser);
     }

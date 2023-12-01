@@ -44,8 +44,8 @@ builder.Services.Configure<Microsoft.AspNetCore.Mvc.JsonOptions>(options =>
 //builder.Services.AddDbContext<AppDBContext>();
 builder.Services.AddDbContext<AppDBContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DataBaseMAC"));
-    //soptions.UseSqlServer(builder.Configuration.GetConnectionString("DataBaseWIN"));
+    //options.UseSqlServer(builder.Configuration.GetConnectionString("DataBaseMAC"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DataBaseWIN"));
 });
 
 builder.Services.AddSession();
