@@ -1,17 +1,52 @@
 ﻿using System;
+using AstroScreen_Cinema.Models.EntitiesDto;
+using AstroScreen_Cinema.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AstroScreen_Cinema.Controllers
 {
     public class MyAccountController : Controller
     {
-        public MyAccountController()
+        private readonly MyAccountService _myAccountService;
+
+        public MyAccountController(MyAccountService myAccountService)
         {
+            _myAccountService = myAccountService;
         }
 
-        public IActionResult Account()
+        public IActionResult MyAccount()
         {
-            return View();
+            var userLogin = HttpContext.Session.GetString("UserLogin");
+
+            var accountData = _myAccountService.GetAccountData(userLogin);
+
+            return View(accountData);
+        }
+
+        public IActionResult ChangeData()
+        {
+            var userLogin = HttpContext.Session.GetString("UserLogin");
+
+            var accountData = _myAccountService.GetAccountData(userLogin);
+
+            return RedirectToAction("MyAccount", "MyAccount", accountData);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangeData(MyAccountDto myAccountDto)
+        {
+            await _myAccountService.ChangeDataService(myAccountDto);
+
+            return RedirectToAction("MyAccount", "MyAccount");
+        }
+
+        public IActionResult ViewingHistory()
+        {
+            var _login = HttpContext.Session.GetString("UserLogin");
+
+            var history = _myAccountService.GetViewingHistory(_login);
+
+            return RedirectToAction("MyAccount", "MyAccount", history);
         }
     }
 }

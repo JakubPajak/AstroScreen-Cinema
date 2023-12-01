@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using AstroScreen_Cinema.Models;
 using System;
+using AstroScreen_Cinema.Models.EntitiesDto;
 
 namespace AstroScreen_Cinema.Controllers;
 
@@ -18,8 +19,28 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        List<Movie> movies = _appDbContext.Movies.Where(m => m.Duration < 100).ToList();
-        return View(movies);
+        var activeUser = new LoginDto();
+        //List<Movie> movies = _appDbContext.Movies.Where(m => m.Duration < 100).ToList();
+        var loginStatus = HttpContext.Session.GetString("LoginStatus") ?? "NO";
+
+        
+
+        if (loginStatus is not null)
+        {
+            activeUser.IsLogged = loginStatus;
+            activeUser.Login = "anonymous";
+            activeUser.Password = "anonymous";
+        }
+        else
+        {
+            activeUser.IsLogged = loginStatus;
+            activeUser.Login = "anonymous";
+            activeUser.Password = "anonymous";
+        }
+
+        ViewBag["LoginStatus", loginStatus];
+
+        return View(activeUser);
     }
 
     public IActionResult Privacy()

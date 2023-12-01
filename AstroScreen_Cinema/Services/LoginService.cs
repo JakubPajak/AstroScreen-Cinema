@@ -28,7 +28,7 @@ namespace AstroScreen_Cinema.Services
             _userHttpContext = userHttpContext;
         }
 
-        public string GetLogin(string _login, string _pass)
+        public LoginDto GetLogin(string _login, string _pass)
         {
             var getUser = _appDBContext.Accounts.FirstOrDefault(a => a.Email.Equals(_login));
 
@@ -61,7 +61,7 @@ namespace AstroScreen_Cinema.Services
 
             var tokenHandler = new JwtSecurityTokenHandler();
 
-            return tokenHandler.WriteToken(token);
+            return new LoginDto() { Login = getUser.Email, Password = getUser.Password ,IsLogged = "YES"};
         }
 
         public LoginDto UserLogOut(string _login)

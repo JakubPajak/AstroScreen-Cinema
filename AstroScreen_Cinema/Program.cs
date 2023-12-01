@@ -1,11 +1,12 @@
-﻿using AstroScreen_Cinema;
+﻿using System.Text;
+using AstroScreen_Cinema;
 using AstroScreen_Cinema.AuthorizationAuthentication;
 using AstroScreen_Cinema.DataSeed;
 using AstroScreen_Cinema.Models;
 using AstroScreen_Cinema.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using StackoveflowClone.Services;
-using System.IdentityModel.Tokens.Jwt;
 
 var builder = WebApplication.CreateBuilder(args);
 var authenticationSettings = new AuthenticationSettings();
@@ -47,11 +48,13 @@ builder.Services.AddDbContext<AppDBContext>(options =>
     //soptions.UseSqlServer(builder.Configuration.GetConnectionString("DataBaseWIN"));
 });
 
+builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSingleton(authenticationSettings);
 builder.Services.AddScoped<DataSeeding>();
 builder.Services.AddScoped<DataGenerator>();
 builder.Services.AddScoped<LoginService>();
+builder.Services.AddScoped<MyAccountService>();
 builder.Services.AddScoped<IUserHttpContextService, UserHttpContextService>();
 builder.Services.AddScoped<HomeService>();
 
@@ -72,6 +75,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseSession();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

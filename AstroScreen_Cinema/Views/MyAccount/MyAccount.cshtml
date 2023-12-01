@@ -1,48 +1,78 @@
 ﻿@namespace AstroScreen_Cinema.Views.MyAccount
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
+@model AstroScreen_Cinema.Models.EntitiesDto.MyAccountDto;
+
 <div class="myacount--main_container">
     <div class="myaccount--major_container">
         <div class="myaccount--left_nav">
             <div class="myaccount-menu_content" id="tab1">
-                <h3>My Account</h3>
+                <a asp-area="" asp-controller="MyAccount" asp-action="MyAccount"><h3>My Account</h3></a>
             </div>
             <div class="myaccount-menu_content" id="tab2">
-                <h3>Change My Data</h3>
+                <a asp-area="" asp-controller="MyAccount" asp-action="ChangeData"><h3>Change My Data</h3></a>
+                <button type="submit">Save changes</button>
             </div>
             <div class="myaccount-menu_content" id="tab3">
-                <h3>Viewing History</h3>
+                <a asp-area="" asp-controller="MyAccount" asp-action="ViewingHistory"><h3>Viewing History</h3></a>
             </div>
             <div class="myaccount-menu_content" id="tab4">
-                <h3>Wish List</h3>
+                <a asp-area="" asp-controller="Home" asp-action="Index"><h3>Back to Home Page</h3></a>
             </div>
         </div>
         <div class="myaccount--minor_content">
-            <div class="tab-content" id="content1">
+            <div class="tab-content active" id="content1">
                 <div class="myaccount--content_div">
                     <h2 class="myaccount--header">Account Details</h2>
                     <div class="myaccount--content_details">
                         <div class="myaccount--content_label">
-                            Name:
+                            Name: @Model.Name
                         </div>
                         <div class="myaccount--content_label">
-                            Second Name:
+                            Second Name: @Model.SecondName
                         </div>
                         <div class="myaccount--content_label">
-                            Phone Number:
+                            Phone Number: @Model.PhoneNum
                         </div>
                         <div class="myaccount--content_label">
-                            Email Adress:
+                            Email Adress: @Model.EmailAddress
                         </div>
                         <div class="myaccount--content_label">
-                            Birth Date:
+                            Birth Date: @Model.BirthDate
                         </div>
                         <div class="myaccount--content_label hidden"></div>
                     </div>
                 </div>
             </div>
             <div class="tab-content" id="content2">
-                <p>TAB2</p>
+                <form asp-action="ChangeData" asp-controller="MyAccount" method="post" class="myacc--change_data__form">
+                    <div class="myaccount--content_div">
+                        <h2 class="myaccount--header">Account Details</h2>
+                        <div class="myaccount--content_details">
+                            <div class="myaccount--content_label">
+                                <label>Name:</label>
+                                <input type="text" placeholder="@Model.Name" asp-for="Name" /> Name: @Model.Name
+                            </div>
+                            <div class="myaccount--content_label">
+                                <label>Second Name:</label>
+                                <input type="text" placeholder="@Model.SecondName" asp-for="SecondName" /> Name: @Model.SecondName
+                            </div>
+                            <div class="myaccount--content_label">
+                                <label>Phone Number:</label>
+                                <input type="tel" placeholder="@Model.PhoneNum" asp-for="PhoneNum" /> Name: @Model.PhoneNum
+                            </div>
+                            <div class="myaccount--content_label">
+                                <label>Email Address:</label>
+                                <input type="email" placeholder="@Model.EmailAddress" asp-for="EmailAddress" /> Name: @Model.EmailAddress
+                            </div>
+                            <div class="myaccount--content_label">
+                                <label>Birth Date:</label>
+                                <input type="date" placeholder="@Model.BirthDate" asp-for="BirthDate" /> Name: @Model.BirthDate
+                            </div>
+                            <div class="myaccount--content_label hidden"></div>
+                        </div>
+                    </div>
+                </form>
             </div>
             <div class="tab-content" id="content3">
                 <p>TAB3</p>
@@ -54,17 +84,22 @@
     </div>
 </div>
 
-
 <script>document.addEventListener('DOMContentLoaded', function () {
         var tabs = document.querySelectorAll('.myaccount-menu_content');
         var tabContents = document.querySelectorAll('.myaccount--minor_content .tab-content');
 
         tabs.forEach(function (tab, index) {
             tab.addEventListener('click', function () {
+                // Remove 'active' class from all tabs and contents
+                tabs.forEach(function (t) {
+                    t.classList.remove('active');
+                });
                 tabContents.forEach(function (content) {
                     content.classList.remove('active');
                 });
 
+                // Add 'active' class to the clicked tab and corresponding content
+                tab.classList.add('active');
                 tabContents[index].classList.add('active');
             });
         });

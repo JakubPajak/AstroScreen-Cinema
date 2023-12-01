@@ -2,7 +2,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Home Page";
 }
-@model List<Movie>
+@model AstroScreen_Cinema.Models.EntitiesDto.LoginDto
 
 <link rel="stylesheet" href="~/css/Home/site.css" />
 <link rel="stylesheet" href="~/css/Home/slider.css" />
@@ -10,15 +10,31 @@
 <link rel="stylesheet" href="~/css/Home/Events.css" />
 
 
+<nav>
+    <ul>
+        <li><img class="logo" src="~/images/Logo/favlogo.png" /></li>
+        <li><a id="home-link" asp-area="" asp-controller="Home" asp-action="Index">Home<span></span></a></li>
+        <li><a id="home-link" asp-area="" asp-controller="NowShowing" asp-action="Nowshowing">Now Showing<span></span></a></li>
+        @if (Model.IsLogged.Equals("NO"))
+        {
+            <li><a id="home-link" asp-area="" asp-controller="Login" asp-action="Login">Login<span></span></a></li>
+        }
+        @if (Model.IsLogged.Equals("YES"))
+        {
+            <li><a id="home-link" asp-area="" asp-controller="MyAccount" asp-action="MyAccount">My Account<span></span></a></li>
+        }
+    </ul>
+</nav>
+
 <!--Slider functionality-->
 <div class="slider">
 
     <div class="slide-track slider-dissapear">
-        
+
         <!--6 slides-->
 
         <div class="slide">
-            <img src="images/Slider/MandalorianS3_1280_720.jpg"/>
+            <img src="images/Slider/MandalorianS3_1280_720.jpg" />
         </div>
 
         <div class="slide">
@@ -71,8 +87,6 @@
 
 </div>
 <!--End of Slider-->
-
-
 <!--SoonInCinemas-->
 <div class="SoonInCinemas">
 
@@ -81,7 +95,7 @@
             <h1>SOON IN OUR CINEMAS!</h1>
         </div>
     </div>
-    
+
     <div class="Posters">
 
         <figure class="Poster" data-title="Avatar: The way of water">
@@ -146,9 +160,8 @@
     </div>
 
 </div>
-    <!--ScriptforPOPUPsoonincinemas-->
-<script>
-    document.querySelectorAll('.SoonInCinemas .Posters .Poster img').forEach(image => {
+<!--ScriptforPOPUPsoonincinemas-->
+<script>document.querySelectorAll('.SoonInCinemas .Posters .Poster img').forEach(image => {
         image.onclick = () => {
             const title = image.parentElement.getAttribute('data-title');
             const { title: popupTitle, description: popupDescription } = getMovieDescription(title);
@@ -225,11 +238,8 @@
                     description: "Default description"
                 };
         }
-    }
-</script>
+    }</script>
 <!--EndOfSoonInCinemas-->
-
-
 <!--Events-->
 <div class="Events">
     <div class="EventTitleContainer">
@@ -239,23 +249,23 @@
     </div>
     <div class="EventPosters">
         <figure class="EventPoster" data-title="Wheel of Fortune and Fantasy">
-            <img src="images/Events/Asian810x1200.jpeg" alt=""/>
+            <img src="images/Events/Asian810x1200.jpeg" alt="" />
             <figurecaption>Wheel of Fortune and Fantasy</figurecaption>
         </figure>
         <figure class="EventPoster" data-title="Barbenheimer">
-            <img src="images/Events/barbenheimer-810x1200.jpg" alt=""/>
+            <img src="images/Events/barbenheimer-810x1200.jpg" alt="" />
             <figurecaption>Barbenheimer</figurecaption>
         </figure>
         <figure class="EventPoster" data-title="Fallen Leaves">
-            <img src="images/Events/fallenleaves01-810x1200.jpg" alt=""/>
+            <img src="images/Events/fallenleaves01-810x1200.jpg" alt="" />
             <figurecaption>Fallen Leaves</figurecaption>
         </figure>
         <figure class="EventPoster" data-title="Harlem">
-            <img src="images/Events/Harlem810x1200.jpg" alt=""/>
+            <img src="images/Events/Harlem810x1200.jpg" alt="" />
             <figurecaption>Harlem</figurecaption>
         </figure>
         <figure class="EventPoster" data-title="John Lewis: Good Trouble">
-            <img src="images/Events/JohnLewis810x1200.jpg" alt=""/>
+            <img src="images/Events/JohnLewis810x1200.jpg" alt="" />
             <figurecaption>John Lewis: Good Trouble</figurecaption>
         </figure>
     </div>
@@ -271,8 +281,7 @@
 
 </div>
 <!--ScriptforPOPUPevents-->
-<script>
-    document.querySelectorAll('.EventPosters img').forEach(image => {
+<script>document.querySelectorAll('.EventPosters img').forEach(image => {
         image.onclick = () => {
             const title = image.parentElement.getAttribute('data-title');
             const { title: popupTitle, description: popupDescription } = getTitleDescription(title);
@@ -327,8 +336,5 @@
                     description: "Default description"
                 };
         }
-    }
-
-  
-</script>
+    }</script>
 <!--EndOfEvents-->

@@ -18,8 +18,9 @@ namespace AstroScreen_Cinema
             _dataSeeding = dataSeeding;
         }
 
-        public void Seed()
+        public Task Seed()
         {
+            var myMovies = new List<Movie>();
             Randomizer.Seed = new Random(123);
             //int count = 100;
 
@@ -101,6 +102,16 @@ namespace AstroScreen_Cinema
               .RuleFor(c => c.Movies, f => MovieGenerator.Generate());
 
 
+            var myMovie = new Movie()
+            {
+                Title = "",
+
+            };
+
+            myMovies.Add(myMovie);
+
+            _appContext.AddRangeAsync()
+
             var movie = MovieGenerator.Generate(10);
             var director = DirectorGenerator.Generate(3);
 
@@ -137,6 +148,8 @@ namespace AstroScreen_Cinema
             _appContext.Categories.AddRange(category);
             _appContext.CategoriesAndMovies.AddRange(categorymovie);
             //_appContext.SaveChanges();
+
+            return Task.CompletedTask;
         }
 
     }
