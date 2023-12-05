@@ -2,7 +2,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Home Page";
 }
-@model AstroScreen_Cinema.Models.EntitiesDto.LoginDto
+@model List<AstroScreen_Cinema.Models.EntitiesDto.MovieDto>
+
+@{
+    var slider = Model.Where(m => m.Desc.Equals("Random")).ToList();
+    var shownig = Model.Where(m => !m.Desc.Equals("Random")).ToList();
+}
 
 <link rel="stylesheet" href="~/css/Home/site.css" />
 <link rel="stylesheet" href="~/css/Home/slider.css" />
@@ -15,16 +20,17 @@
         <li><img class="logo" src="~/images/Logo/favlogo.png" /></li>
         <li><a id="home-link" asp-area="" asp-controller="Home" asp-action="Index">Home<span></span></a></li>
         <li><a id="home-link" asp-area="" asp-controller="NowShowing" asp-action="Nowshowing">Now Showing<span></span></a></li>
-        @if (Model.IsLogged.Equals("NO"))
+        @if (ViewBag.LoginStatus == "NO")
         {
             <li><a id="home-link" asp-area="" asp-controller="Login" asp-action="Login">Login<span></span></a></li>
         }
-        @if (Model.IsLogged.Equals("YES"))
+        @if (ViewBag.LoginStatus == "YES")
         {
             <li><a id="home-link" asp-area="" asp-controller="MyAccount" asp-action="MyAccount">My Account<span></span></a></li>
         }
     </ul>
 </nav>
+
 
 <!--Slider functionality-->
 <div class="slider">
@@ -34,59 +40,46 @@
         <!--6 slides-->
 
         <div class="slide">
-            <img src="images/Slider/MandalorianS3_1280_720.jpg" />
+            <img src=@slider[1].imgPath />
         </div>
 
         <div class="slide">
-            <img src="images/Slider/Mandalorian_1280_720.jpg" />
+            <img src=@slider[2].imgPath />
         </div>
 
         <div class="slide">
-            <img src="images/Slider/Pirates2_1280_720.jpg" />
+            <img src=@slider[3].imgPath />
         </div>
 
         <div class="slide">
-            <img src="images/Slider/Pirates_1280_720.jpg" />
+            <img src=@slider[4].imgPath />
+        </div>
+        <div class="slide">
+            <img src=@slider[5].imgPath />
+        </div>
+        <div class="slide">
+            <img src=@slider[1].imgPath />
         </div>
 
         <div class="slide">
-            <img src="images/Slider/R2C3PO_1280_720.jpg" />
+            <img src=@slider[2].imgPath />
         </div>
 
         <div class="slide">
-            <img src="images/Slider/ROTS1280_720.jpg" />
-        </div>
-
-        <!--Same 6 slides (doubled)-->
-
-        <div class="slide">
-            <img src="images/Slider/MandalorianS3_1280_720.jpg" />
+            <img src=@slider[3].imgPath />
         </div>
 
         <div class="slide">
-            <img src="images/Slider/Mandalorian_1280_720.jpg" />
+            <img src=@slider[4].imgPath />
         </div>
-
         <div class="slide">
-            <img src="images/Slider/Pirates2_1280_720.jpg" />
+            <img src=@slider[5].imgPath />
         </div>
-
-        <div class="slide">
-            <img src="images/Slider/Pirates_1280_720.jpg" />
-        </div>
-
-        <div class="slide">
-            <img src="images/Slider/R2C3PO_1280_720.jpg" />
-        </div>
-
-        <div class="slide">
-            <img src="images/Slider/ROTS1280_720.jpg" />
-        </div>
-
     </div>
 
 </div>
-<!--End of Slider-->
+
+
 <!--SoonInCinemas-->
 <div class="SoonInCinemas">
 
@@ -98,56 +91,56 @@
 
     <div class="Posters">
 
-        <figure class="Poster" data-title="Avatar: The way of water">
-            <img src="images/SoonInCinemas/avatar810x1200.jpeg" />
+        <figure class="Poster" data-title=@shownig[1].Title>
+            <img src=@shownig[1].imgPath />
             @* <figurecaption>@movie.Title</figurecaption> *@
-            <figurecaption>Avatar: The way of water</figurecaption>
+            <figurecaption>@shownig[1].Title</figurecaption>
         </figure>
-        <figure class="Poster" data-title="Barbie">
-            <img src="images/SoonInCinemas/Barbie810x1200.jpg" />
+        <figure class="Poster" data-title=@shownig[2].Title>
+            <img src=@shownig[2].imgPath />
             @* <figurecaption>@movie.Title</figurecaption> *@
-            <figurecaption>Barbie</figurecaption>
+            <figurecaption>@shownig[2].Title</figurecaption>
         </figure>
-        <figure class="Poster" data-title="Batman: The Dark Knight">
-            <img src="images/SoonInCinemas/Batman810x1200.jpg" />
+        <figure class="Poster" data-title=@shownig[3].Title>
+            <img src=@shownig[3].imgPath />
             @* <figurecaption>@movie.Title</figurecaption> *@
-            <figurecaption>Batman: The Dark Knight</figurecaption>
+            <figurecaption>@shownig[3].Title</figurecaption>
         </figure>
-        <figure class="Poster" data-title="Black Widow">
-            <img src="images/SoonInCinemas/black-widow810x1200.jpg" />
+        <figure class="Poster" data-title=@shownig[4].Title>
+            <img src=@shownig[4].imgPath />
             @* <figurecaption>@movie.Title</figurecaption> *@
-            <figurecaption>Black Widow</figurecaption>
+            <figurecaption>@shownig[4].Title</figurecaption>
         </figure>
-        <figure class="Poster" data-title="Cruella">
-            <img src="images/SoonInCinemas/Cruella810x1200.jpg" />
-            @* <figurecaption>@movie[1].Title</figurecaption> *@
-            <figurecaption>Cruella</figurecaption>
-        </figure>
-        <figure class="Poster" data-title="The Lord of The Rings: Return of The King">
-            <img src="images/SoonInCinemas/LOTR810x1200.jpg" />
+        <figure class="Poster" data-title=@shownig[5].Title>
+            <img src=@shownig[5].imgPath />
             @* <figurecaption>@movie.Title</figurecaption> *@
-            <figurecaption>The Lord of The Rings: Return of The King</figurecaption>
-        </figure>
-        <figure class="Poster" data-title="The Nun 2">
-            <img src="images/SoonInCinemas/Nun810x1200.jpg" />
+            <figurecaption>@shownig[5].Title</figurecaption>
+        </figure><figure class="Poster" data-title=@Model[6].Title>
+            <img src=@shownig[6].imgPath />
             @* <figurecaption>@movie.Title</figurecaption> *@
-            <figurecaption>The Nun 2</figurecaption>
+            <figurecaption>@shownig[6].Title</figurecaption>
         </figure>
-        <figure class="Poster" data-title="Oppenheimer">
-            <img src="images/SoonInCinemas/oppenheimer810x1200.jpg" />
+        </figure><figure class="Poster" data-title=@shownig[7].Title>
+            <img src=@shownig[7].imgPath />
             @* <figurecaption>@movie.Title</figurecaption> *@
-            <figurecaption>Oppenheimer</figurecaption>
+            <figurecaption>@shownig[7].Title</figurecaption>
         </figure>
-        <figure class="Poster" data-title="Spider-Man: Across the spider-verse">
-            <img src="images/SoonInCinemas/Spiderman_across_the_spiderverse810x1200.jpg" />
+        </figure><figure class="Poster" data-title=@shownig[8].Title>
+            <img src=@shownig[8].imgPath />
             @* <figurecaption>@movie.Title</figurecaption> *@
-            <figurecaption>Spider-Man: Across the spider-verse</figurecaption>
+            <figurecaption>@shownig[8].Title</figurecaption>
         </figure>
-        <figure class="Poster" data-title="Thor: Love and Thunder">
-            <img src="images/SoonInCinemas/thor810x1200.jpeg" />
+        </figure><figure class="Poster" data-title=@shownig[9].Title>
+            <img src=@shownig[9].imgPath />
             @* <figurecaption>@movie.Title</figurecaption> *@
-            <figurecaption>Thor: Love and Thunder</figurecaption>
+            <figurecaption>@shownig[9].Title</figurecaption>
         </figure>
+        </figure><figure class="Poster" data-title=@shownig[10].Title>
+            <img src=@shownig[10].imgPath />
+            @* <figurecaption>@movie.Title</figurecaption> *@
+            <figurecaption>@shownig[10].Title</figurecaption>
+        </figure>
+
     </div>
 
     <div class="popup-image-soon">
@@ -160,6 +153,49 @@
     </div>
 
 </div>
+
+
+<!--Events-->
+<div class="Events">
+    <div class="EventTitleContainer">
+        <div class="EventTitle">
+            <h1>EVENTS!</h1>
+        </div>
+    </div>
+    <div class="EventPosters">
+        <figure class="EventPoster" data-title="Wheel of Fortune and Fantasy">
+            <img src="images/Events/Asian810x1200.jpeg" alt="" />
+            <figurecaption>Wheel of Fortune and Fantasy</figurecaption>
+        </figure>
+        <figure class="EventPoster" data-title="Barbenheimer">
+            <img src="images/Events/barbenheimer-810x1200.jpg" alt="" />
+            <figurecaption>Barbenheimer</figurecaption>
+        </figure>
+        <figure class="EventPoster" data-title="Fallen Leaves">
+            <img src="images/Events/fallenleaves01-810x1200.jpg" alt="" />
+            <figurecaption>Fallen Leaves</figurecaption>
+        </figure>
+        <figure class="EventPoster" data-title="Harlem">
+            <img src="images/Events/Harlem810x1200.jpg" alt="" />
+            <figurecaption>Harlem</figurecaption>
+        </figure>
+        <figure class="EventPoster" data-title="John Lewis: Good Trouble">
+            <img src="images/Events/JohnLewis810x1200.jpg" alt="" />
+            <figurecaption>John Lewis: Good Trouble</figurecaption>
+        </figure>
+    </div>
+
+    <div class="popup-image">
+        <span>&times;</span>
+        <div class="popup-content">
+            <h1 class="popup-title">Default Text</h1>
+            <p class="popup-description">Default Description</p>
+        </div>
+        <img />
+    </div>
+</div>
+
+
 <!--ScriptforPOPUPsoonincinemas-->
 <script>document.querySelectorAll('.SoonInCinemas .Posters .Poster img').forEach(image => {
         image.onclick = () => {
@@ -180,6 +216,7 @@
     document.querySelector('.SoonInCinemas .popup-image-soon .popup-close').onclick = () => {
         document.querySelector('.SoonInCinemas .popup-image-soon').style.display = 'none';
     }
+
     function getMovieDescription(title) {
         switch (title) {
             case "Avatar: The way of water":
@@ -239,47 +276,7 @@
                 };
         }
     }</script>
-<!--EndOfSoonInCinemas-->
-<!--Events-->
-<div class="Events">
-    <div class="EventTitleContainer">
-        <div class="EventTitle">
-            <h1>EVENTS!</h1>
-        </div>
-    </div>
-    <div class="EventPosters">
-        <figure class="EventPoster" data-title="Wheel of Fortune and Fantasy">
-            <img src="images/Events/Asian810x1200.jpeg" alt="" />
-            <figurecaption>Wheel of Fortune and Fantasy</figurecaption>
-        </figure>
-        <figure class="EventPoster" data-title="Barbenheimer">
-            <img src="images/Events/barbenheimer-810x1200.jpg" alt="" />
-            <figurecaption>Barbenheimer</figurecaption>
-        </figure>
-        <figure class="EventPoster" data-title="Fallen Leaves">
-            <img src="images/Events/fallenleaves01-810x1200.jpg" alt="" />
-            <figurecaption>Fallen Leaves</figurecaption>
-        </figure>
-        <figure class="EventPoster" data-title="Harlem">
-            <img src="images/Events/Harlem810x1200.jpg" alt="" />
-            <figurecaption>Harlem</figurecaption>
-        </figure>
-        <figure class="EventPoster" data-title="John Lewis: Good Trouble">
-            <img src="images/Events/JohnLewis810x1200.jpg" alt="" />
-            <figurecaption>John Lewis: Good Trouble</figurecaption>
-        </figure>
-    </div>
 
-    <div class="popup-image">
-        <span>&times;</span>
-        <div class="popup-content">
-            <h1 class="popup-title">Default Text</h1>
-            <p class="popup-description">Default Description</p>
-        </div>
-        <img />
-    </div>
-
-</div>
 <!--ScriptforPOPUPevents-->
 <script>document.querySelectorAll('.EventPosters img').forEach(image => {
         image.onclick = () => {
@@ -337,4 +334,3 @@
                 };
         }
     }</script>
-<!--EndOfEvents-->

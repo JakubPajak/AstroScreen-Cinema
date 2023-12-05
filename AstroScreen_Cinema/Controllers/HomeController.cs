@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using AstroScreen_Cinema.Models;
 using System;
 using AstroScreen_Cinema.Models.EntitiesDto;
+using AstroScreen_Cinema.Services;
 
 namespace AstroScreen_Cinema.Controllers;
 
@@ -10,37 +11,24 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private readonly AppDBContext _appDbContext;
+    private readonly HomeService _homeService;
 
-    public HomeController(ILogger<HomeController> logger, AppDBContext appDbContext)
+    public HomeController(ILogger<HomeController> logger, AppDBContext appDbContext, HomeService homeService)
     {
         _logger = logger;
         _appDbContext = appDbContext;
+        _homeService = homeService;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        var activeUser = new LoginDto();
         //List<Movie> movies = _appDbContext.Movies.Where(m => m.Duration < 100).ToList();
         var loginStatus = HttpContext.Session.GetString("LoginStatus") ?? "NO";
 
-        
+        ViewBag.LoginStatus = loginStatus;
 
-        if (loginStatus is not null)
-        {
-            activeUser.IsLogged = loginStatus;
-            activeUser.Login = "anonymous";
-            activeUser.Password = "anonymous";
-        }
-        else
-        {
-            activeUser.IsLogged = loginStatus;
-            activeUser.Login = "anonymous";
-            activeUser.Password = "anonymous";
-        }
-
-        //ViewBag["LoginStatus", loginStatus];
-
-        return View(activeUser);
+        var movies = await _homeService.GetMovies();
+        return View(movies);
     }
 
     public IActionResult Privacy()
@@ -48,10 +36,10 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult NowShowing()
-    {
-        return View();
-    }
+    //public async Task<IActionResult> NowShowing()
+    //{
+
+    //}
 
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

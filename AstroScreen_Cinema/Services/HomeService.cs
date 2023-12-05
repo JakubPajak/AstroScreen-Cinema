@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Text;
 using AstroScreen_Cinema.AuthorizationAuthentication;
 using AstroScreen_Cinema.Models;
+using AstroScreen_Cinema.Models.EntitiesDto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -27,18 +28,19 @@ namespace AstroScreen_Cinema.Services
             _userHttpContext = userHttpContext;
         }
 
-        public string IndexAuthorize()
+        public async Task<List<MovieDto>> GetMovies()
         {
-            var user = _userHttpContext.GetUserId;
-            //var user = _context.Accounts.FirstOrDefault(a => a.Account_ID == Id);
+            var movies = await _context.Movies.Where(m => m.PosterPath != null)
+                .Select(m => new MovieDto
+                {
+                    Title = m.Title,
+                    Desc = m.Description,
+                    Duration = m.Duration,
+                    imgPath = m.PosterPath
 
-            var authorizatonResult = _authorizationServiece.AuthorizeAsync(_userHttpContext.User, user,
-                new DataDisplayRequirement(ResourceOperation.MyAccount)).Result;
+                }).ToListAsync();
 
-            if (authorizatonResult.Succeeded)
-                return authorizatonResult.Succeeded.ToString();
-            else
-                return authorizatonResult.Failure.ToString();
+            return movies;
         }
 	}
 }
