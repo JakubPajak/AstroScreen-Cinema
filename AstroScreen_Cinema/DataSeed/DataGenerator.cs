@@ -145,13 +145,13 @@ namespace AstroScreen_Cinema
             #endregion
 
             //Filmy sa dodane wiec nie ma potrzeby tego znowu dodawac 
-            //await _appContext.AddRangeAsync(_myMovieGen.GenerateMovie());
+            await _appContext.AddRangeAsync(_myMovieGen.GenerateMovie());
 
             await _appContext.AddRangeAsync(_myShowtimeGen.GenerateShowtime());
 
             await _appContext.SaveChangesAsync();
-            //await _appContext.AddRangeAsync(myMovies);
-            //await _appContext.SaveChangesAsync();
+            await _appContext.AddRangeAsync(myMovies);
+            await _appContext.SaveChangesAsync();
 
             return Task.CompletedTask;
         }

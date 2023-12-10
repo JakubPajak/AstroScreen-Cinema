@@ -17,9 +17,14 @@ namespace AstroScreen_Cinema.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Hall_1(DateTime _date)
+        //public async Task<IActionResult> Hall_1(DateTime _date)
+        //{
+        //    return View(await _hallRepertuair.GetRepertoires(_date));
+        //}
+
+        private IActionResult View(object value)
         {
-            return View(await _hallRepertuair.GetRepertoires(_date));
+            throw new NotImplementedException();
         }
     }
 }

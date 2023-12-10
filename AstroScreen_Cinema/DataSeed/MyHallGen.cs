@@ -5,6 +5,7 @@ namespace AstroScreen_Cinema.DataSeed
 	{
 		public MyHallGen()
 		{
+
 		}
 	}
 }
