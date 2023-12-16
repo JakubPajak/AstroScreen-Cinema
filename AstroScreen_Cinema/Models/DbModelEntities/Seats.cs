@@ -25,7 +25,6 @@ namespace AstroScreen_Cinema.Models
 
 
 		public List<Reservation>? Reservations { get; set; } = new List<Reservation>();
-
 	}
 }
 

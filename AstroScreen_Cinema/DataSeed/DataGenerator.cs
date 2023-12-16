@@ -12,14 +12,16 @@ namespace AstroScreen_Cinema
         public readonly AppDBContext _appContext;
         private readonly DataSeeding _dataSeeding;
         private readonly MyMovieGen _myMovieGen;
+        private readonly MyHallGen _myHallGen;
         private readonly MyShowtimeGen _myShowtimeGen;
 
         public DataGenerator(AppDBContext appContext, DataSeeding dataSeeding,
-            MyMovieGen myMovieGen, MyShowtimeGen myShowtimeGen)
+            MyMovieGen myMovieGen, MyShowtimeGen myShowtimeGen, MyHallGen myHallGen)
         {
             _appContext = appContext;
             _dataSeeding = dataSeeding;
             _myMovieGen = myMovieGen;
+            _myHallGen = myHallGen;
             _myShowtimeGen = myShowtimeGen;
         }
 
@@ -143,15 +145,14 @@ namespace AstroScreen_Cinema
             //_appContext.Categories.AddRange(category);
             //_appContext.CategoriesAndMovies.AddRange(categorymovie);
             #endregion
-
-            //Filmy sa dodane wiec nie ma potrzeby tego znowu dodawac 
-            await _appContext.AddRangeAsync(_myMovieGen.GenerateMovie());
-
+            
+            await _appContext.AddRangeAsync(_myHallGen.GenerateCinemaHalls());
             await _appContext.AddRangeAsync(_myShowtimeGen.GenerateShowtime());
 
             await _appContext.SaveChangesAsync();
-            await _appContext.AddRangeAsync(myMovies);
-            await _appContext.SaveChangesAsync();
+
+            //await _appContext.AddRangeAsync(myMovies);
+            //await _appContext.SaveChangesAsync();
 
             return Task.CompletedTask;
         }

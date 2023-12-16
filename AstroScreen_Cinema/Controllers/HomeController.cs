@@ -11,9 +11,9 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private readonly AppDBContext _appDbContext;
-    private readonly HomeService _homeService;
+    private readonly IHomeService _homeService;
 
-    public HomeController(ILogger<HomeController> logger, AppDBContext appDbContext, HomeService homeService)
+    public HomeController(ILogger<HomeController> logger, AppDBContext appDbContext, IHomeService homeService)
     {
         _logger = logger;
         _appDbContext = appDbContext;

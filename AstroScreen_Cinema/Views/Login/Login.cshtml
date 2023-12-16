@@ -1,56 +1,74 @@
-﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "Login Page";
-
-}
-
+﻿@* <link rel="stylesheet" href="~/css/Home/site.css" /> *@
+<link rel="stylesheet" href="~/css/Home/slider.css" />
+<link rel="stylesheet" href="~/css/Home/SoonInCinemas.css" />
+<link rel="stylesheet" href="~/css/Home/Events.css" />
 
 @model AstroScreen_Cinema.Models.EntitiesDto.LoginDto
 
+    <nav>
+        <ul>
+            <li><img class="logo" src="~/images/Logo/favlogo.png" /></li>
+            <li><a id="home-link" asp-area="" asp-controller="Home" asp-action="Index">Home<span></span></a></li>
+            <li><a id="home-link" asp-area="" asp-controller="NowShowing" asp-action="Nowshowing">Now Showing<span></span></a></li>
+            @if (ViewBag.LoginStatus == "NO")
+            {
+                <li><a id="home-link" asp-area="" asp-controller="Login" asp-action="Login">Login<span></span></a></li>
+            }
+            @if (ViewBag.LoginStatus == "YES")
+            {
+                <li><a id="home-link" asp-area="" asp-controller="MyAccount" asp-action="MyAccount">My Account<span></span></a></li>
+            }
+        </ul>
+    </nav>
 
-<form asp-action="Login" asp-controller="Login" method="post" class="login--form_main">
+    <form asp-action="Login" asp-controller="Login" method="post" class="login--form_main">
 
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
-    <div class="login--main_container">
-        <div class="login--main_label">
-            <h2 class="login--main-label_text">Log Into your account</h2>
-        </div>
-        <div class="login--input_area">
-            <div class="login--input">
-                <div class="login--label">
-                    <label asp-for="Login">Login:</label>
-                </div>
-                <input type="text" asp-for="Login" required class="login--input" />
+        <div class="login--main_container">
+            <div class="login--main_label">
+                <h2 class="login--main-label_text">Log Into your account</h2>
             </div>
-            <div class="login--input">
-                <div class="login--label">
-                    <label asp-for="Password">Password:</label>
+            <div class="login--input_area">
+                <div class="login--input">
+                    <div class="login--label">
+                        <label asp-for="Login">Login:</label>
+                    </div>
+                    <input type="text" asp-for="Login" class="login--input" />
                 </div>
-                <input type="password" asp-for="Password" class="login--input" required />
-            </div>
+                <div class="login--input">
+                    <div class="login--label">
+                        <label asp-for="Password">Password:</label>
+                    </div>
+                    <input type="password" asp-for="Password" class="login--input" />
+                </div>
 
-            @{
-                if (ViewBag.LoginStatus != null)
-                {
-                    if (ViewBag.LoginStatus == 0)
+                @{
+                    if (ViewBag.LoginStatus != "NULL")
                     {
-                        <div class="login--error">
-                            <p>Login failed. Pleas check your credentials</p>
-                        </div>
+                        if (ViewBag.LoginStatus == "NO")
+                        {
+                            <div class="login--error">
+                                <p>Login failed. Please check your credentials</p>
+                            </div>
+                        }
                     }
                 }
-            }
-            <div class="login--submit_btn_container">
-                <button type="submit" value="Login" class="login--submit_btn">Login</button>
+                <div class="login--submit_btn_container">
+                    <button type="submit" value="Login" class="login--submit_btn">Login</button>
+                </div>
+                <div class="login--submit_btn_container">
+                    <a asp-area="" asp-controller="Login" asp-action="Register">Create Account</a>
+                </div>
             </div>
         </div>
-    </div>
-</form>
+    </form>
 
-<div id="messageContainer"></div>
+    <script>// JavaScript to toggle 'required' attribute on Login and Password inputs
+        document.getElementById('registerButton').addEventListener('click', function () {
+            var loginInput = document.querySelector('[asp-for="Login"]');
+            var passwordInput = document.querySelector('[asp-for="Password"]');
 
-
-
-@*@Html.Partial("LoginStatus");*@
+            loginInput.removeAttribute('required');
+            passwordInput.removeAttribute('required');
+        });</script>

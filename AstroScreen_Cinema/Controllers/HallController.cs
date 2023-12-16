@@ -8,23 +8,23 @@ namespace AstroScreen_Cinema.Controllers
 {
     public class HallController : Controller
     {
-        private readonly HallController _hallController;
-        private readonly HallReperuairService _hallRepertuair;
+        private readonly IHallReperuairService _hallRepertuair;
 
-        public HallController(HallReperuairService hallRepertuair)
+        public HallController(IHallReperuairService hallRepertuair)
         {
             _hallRepertuair = hallRepertuair;
         }
 
-        [HttpPost]
-        //public async Task<IActionResult> Hall_1(DateTime _date)
-        //{
-        //    return View(await _hallRepertuair.GetRepertoires(_date));
-        //}
-
-        private IActionResult View(object value)
+        public IActionResult Hall_One()
         {
-            throw new NotImplementedException();
+            var _city = HttpContext.Session.GetString("City");
+            var hall = _hallRepertuair.GetHall(_city);
+            return View(hall);
         }
+
+        //private IActionResult View(object value)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

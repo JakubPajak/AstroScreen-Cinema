@@ -1,0 +1,105 @@
+﻿@namespace AstroScreen_Cinema.Views.Registration
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Registration Page";
+
+}
+
+<link rel="stylesheet" href="~/css/Home/site.css" />
+<link rel="stylesheet" href="~/css/Home/slider.css" />
+<link rel="stylesheet" href="~/css/Home/SoonInCinemas.css" />
+<link rel="stylesheet" href="~/css/Home/Events.css" />
+
+@model AstroScreen_Cinema.Models.EntitiesDto.RegisterDto
+
+    <nav>
+        <ul>
+            <li><img class="logo" src="~/images/Logo/favlogo.png" /></li>
+            <li><a id="home-link" asp-area="" asp-controller="Home" asp-action="Index">Home<span></span></a></li>
+            <li><a id="home-link" asp-area="" asp-controller="NowShowing" asp-action="Nowshowing">Now Showing<span></span></a></li>
+            @if (ViewBag.LoginStatus == "NO")
+            {
+                <li><a id="home-link" asp-area="" asp-controller="Login" asp-action="Login">Login<span></span></a></li>
+            }
+            @if (ViewBag.LoginStatus == "YES")
+            {
+                <li><a id="home-link" asp-area="" asp-controller="MyAccount" asp-action="MyAccount">My Account<span></span></a></li>
+            }
+        </ul>
+    </nav>
+
+<form asp-action="Register" asp-controller="Login" method="post" class="login--form_main">
+
+    @*@Html.AntiForgeryToken()*@
+
+    <div class="login--main_container">
+        <div class="login--main_label">
+            <h2 class="login--main-label_text">Log Into your account</h2>
+        </div>
+        <div class="login--input_area">
+            <div class="login--input">
+                <div class="login--label">
+                    <label asp-for="EmailAddress">Email Address:</label>
+                </div>
+                <input type="email" asp-for="EmailAddress" required class="login--input" />
+            </div>
+            <div class="login--input">
+                <div class="login--label">
+                    <label asp-for="Password">Password:</label>
+                </div>
+                <input type="password" asp-for="Password" class="login--input" required />
+            </div>
+
+            @*DODAC WALIDACJE HASLA*@
+
+
+            <div class="login--input">
+                <div class="login--label">
+                    <label asp-for="Name">Name:</label>
+                </div>
+                <input type="text" asp-for="Name" class="login--input" required />
+            </div>
+            <div class="login--input">
+                <div class="login--label">
+                    <label asp-for="SecondName">Second Name:</label>
+                </div>
+                <input type="text" asp-for="SecondName" class="login--input" required />
+            </div>
+            <div class="login--input">
+                <div class="login--label">
+                    <label asp-for="PhoneNum">Phone Number:</label>
+                </div>
+                <input type="tel" asp-for="PhoneNum" class="login--input" required />
+            </div>
+            <div class="login--input">
+                <div class="login--label">
+                    <label asp-for="BirthDate">Birth Date:</label>
+                </div>
+                <input type="date" asp-for="BirthDate" class="login--input" required />
+            </div>
+
+            @{
+                if (ViewBag.RegisterStatus != null)
+                {
+                    if (ViewBag.RegisterStatus != "DONE")
+                    {
+                        <div class="login--error">
+                            <p>
+                                Registration Failed - Please contact our customer support
+                                service to solve this problem
+                            </p>
+                        </div>
+                    }
+                }
+            }
+            <div class="login--submit_btn_container">
+                <button type="submit" value="Register" class="login--submit_btn">Register</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div id="messageContainer"></div>

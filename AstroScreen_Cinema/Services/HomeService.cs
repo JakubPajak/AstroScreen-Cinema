@@ -12,8 +12,8 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace AstroScreen_Cinema.Services
 {
-	public class HomeService
-	{
+    public class HomeService : IHomeService
+    {
         private readonly AppDBContext _context;
         private readonly AuthenticationSettings _authenticationSettings;
         private readonly IAuthorizationService _authorizationServiece;
@@ -21,9 +21,9 @@ namespace AstroScreen_Cinema.Services
 
         public HomeService(AppDBContext context, AuthenticationSettings authenticationSettings, IAuthorizationService authorizationServiece,
             IUserHttpContextService userHttpContext)
-		{
-			_context = context;
-			_authenticationSettings = authenticationSettings;
+        {
+            _context = context;
+            _authenticationSettings = authenticationSettings;
             _authorizationServiece = authorizationServiece;
             _userHttpContext = userHttpContext;
         }
@@ -42,5 +42,5 @@ namespace AstroScreen_Cinema.Services
 
             return movies;
         }
-	}
+    }
 }

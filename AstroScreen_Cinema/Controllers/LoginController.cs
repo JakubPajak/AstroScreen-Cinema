@@ -15,9 +15,9 @@ namespace AstroScreen_Cinema.Controllers
     {
         private readonly ILogger<LoginController> _logger;
         private readonly AppDBContext _appDbContext;
-        private readonly LoginService _loginService;
+        private readonly ILoginService _loginService;
 
-        public LoginController(ILogger<LoginController> logger, AppDBContext appDbContext, LoginService loginService)
+        public LoginController(ILogger<LoginController> logger, AppDBContext appDbContext, ILoginService loginService)
         {
             _logger = logger;
             _appDbContext = appDbContext;
@@ -27,6 +27,9 @@ namespace AstroScreen_Cinema.Controllers
         [HttpGet]
         public IActionResult Login()
         {
+            var loginStatus = HttpContext.Session.GetString("LoginStatus") ?? "NULL";
+            ViewBag.LoginStatus = loginStatus;
+
             return View();
         }
 
@@ -39,6 +42,24 @@ namespace AstroScreen_Cinema.Controllers
             HttpContext.Session.SetString("LoginStatus", user.IsLogged);
             HttpContext.Session.SetString("UserLogin", user.Login);
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public IActionResult Register()
+        {
+            var loginStatus = HttpContext.Session.GetString("LoginStatus") ?? "NULL";
+
+            ViewBag.LoginStatus = loginStatus;
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterDto registerDto)
+        {
+            await _loginService.RegisterUser(registerDto);
+
+            ViewBag.RegisterStatus = "DONE";
+            return View();
         }
     }
 }

@@ -6,74 +6,131 @@
     ViewData["Title"] = "NowShowing";
 }
 
+@model List<AstroScreen_Cinema.Models.EntitiesDto.RepertoireDto>
+
+
 <link rel="stylesheet" href="~/css/Home/site.css" />
 <link rel="stylesheet" href="~/css/NowShowing/Repertoire.css" />
+
+    <nav>
+        <ul>
+            <li><img class="logo" src="~/images/Logo/favlogo.png" /></li>
+            <li><a id="home-link" asp-area="" asp-controller="Home" asp-action="Index">Home<span></span></a></li>
+            <li><a id="home-link" asp-area="" asp-controller="NowShowing" asp-action="Nowshowing">Now Showing<span></span></a></li>
+            @if (ViewBag.LoginStatus == "NO")
+            {
+                <li><a id="home-link" asp-area="" asp-controller="Login" asp-action="Login">Login<span></span></a></li>
+            }
+            @if (ViewBag.LoginStatus == "YES")
+            {
+                <li><a id="home-link" asp-area="" asp-controller="MyAccount" asp-action="MyAccount">My Account<span></span></a></li>
+            }
+        </ul>
+    </nav>
 
 <div class="nowshowing">
 
     <div class="Repertoire">Repertoire</div>
         
     <main>
-        <section class="selections">
-            <div class="city-selection">
-                <label for="city">City selection:</label>
-                <select id="city" name="city">
-                    <option value="city1">City 1</option>
-                    <option value="city2">City 2</option>
-                    <!-- Dodaj więcej opcji miast według potrzeb -->
-                </select>
-            </div>
+        <form asp-action="NowShowing" asp-controller="NowShowing" method="post">
+            <section class="selections">
+                <div class="city-selection">
+                    <label for="city">City selection:</label>
+                    <select id="city" name="city">
+                        <option for="City" id="city" name="city">Gliwice</option>
+                        <option for="City" id="city" name="city">Zabrze</option>
+                        <option for="City" id="city" name="city">Warszawa</option>
+                        <option for="City" id="city" name="city">Kraków</option>
+                        <!-- Dodaj więcej opcji miast według potrzeb -->
+                    </select>
+                </div>
 
-            <div class="date-selection">
-                <label for="date">Date selection:</label>
-                <input type="date" id="date" name="date" />
-            </div>
-        </section>
+                <div class="date-selection">
+                    <label for="Date">Date selection:</label>
+                    <input type="date" for="Date" id="date" name="date"/>
+                </div>
+                <div>
+                    <button type="submit" value="NowShowing">Filter</button>
+                </div>
+            </section>
+        </form>
 
         <section class="movie-schedule">
             <!-- Film 1 -->
-            <div class="movie">
-                <img src="~/images/SoonInCinemas/avatar810x1200.jpeg" alt="Movie 1">
-                <div class="details">
-                    <div class="Title">
-                        <p>Avatar: The Way of Water</p>
+            @if (Model.Count != 0)
+            { 
+                @foreach (var movie in Model)
+                {
+                    var path = movie.imgPath;
+                    <div class="movie">
+                        <img src="~/@path" alt="Movie 1">
+                        <div class="details">
+                            <div class="Title">
+                                <p>@movie.MovieName</p>
+                            </div>
+                            <div class="additional-info">
+                                <p>Duration: @movie.Duration</p>
+                                @*<p>Categories: Action, Adventure, Sci-Fi</p>*@
+                            </div>
+                            <div class="schedule">
+                                <p>Hours:</p>
+                                <ul>
+                                    @foreach (var hour in movie.Hours)
+                                    {
+                                        <li><a id="home-link" asp-area="" asp-controller="Hall" asp-action="Hall_One">@hour<span></span></a></li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="additional-info">
-                        <p>Duration: 2h 30min</p>
-                        <p>Categories: Action, Adventure, Sci-Fi</p>
-                    </div>
-                    <div class="schedule">
-                        <p>Hours:</p>
-                        <ul>
-                            <li><a id="home-link" asp-area="" asp-controller="Hall" asp-action="Hall_1">14:00<span></span></a></li>
-                            <li>17:30</li>
-                            <li>20:45</li>
-                        </ul>
+                }
+            }
+            else
+            {
+                <div class="movie">
+                <img src="~/images/SoonInCinemas/Barbie810x1200.jpg" alt="Movie 2">
+                    <div class="details">
+                        <div class="Title">
+                            <p>Barbie</p>
+                        </div>
+                        <div class="additional-info">
+                            <p>Duration: 1h 45min</p>
+                            <p>Categories: Comedy, Family</p>
+                        </div>
+                        <div class="schedule">
+                            <p>Hours:</p>
+                            <ul>
+                                <li>15:15</li>
+                                <li>18:45</li>
+                                <li>21:30</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
 
             <!-- Film 2 -->
-            <div class="movie">
-                <img src="~/images/SoonInCinemas/Barbie810x1200.jpg" alt="Movie 2">
-                <div class="details">
-                    <div class="Title">
-                        <p>Barbie</p>
-                    </div>
-                    <div class="additional-info">
-                        <p>Duration: 1h 45min</p>
-                        <p>Categories: Comedy, Family</p>
-                    </div>
-                    <div class="schedule">
-                        <p>Hours:</p>
-                        <ul>
-                            <li>15:15</li>
-                            <li>18:45</li>
-                            <li>21:30</li>
-                        </ul>
-                    </div>
+            @*<div class="movie">
+            <img src="~/images/SoonInCinemas/Barbie810x1200.jpg" alt="Movie 2">
+            <div class="details">
+                <div class="Title">
+                    <p>Barbie</p>
+                </div>
+                <div class="additional-info">
+                    <p>Duration: 1h 45min</p>
+                    <p>Categories: Comedy, Family</p>
+                </div>
+                <div class="schedule">
+                    <p>Hours:</p>
+                    <ul>
+                        <li>15:15</li>
+                        <li>18:45</li>
+                        <li>21:30</li>
+                    </ul>
                 </div>
             </div>
+        </div>*@
         </section>
     </main>
 </div>

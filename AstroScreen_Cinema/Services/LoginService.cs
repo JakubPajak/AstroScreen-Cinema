@@ -12,7 +12,7 @@ using StackoveflowClone.Exceptions;
 
 namespace AstroScreen_Cinema.Services
 {
-    public class LoginService
+    public class LoginService : ILoginService
     {
         private readonly AppDBContext _appDBContext;
         private readonly AuthenticationSettings _authenticationSettings;
@@ -61,7 +61,7 @@ namespace AstroScreen_Cinema.Services
 
             var tokenHandler = new JwtSecurityTokenHandler();
 
-            return new LoginDto() { Login = getUser.Email, Password = getUser.Password ,IsLogged = "YES"};
+            return new LoginDto() { Login = getUser.Email, Password = getUser.Password, IsLogged = "YES" };
         }
 
         public LoginDto UserLogOut(string _login)
@@ -83,6 +83,29 @@ namespace AstroScreen_Cinema.Services
             else
             {
                 return new LoginDto();
+            }
+        }
+
+        public async Task RegisterUser(RegisterDto _user)
+        {
+            var newUser = new Account()
+            {
+                Name = _user.Name,
+                Surname = _user.SecondName,
+                Password = _user.Password,
+                Email = _user.EmailAddress,
+                PhoneNum = _user.PhoneNum,
+                Birthdate = _user.BirthDate
+            };
+
+            await _appDBContext.AddAsync(newUser);
+            try
+            {
+                await _appDBContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new BadRequestException(ex.ToString());
             }
         }
     }

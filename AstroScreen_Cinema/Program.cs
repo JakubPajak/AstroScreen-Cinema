@@ -44,19 +44,28 @@ builder.Services.Configure<Microsoft.AspNetCore.Mvc.JsonOptions>(options =>
 //builder.Services.AddDbContext<AppDBContext>();
 builder.Services.AddDbContext<AppDBContext>(options =>
 {
-    //options.UseSqlServer(builder.Configuration.GetConnectionString("DataBaseMAC"));
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DataBaseWIN"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DataBaseMAC"));
+    //options.UseSqlServer(builder.Configuration.GetConnectionString("DataBaseWIN"));
 });
 
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSingleton(authenticationSettings);
+
+//Seeding Services
 builder.Services.AddScoped<DataSeeding>();
+builder.Services.AddScoped<MyHallGen>();
+builder.Services.AddScoped<MyMovieGen>();
+builder.Services.AddScoped<MyShowtimeGen>();
 builder.Services.AddScoped<DataGenerator>();
-builder.Services.AddScoped<LoginService>();
-builder.Services.AddScoped<MyAccountService>();
+
+//Contrller services
+builder.Services.AddScoped<IHallReperuairService, HallReperuairService >();
+builder.Services.AddScoped<IHomeService, HomeService>();
+builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddScoped<IMyAccountService, MyAccountService>();
+builder.Services.AddScoped<INowShowingService, NowShowingService>();
 builder.Services.AddScoped<IUserHttpContextService, UserHttpContextService>();
-builder.Services.AddScoped<HomeService>();
 
 var app = builder.Build();
 
@@ -64,7 +73,7 @@ var app = builder.Build();
 using var scope = app.Services.CreateScope();
 var seeder = scope.ServiceProvider.GetRequiredService<DataGenerator>();
 
-await seeder.Seed();
+//await seeder.Seed();
 
 
 // Configure the HTTP request pipeline.
@@ -88,9 +97,3 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
-
-
-
-//Lukasz ciezko kapuje temat
-//Ale stara sie walczyc
-//Chociaz roznie to wychodzi

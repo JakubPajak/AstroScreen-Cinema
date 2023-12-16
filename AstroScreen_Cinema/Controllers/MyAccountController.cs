@@ -7,9 +7,9 @@ namespace AstroScreen_Cinema.Controllers
 {
     public class MyAccountController : Controller
     {
-        private readonly MyAccountService _myAccountService;
+        private readonly IMyAccountService _myAccountService;
 
-        public MyAccountController(MyAccountService myAccountService)
+        public MyAccountController(IMyAccountService myAccountService)
         {
             _myAccountService = myAccountService;
         }

@@ -12,7 +12,9 @@ namespace AstroScreen_Cinema.Services
 			_appDBContext = appDBContext;
 		}
 
-
 	}
 }
 
+
+
+ 

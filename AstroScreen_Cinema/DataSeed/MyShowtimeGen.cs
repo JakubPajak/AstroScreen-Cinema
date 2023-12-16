@@ -1,6 +1,7 @@
 ﻿using System;
 using AstroScreen_Cinema.Models;
 using AstroScreen_Cinema.Views.NowShowing;
+using Microsoft.EntityFrameworkCore;
 
 namespace AstroScreen_Cinema.DataSeed
 {
@@ -57,12 +58,43 @@ namespace AstroScreen_Cinema.DataSeed
                      {
                         var schedule = new Showtime()
                         {
-                            Movie_ID = _appContext.Movies.FirstOrDefault(m => m.Film_ID.Equals(Guid.Parse("FD5D7EA8-88B9-4DDF-D1E7-08DBE8F3E1AC"))),
-                            Hall_ID = _appContext.CinemaHalls.FirstOrDefault(m => m.Hall_ID.Equals(Guid.Parse("B5DC1237-051F-46B8-6AD3-08DBE8F3E1DC"))),
-                            Day = showTime.AddDays((int)dayOfWeek).Date,
-                            Time = showTime                                    
-                        };            
-                     }           
+                            Movie = _appContext.Movies
+                                    .Include(m => m.Director) // Ensure Director is loaded
+                                    .FirstOrDefault(m => m.Film_ID.Equals(Guid.Parse("1d37a159-907a-4342-e345-08dbf5004f72"))),
+                            CinemaHall = _appContext.CinemaHalls.FirstOrDefault(m => m.Hall_ID.Equals(Guid.Parse("f47e3102-ceb0-4b9e-abcb-08dbfd4f37cb"))),
+                            Day = showTime.AddDays((int)dayOfWeek + week*7).Date,
+                            Time = showTime.AddDays((int)dayOfWeek + week * 7).Date + showTime.TimeOfDay
+                        };
+                        //myShowtimes.Add(schedule);
+                        _appContext.Add(schedule);
+                        _appContext.SaveChanges();
+                        //myShowtimes.Add(schedule);
+                    }           
+                }
+            }
+            #endregion
+
+            #region
+            for (int week = 0; week < 3; week++)
+            {
+                foreach (var dayOfWeek in daysOfWeek)
+                {
+                    foreach (var showTime in showTimesFORAvatar)
+                    {
+                        var schedule = new Showtime()
+                        {
+                            Movie = _appContext.Movies
+                                    .Include(m => m.Director) // Ensure Director is loaded
+                                    .FirstOrDefault(m => m.Film_ID.Equals(Guid.Parse("1d37a159-907a-4342-e345-08dbf5004f72"))),
+                            CinemaHall = _appContext.CinemaHalls.FirstOrDefault(m => m.Hall_ID.Equals(Guid.Parse("1b22f2aa-69a4-40e7-abce-08dbfd4f37cb"))),
+                            Day = showTime.AddDays((int)dayOfWeek + week * 7).Date,
+                            Time = showTime.AddDays((int)dayOfWeek + week * 7).Date + showTime.TimeOfDay
+                        };
+                        //myShowtimes.Add(schedule);
+                        _appContext.Add(schedule);
+                        _appContext.SaveChanges();
+                        //myShowtimes.Add(schedule);
+                    }
                 }
             }
             #endregion
@@ -83,11 +115,15 @@ namespace AstroScreen_Cinema.DataSeed
                     {
                         var schedule = new Showtime()
                         {
-                            Movie_ID = _appContext.Movies.FirstOrDefault(m => m.Film_ID.Equals(Guid.Parse("FD5D7EA8-88B9-4DDF-D1E7-08DBE8F3E1AC"))),
-                            Hall_ID = _appContext.CinemaHalls.FirstOrDefault(m => m.Hall_ID.Equals(Guid.Parse("B5DC1237-051F-46B8-6AD3-08DBE8F3E1DC"))),
-                            Day = showTime.AddDays((int)dayOfWeek).Date,
-                            Time = showTime
+                            Movie = _appContext.Movies.FirstOrDefault(m => m.Film_ID.Equals(Guid.Parse("c9cfdae4-ed3c-4515-4129-08dbf4ffc769"))),
+                            CinemaHall = _appContext.CinemaHalls.FirstOrDefault(m => m.Hall_ID.Equals(Guid.Parse("f47e3102-ceb0-4b9e-abcb-08dbfd4f37cb"))),
+                            Day = showTime.AddDays((int)dayOfWeek + week * 7).Date,
+                            Time = showTime.AddDays((int)dayOfWeek + week * 7).Date + showTime.TimeOfDay
                         };
+                        //myShowtimes.Add(schedule);
+                        _appContext.Add(schedule);
+                        _appContext.SaveChanges();
+                        //myShowtimes.Add(schedule);
                     }
                 }
             }
@@ -109,11 +145,15 @@ namespace AstroScreen_Cinema.DataSeed
                     {
                         var schedule = new Showtime()
                         {
-                            Movie_ID = _appContext.Movies.FirstOrDefault(m => m.Film_ID.Equals(Guid.Parse("FD5D7EA8-88B9-4DDF-D1E7-08DBE8F3E1AC"))),
-                            Hall_ID = _appContext.CinemaHalls.FirstOrDefault(m => m.Hall_ID.Equals(Guid.Parse("B5DC1237-051F-46B8-6AD3-08DBE8F3E1DC"))),
-                            Day = showTime.AddDays((int)dayOfWeek).Date,
-                            Time = showTime
+                            Movie = _appContext.Movies.FirstOrDefault(m => m.Film_ID.Equals(Guid.Parse("f4590b8c-9abc-42f7-e346-08dbf5004f72"))),
+                            CinemaHall = _appContext.CinemaHalls.FirstOrDefault(m => m.Hall_ID.Equals(Guid.Parse("f47e3102-ceb0-4b9e-abcb-08dbfd4f37cb"))),
+                            Day = showTime.AddDays((int)dayOfWeek + week * 7).Date,
+                            Time = showTime.AddDays((int)dayOfWeek + week * 7).Date + showTime.TimeOfDay
                         };
+                        //myShowtimes.Add(schedule);
+                        _appContext.Add(schedule);
+                        _appContext.SaveChanges();
+                        //myShowtimes.Add(schedule);
                     }
                 }
             }
@@ -136,11 +176,15 @@ namespace AstroScreen_Cinema.DataSeed
                     {
                         var schedule = new Showtime()
                         {
-                            Movie_ID = _appContext.Movies.FirstOrDefault(m => m.Film_ID.Equals(Guid.Parse("FD5D7EA8-88B9-4DDF-D1E7-08DBE8F3E1AC"))),
-                            Hall_ID = _appContext.CinemaHalls.FirstOrDefault(m => m.Hall_ID.Equals(Guid.Parse("B5DC1237-051F-46B8-6AD3-08DBE8F3E1DC"))),
-                            Day = showTime.AddDays((int)dayOfWeek).Date,
-                            Time = showTime
+                            Movie = _appContext.Movies.FirstOrDefault(m => m.Film_ID.Equals(Guid.Parse("db04cebf-074b-4ff9-e347-08dbf5004f72"))),
+                            CinemaHall = _appContext.CinemaHalls.FirstOrDefault(m => m.Hall_ID.Equals(Guid.Parse("7b11c45a-4dab-4138-abcc-08dbfd4f37cb"))),
+                            Day = showTime.AddDays((int)dayOfWeek + week * 7).Date,
+                            Time = showTime.AddDays((int)dayOfWeek + week * 7).Date + showTime.TimeOfDay
                         };
+                        //myShowtimes.Add(schedule);
+                        _appContext.Add(schedule);
+                        _appContext.SaveChanges();
+                        //myShowtimes.Add(schedule);
                     }
                 }
             }
@@ -161,11 +205,15 @@ namespace AstroScreen_Cinema.DataSeed
                     {
                         var schedule = new Showtime()
                         {
-                            Movie_ID = _appContext.Movies.FirstOrDefault(m => m.Film_ID.Equals(Guid.Parse("FD5D7EA8-88B9-4DDF-D1E7-08DBE8F3E1AC"))),
-                            Hall_ID = _appContext.CinemaHalls.FirstOrDefault(m => m.Hall_ID.Equals(Guid.Parse("B5DC1237-051F-46B8-6AD3-08DBE8F3E1DC"))),
-                            Day = showTime.AddDays((int)dayOfWeek).Date,
-                            Time = showTime
+                            Movie = _appContext.Movies.FirstOrDefault(m => m.Film_ID.Equals(Guid.Parse("dc6b4218-61e7-4192-e348-08dbf5004f72"))),
+                            CinemaHall = _appContext.CinemaHalls.FirstOrDefault(m => m.Hall_ID.Equals(Guid.Parse("7b11c45a-4dab-4138-abcc-08dbfd4f37cb"))),
+                            Day = showTime.AddDays((int)dayOfWeek + week * 7).Date,
+                            Time = showTime.AddDays((int)dayOfWeek + week * 7).Date + showTime.TimeOfDay
                         };
+                        //myShowtimes.Add(schedule);
+                        _appContext.Add(schedule);
+                        _appContext.SaveChanges();
+                        //myShowtimes.Add(schedule);
                     }
                 }
             }
@@ -186,11 +234,15 @@ namespace AstroScreen_Cinema.DataSeed
                     {
                         var schedule = new Showtime()
                         {
-                            Movie_ID = _appContext.Movies.FirstOrDefault(m => m.Film_ID.Equals(Guid.Parse("FD5D7EA8-88B9-4DDF-D1E7-08DBE8F3E1AC"))),
-                            Hall_ID = _appContext.CinemaHalls.FirstOrDefault(m => m.Hall_ID.Equals(Guid.Parse("B5DC1237-051F-46B8-6AD3-08DBE8F3E1DC"))),
-                            Day = showTime.AddDays((int)dayOfWeek).Date,
-                            Time = showTime
+                            Movie = _appContext.Movies.FirstOrDefault(m => m.Film_ID.Equals(Guid.Parse("f3206f54-f7bf-414b-e349-08dbf5004f72"))),
+                            CinemaHall = _appContext.CinemaHalls.FirstOrDefault(m => m.Hall_ID.Equals(Guid.Parse("7b11c45a-4dab-4138-abcc-08dbfd4f37cb"))),
+                            Day = showTime.AddDays((int)dayOfWeek + week * 7).Date,
+                            Time = showTime.AddDays((int)dayOfWeek + week * 7).Date + showTime.TimeOfDay
                         };
+                        //myShowtimes.Add(schedule);
+                        _appContext.Add(schedule);
+                        _appContext.SaveChanges();
+                        myShowtimes.Add(schedule);
                     }
                 }
             }
@@ -211,11 +263,15 @@ namespace AstroScreen_Cinema.DataSeed
                     {
                         var schedule = new Showtime()
                         {
-                            Movie_ID = _appContext.Movies.FirstOrDefault(m => m.Film_ID.Equals(Guid.Parse("FD5D7EA8-88B9-4DDF-D1E7-08DBE8F3E1AC"))),
-                            Hall_ID = _appContext.CinemaHalls.FirstOrDefault(m => m.Hall_ID.Equals(Guid.Parse("B5DC1237-051F-46B8-6AD3-08DBE8F3E1DC"))),
-                            Day = showTime.AddDays((int)dayOfWeek).Date,
-                            Time = showTime
+                            Movie = _appContext.Movies.FirstOrDefault(m => m.Film_ID.Equals(Guid.Parse("f9435820-e78c-4e21-e34a-08dbf5004f72"))),
+                            CinemaHall = _appContext.CinemaHalls.FirstOrDefault(m => m.Hall_ID.Equals(Guid.Parse("d782d353-5c6d-4eaf-abcd-08dbfd4f37cb"))),
+                            Day = showTime.AddDays((int)dayOfWeek + week * 7).Date,
+                            Time = showTime.AddDays((int)dayOfWeek + week * 7).Date + showTime.TimeOfDay
                         };
+                        //myShowtimes.Add(schedule);
+                        _appContext.Add(schedule);
+                        _appContext.SaveChanges();
+                        myShowtimes.Add(schedule);
                     }
                 }
             }
@@ -237,11 +293,15 @@ namespace AstroScreen_Cinema.DataSeed
                     {
                         var schedule = new Showtime()
                         {
-                            Movie_ID = _appContext.Movies.FirstOrDefault(m => m.Film_ID.Equals(Guid.Parse("FD5D7EA8-88B9-4DDF-D1E7-08DBE8F3E1AC"))),
-                            Hall_ID = _appContext.CinemaHalls.FirstOrDefault(m => m.Hall_ID.Equals(Guid.Parse("B5DC1237-051F-46B8-6AD3-08DBE8F3E1DC"))),
-                            Day = showTime.AddDays((int)dayOfWeek).Date,
-                            Time = showTime
+                            Movie = _appContext.Movies.FirstOrDefault(m => m.Film_ID.Equals(Guid.Parse("b357d1f1-ff16-48a7-e34b-08dbf5004f72"))),
+                            CinemaHall = _appContext.CinemaHalls.FirstOrDefault(m => m.Hall_ID.Equals(Guid.Parse("d782d353-5c6d-4eaf-abcd-08dbfd4f37cb"))),
+                            Day = showTime.AddDays((int)dayOfWeek + week * 7).Date,
+                            Time = showTime.AddDays((int)dayOfWeek + week * 7).Date + showTime.TimeOfDay
                         };
+                        //myShowtimes.Add(schedule);
+                        _appContext.Add(schedule);
+                        _appContext.SaveChanges();
+                        myShowtimes.Add(schedule);
                     }
                 }
             }
@@ -263,11 +323,15 @@ namespace AstroScreen_Cinema.DataSeed
                     {
                         var schedule = new Showtime()
                         {
-                            Movie_ID = _appContext.Movies.FirstOrDefault(m => m.Film_ID.Equals(Guid.Parse("FD5D7EA8-88B9-4DDF-D1E7-08DBE8F3E1AC"))),
-                            Hall_ID = _appContext.CinemaHalls.FirstOrDefault(m => m.Hall_ID.Equals(Guid.Parse("B5DC1237-051F-46B8-6AD3-08DBE8F3E1DC"))),
-                            Day = showTime.AddDays((int)dayOfWeek).Date,
-                            Time = showTime
+                            Movie = _appContext.Movies.FirstOrDefault(m => m.Film_ID.Equals(Guid.Parse("5a77513f-fc82-4076-e34c-08dbf5004f72"))),
+                            CinemaHall = _appContext.CinemaHalls.FirstOrDefault(m => m.Hall_ID.Equals(Guid.Parse("ddf1c6d4-a7a4-4f75-5db1-08dbde0a2fea"))),
+                            Day = showTime.AddDays((int)dayOfWeek + week * 7).Date,
+                            Time = showTime.AddDays((int)dayOfWeek + week * 7).Date + showTime.TimeOfDay
                         };
+                        //myShowtimes.Add(schedule);
+                        //_appContext.Add(schedule);
+                        //_appContext.SaveChanges();
+                        myShowtimes.Add(schedule);
                     }
                 }
             }
@@ -289,16 +353,20 @@ namespace AstroScreen_Cinema.DataSeed
                     {
                         var schedule = new Showtime()
                         {
-                            Movie_ID = _appContext.Movies.FirstOrDefault(m => m.Film_ID.Equals(Guid.Parse("FD5D7EA8-88B9-4DDF-D1E7-08DBE8F3E1AC"))),
-                            Hall_ID = _appContext.CinemaHalls.FirstOrDefault(m => m.Hall_ID.Equals(Guid.Parse("B5DC1237-051F-46B8-6AD3-08DBE8F3E1DC"))),
-                            Day = showTime.AddDays((int)dayOfWeek).Date,
-                            Time = showTime
+                            Movie = _appContext.Movies.FirstOrDefault(m => m.Film_ID.Equals(Guid.Parse("f22f847d-2ab2-4159-e34d-08dbf5004f72"))),
+                            CinemaHall = _appContext.CinemaHalls.FirstOrDefault(m => m.Hall_ID.Equals(Guid.Parse("1b22f2aa-69a4-40e7-abce-08dbfd4f37cb"))),
+                            Day = showTime.AddDays((int)dayOfWeek + week * 7).Date,
+                            Time = showTime.AddDays((int)dayOfWeek + week * 7).Date + showTime.TimeOfDay
                         };
+                        //myShowtimes.Add(schedule);
+                        _appContext.Add(schedule);
+                        _appContext.SaveChanges();
+                        myShowtimes.Add(schedule);
                     }
                 }
             }
             #endregion
-
+            
             return myShowtimes;
         }
 	}

@@ -30,6 +30,7 @@
     <None Remove="AuthorizatonAuthentication\" />
     <None Remove="Views\MyAccount\" />
     <None Remove="Exceptions\" />
+    <None Remove="Services\Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\Config\" />
@@ -44,6 +45,7 @@
     <Folder Include="Views\MyAccount\" />
     <Folder Include="wwwroot\css\MyAccount\" />
     <Folder Include="Exceptions\" />
+    <Folder Include="Services\Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Models\Config\EntitiesConfig\CustomerConfig.cs" />
