@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="~/css/Home/slider.css" />
 <link rel="stylesheet" href="~/css/Home/SoonInCinemas.css" />
 <link rel="stylesheet" href="~/css/Home/Events.css" />
+<link rel="stylesheet" href="~/css/Home/site.css" />
 
 @model AstroScreen_Cinema.Models.EntitiesDto.LoginDto
 
@@ -57,9 +58,11 @@
                 <div class="login--submit_btn_container">
                     <button type="submit" value="Login" class="login--submit_btn">Login</button>
                 </div>
-                <div class="login--submit_btn_container">
-                    <a asp-area="" asp-controller="Login" asp-action="Register">Create Account</a>
-                </div>
+                <ul class="loginCreate--submit_btn_container">
+                    <li>
+                        <a asp-area="" asp-controller="Login" asp-action="Register">Create Account</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </form>

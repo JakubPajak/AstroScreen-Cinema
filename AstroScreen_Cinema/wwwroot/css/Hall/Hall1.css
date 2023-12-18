@@ -1,25 +1,13 @@
 ﻿.SeatSelector {
-    margin-top:20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
     font-family: 'Poppins', sans-serif;
-    padding: 0;
+    padding: 20px;
 }
 
-.SelectorTitle {
-    color: #fff;
-    text-align: center;
-    padding: 1em 0;
-    font-size: 30px;
-    font-weight: bold;
-}
-
+.SelectorTitle,
 h1 {
-    
     color: #fff;
     text-align: center;
     padding: 1em 0;
@@ -71,14 +59,15 @@ h1 {
 
 .right-section {
     margin-left: 40px;
-    flex: 0 0 30%; 
-    overflow: auto; 
+    flex: 0 0 30%;
+    overflow: auto;
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
 }
 
 .total-section {
-    order: 1; 
+    order: 1;
+    color: #fff;
 }
 
 .Reservation {
@@ -86,11 +75,10 @@ h1 {
     border: 2px solid #fff;
     border-radius: 10px;
     cursor: pointer;
-    
-    order: 2; 
-    background-color: aqua; 
-    
+    order: 2;
+    background-color: aqua;
 }
+
     .Reservation a {
         text-decoration: none;
         display: block;
@@ -101,11 +89,8 @@ h1 {
     }
 
     .Reservation:hover {
-        background-color: #2980b9; /* Kolor tła przycisku po najechaniu myszą */
+        background-color: #2980b9;
     }
-
-
-
 
 .hall-container,
 .seat-selected {
@@ -165,12 +150,10 @@ h1 {
     color: #000;
 }
 
-
 .seat.copied {
     background-color: #3498db;
     color: #fff;
 }
-
 
 .seat.copied-vip {
     background-color: #ffcc00;
@@ -180,8 +163,8 @@ h1 {
 .seat.copied,
 .seat.copied-vip {
     display: inline-block;
-    margin-right: 5px; /* Opcjonalny margines między sklonowanymi miejscami */
-    flex-wrap: wrap; /* Miejsca przechodzą do nowej linii, gdy brakuje miejsca */
+    margin-right: 5px;
+    flex-wrap: wrap;
 }
 
 .selected-seats .cloned {
@@ -194,6 +177,7 @@ h1 {
     background-color: #3498db;
     color: #fff;
 }
+
 /*Cancel Selection*/
 .cancel-selection-frame {
     padding: 10px;
@@ -203,17 +187,17 @@ h1 {
     color: #fff;
     text-align: center;
 }
+
     .cancel-selection-frame:hover {
         background-color: rgba(255, 255, 255, 0.2);
     }
+
 .selected-seats {
     padding: 10px;
     color: #fff;
     text-align: center;
 }
 
-.total-section{
+.total-section {
     color: #fff;
 }
-
-

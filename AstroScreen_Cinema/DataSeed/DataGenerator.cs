@@ -146,12 +146,12 @@ namespace AstroScreen_Cinema
             //_appContext.CategoriesAndMovies.AddRange(categorymovie);
             #endregion
             
-            await _appContext.AddRangeAsync(_myHallGen.GenerateCinemaHalls());
-            await _appContext.AddRangeAsync(_myShowtimeGen.GenerateShowtime());
+            //await _appContext.AddRangeAsync(_myHallGen.GenerateCinemaHalls());
+            //await _appContext.AddRangeAsync(_myShowtimeGen.GenerateShowtime());
+            //await _appContext.AddRangeAsync(_myMovieGen.GenerateMovie());
+            //await _appContext.SaveChangesAsync();
 
-            await _appContext.SaveChangesAsync();
-
-            //await _appContext.AddRangeAsync(myMovies);
+            
             //await _appContext.SaveChangesAsync();
 
             return Task.CompletedTask;

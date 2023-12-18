@@ -44,8 +44,8 @@ builder.Services.Configure<Microsoft.AspNetCore.Mvc.JsonOptions>(options =>
 //builder.Services.AddDbContext<AppDBContext>();
 builder.Services.AddDbContext<AppDBContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DataBaseMAC"));
-    //options.UseSqlServer(builder.Configuration.GetConnectionString("DataBaseWIN"));
+    //options.UseSqlServer(builder.Configuration.GetConnectionString("DataBaseMAC"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DataBaseWIN"));
 });
 
 builder.Services.AddSession();
@@ -73,7 +73,7 @@ var app = builder.Build();
 using var scope = app.Services.CreateScope();
 var seeder = scope.ServiceProvider.GetRequiredService<DataGenerator>();
 
-//await seeder.Seed();
+await seeder.Seed();
 
 
 // Configure the HTTP request pipeline.

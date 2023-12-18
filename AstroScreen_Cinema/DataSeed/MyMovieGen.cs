@@ -26,7 +26,7 @@ namespace AstroScreen_Cinema.DataSeed
                 Duration = 179,
                 PosterPath = "images/SoonInCinemas/avatar810x1200.jpeg",
                 //TrailerPath = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/d9MyW72ELq0?si=Q8zXuPYn11JjjmB5\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>",
-                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID.Equals(Guid.Parse("e1a50987-95c7-4739-46fc-08dbde026de1")))
+                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID.Equals(Guid.Parse("0790E88F-C304-48FE-78E9-08DBE8F3E1C4")))
             };
             myMovies.Add(Avatar);
 
@@ -38,7 +38,7 @@ namespace AstroScreen_Cinema.DataSeed
                 Duration = 121,
                 PosterPath = "images/SoonInCinemas/Barbie810x1200.jpg",
                 //Director_ID = Guid.Parse("e1a50987-95c7-4739-46fc-08dbde026de1"),
-                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID.Equals(Guid.Parse("e1a50987-95c7-4739-46fc-08dbde026de1")))
+                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID.Equals(Guid.Parse("0790E88F-C304-48FE-78E9-08DBE8F3E1C4")))
             };
             myMovies.Add(Barbie);
 
@@ -54,7 +54,7 @@ namespace AstroScreen_Cinema.DataSeed
                 Duration = 149,
                 PosterPath = "images/SoonInCinemas/Batman810x1200.jpg",
                 //Director_ID = Guid.Parse("e1a50987-95c7-4739-46fc-08dbde026de1"),
-                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID.Equals(Guid.Parse("e1a50987-95c7-4739-46fc-08dbde026de1")))
+                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID.Equals(Guid.Parse("0790E88F-C304-48FE-78E9-08DBE8F3E1C4")))
             };
             myMovies.Add(Batman);
 
@@ -66,7 +66,7 @@ namespace AstroScreen_Cinema.DataSeed
                 Duration = 119,
                 PosterPath = "images/SoonInCinemas/black-widow810x1200.jpg",
                 //Director_ID = Guid.Parse("e1a50987-95c7-4739-46fc-08dbde026de1"),
-                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID.Equals(Guid.Parse("e1a50987-95c7-4739-46fc-08dbde026de1")))
+                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID.Equals(Guid.Parse("0790E88F-C304-48FE-78E9-08DBE8F3E1C4")))
             };
             myMovies.Add(BlackWidow);
 
@@ -78,7 +78,7 @@ namespace AstroScreen_Cinema.DataSeed
                 Duration = 100,
                 PosterPath = "images/SoonInCinemas/Cruella810x1200.jpg",
                 //Director_ID = Guid.Parse("01076649-907b-46c6-46fe-08dbde026de1"),
-                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID.Equals(Guid.Parse("01076649-907b-46c6-46fe-08dbde026de1")))
+                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID.Equals(Guid.Parse("0790E88F-C304-48FE-78E9-08DBE8F3E1C4")))
             };
             myMovies.Add(Cruella);
 
@@ -90,7 +90,7 @@ namespace AstroScreen_Cinema.DataSeed
                 Duration = 180,
                 PosterPath = "images/SoonInCinemas/LOTR810x1200.jpg",
                 //Director_ID = Guid.Parse("01076649-907b-46c6-46fe-08dbde026de1"),
-                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID.Equals(Guid.Parse("01076649-907b-46c6-46fe-08dbde026de1")))
+                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID.Equals(Guid.Parse("0790E88F-C304-48FE-78E9-08DBE8F3E1C4")))
             };
             myMovies.Add(LOTR);
 
@@ -102,7 +102,7 @@ namespace AstroScreen_Cinema.DataSeed
                 Duration = 130,
                 PosterPath = "images/SoonInCinemas/Nun810x1200.jpg",
                 //Director_ID = Guid.Parse("01076649-907b-46c6-46fe-08dbde026de1"),
-                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID.Equals(Guid.Parse("01076649-907b-46c6-46fe-08dbde026de1")))
+                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID.Equals(Guid.Parse("0790E88F-C304-48FE-78E9-08DBE8F3E1C4")))
             };
             myMovies.Add(Nun);
 
@@ -114,7 +114,7 @@ namespace AstroScreen_Cinema.DataSeed
                 Duration = 176,
                 PosterPath = "images/SoonInCinemas/oppenheimer810x1200.jpg",
                 //Director_ID = Guid.Parse("620cafb0-729e-4b5d-4700-08dbde026de1"),
-                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID.Equals(Guid.Parse("620cafb0-729e-4b5d-4700-08dbde026de1")))
+                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID.Equals(Guid.Parse("0790E88F-C304-48FE-78E9-08DBE8F3E1C4")))
             };
             myMovies.Add(Oppenheimer);
 
@@ -126,7 +126,7 @@ namespace AstroScreen_Cinema.DataSeed
                 Duration = 154,
                 PosterPath = "images/SoonInCinemas/Spiderman_across_the_spiderverse810x1200.jpg",
                 //Director_ID = Guid.Parse("620cafb0-729e-4b5d-4700-08dbde026de1"),
-                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID.Equals(Guid.Parse("620cafb0-729e-4b5d-4700-08dbde026de1")))
+                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID.Equals(Guid.Parse("0790E88F-C304-48FE-78E9-08DBE8F3E1C4")))
             };
             myMovies.Add(Spiderman);
             //await _appContext.AddRangeAsync();
@@ -139,7 +139,7 @@ namespace AstroScreen_Cinema.DataSeed
                 Duration = 132,
                 PosterPath = "images/SoonInCinemas/thor810x1200.jpeg",
                 //Director_ID = Guid.Parse("620cafb0-729e-4b5d-4700-08dbde026de1"),
-                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID.Equals(Guid.Parse("620cafb0-729e-4b5d-4700-08dbde026de1")))
+                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID.Equals(Guid.Parse("0790E88F-C304-48FE-78E9-08DBE8F3E1C4")))
 
             };
             myMovies.Add(Thor);
@@ -155,7 +155,7 @@ namespace AstroScreen_Cinema.DataSeed
                 Duration = 90,
                 PosterPath = "images/Events/Asian810x1200.jpeg",
                 //Director_ID = Guid.Parse("04bca373-e204-4366-4702-08dbde026de1"),
-                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID.Equals(Guid.Parse("04bca373-e204-4366-4702-08dbde026de1")))
+                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID.Equals(Guid.Parse("0790E88F-C304-48FE-78E9-08DBE8F3E1C4")))
             };
             myMovies.Add(Fortune);
 
@@ -168,7 +168,7 @@ namespace AstroScreen_Cinema.DataSeed
                 Duration = 134,
                 PosterPath = "images/Events/barbenheimer-810x1200.jpg",
                 //Director_ID = Guid.Parse("04bca373-e204-4366-4702-08dbde026de1"),
-                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID.Equals(Guid.Parse("db04cebf-074b-4ff9-e347-08dbf5004f72")))
+                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID.Equals(Guid.Parse("0790E88F-C304-48FE-78E9-08DBE8F3E1C4")))
             };
             myMovies.Add(Barbenheimer);
 
@@ -180,7 +180,7 @@ namespace AstroScreen_Cinema.DataSeed
                 Duration = 81,
                 PosterPath = "images/Events/fallenleaves01-810x1200.jpg",
                 //Director_ID = Guid.Parse("04bca373-e204-4366-4702-08dbde026de1"),
-                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID.Equals(Guid.Parse("04bca373-e204-4366-4702-08dbde026de1")))
+                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID.Equals(Guid.Parse("0790E88F-C304-48FE-78E9-08DBE8F3E1C4")))
             };
             myMovies.Add(Fallenleaves);
 
@@ -193,7 +193,7 @@ namespace AstroScreen_Cinema.DataSeed
                 Duration = 60,
                 PosterPath = "images/Events/Harlem810x1200.jpg",
                 //Director_ID = Guid.Parse("336852fa-28e5-44e6-4704-08dbde026de1"),
-                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID.Equals(Guid.Parse("04bca373-e204-4366-4702-08dbde026de1")))
+                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID.Equals(Guid.Parse("0790E88F-C304-48FE-78E9-08DBE8F3E1C4")))
             };
             myMovies.Add(Harlem);
 
@@ -207,7 +207,7 @@ namespace AstroScreen_Cinema.DataSeed
                 Duration = 93,
                 PosterPath = "images/Events/JohnLewis810x1200.jpg",
                 //Director_ID = Guid.Parse("336852fa-28e5-44e6-4704-08dbde026de1"),
-                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID.Equals(Guid.Parse("1bcec000-fffb-49bb-86e6-08dbde0a2fe7")))
+                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID.Equals(Guid.Parse("0790E88F-C304-48FE-78E9-08DBE8F3E1C4")))
             };
             myMovies.Add(JohnLewis);
 
@@ -223,7 +223,7 @@ namespace AstroScreen_Cinema.DataSeed
                 Duration = 54,
                 PosterPath = "images/Slider/Mandalorian_1280_720.jpg",
                 //Director_ID = Guid.Parse("336852fa-28e5-44e6-4704-08dbde026de1"),
-                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID.Equals(Guid.Parse("1bcec000-fffb-49bb-86e6-08dbde0a2fe7")))
+                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID.Equals(Guid.Parse("0790E88F-C304-48FE-78E9-08DBE8F3E1C4")))
             };
             myMovies.Add(Slide1);
 
@@ -235,7 +235,7 @@ namespace AstroScreen_Cinema.DataSeed
                 Duration = 56,
                 PosterPath = "images/Slider/MandalorianS3_1280_720.jpg",
                 //Director_ID = Guid.Parse("27683593-b45e-420a-08f7-08dbde030165"),
-                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID.Equals(Guid.Parse("6fbb2853-4279-49f0-86e8-08dbde0a2fe7")))
+                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID.Equals(Guid.Parse("0790E88F-C304-48FE-78E9-08DBE8F3E1C4")))
             };
             myMovies.Add(Slide2);
 
@@ -248,7 +248,7 @@ namespace AstroScreen_Cinema.DataSeed
                 Duration = 124,
                 PosterPath = "images/Slider/Pirates2_1280_720.jpg",
                 //Director_ID = Guid.Parse("27683593-b45e-420a-08f7-08dbde030165"),
-                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID.Equals(Guid.Parse("1be7495b-b890-4e84-86ea-08dbde0a2fe7")))
+                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID.Equals(Guid.Parse("0790E88F-C304-48FE-78E9-08DBE8F3E1C4")))
             };
             myMovies.Add(Slide3);
 
@@ -260,7 +260,7 @@ namespace AstroScreen_Cinema.DataSeed
                 Duration = 122,
                 PosterPath = "images/Slider/Pirates_1280_720.jpg",
                 // Director_ID = Guid.Parse("062b324b-ff9b-49b7-46fb-08dbde026de1"),
-                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID == Guid.Parse("acafe3e9-8e71-43b6-86ec-08dbde0a2fe7"))
+                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID == Guid.Parse("0790E88F-C304-48FE-78E9-08DBE8F3E1C4"))
             };
             myMovies.Add(Slide4);
 
@@ -272,7 +272,7 @@ namespace AstroScreen_Cinema.DataSeed
                 Duration = 122,
                 PosterPath = "images/Slider/R2C3PO_1280_720.jpg",
                 //Director_ID = Guid.Parse("aed9b210-5be7-4fd3-08f4-08dbde030165"),
-                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID == Guid.Parse("b01a3c6f-2cae-4b55-86e5-08dbde0a2fe7"))
+                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID == Guid.Parse("0790E88F-C304-48FE-78E9-08DBE8F3E1C4"))
             };
             myMovies.Add(Slide5);
 
@@ -284,7 +284,7 @@ namespace AstroScreen_Cinema.DataSeed
                 Duration = 122,
                 PosterPath = "images/Slider/ROTS1280_720.jpg",
                 //Director_ID = Guid.Parse("aed9b210-5be7-4fd3-08f4-08dbde030165"),
-                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID == Guid.Parse("5d21d7aa-4757-47e0-7f41-08dbde07d180"))
+                Director = _appContext.Directors.FirstOrDefault(d => d.Director_ID == Guid.Parse("0790E88F-C304-48FE-78E9-08DBE8F3E1C4"))
             };
             myMovies.Add(Slide6);
 

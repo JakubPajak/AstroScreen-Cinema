@@ -19,9 +19,9 @@
     
     <!--Hall legend-->
     <div class="hall-legend">
-        <div class="seat-legend">Not Selected - 5$</div>
-        <div class="seat-legend vip">VIP - 8$</div>
-        <div class="seat-legend selected">Selected</div>
+        <div class="seat-legend">Not Selected</div>
+        @* <div class="seat-legend vip">VIP - 8$</div> *@
+        <div class="seat-legend selected">Selected - 5$</div>
         <div class="seat-legend taken">Taken</div>
     </div>
 
@@ -31,14 +31,17 @@
             <div class="hall-container left-section">
                 <div class="screen">Screen</div>
 
-                @for (int i = 0; i<Model.NumberOfRows; i++)
+                @for (int row = 0; row<Model.NumberOfRows; row++)
                 {
                     <div class="hall-scheme-row">
-                        @for (int k = 0; k<seatsPerRow; k++)
+                        @for (int seatNumber = 0; seatNumber < seatsPerRow; seatNumber++)
                             {
                                 //class="seat @GetVipClass(i)"
-                            <div data-row="@i" data-seat="@k">
-                                @($"{i}{k}")
+                            @* <div class="seat" data-row="@row" data-seat="@seatNumber">
+                                @($"{@row} {@seatNumber}")
+                            </div> *@
+                            <div class="seat" data-row="@Convert.ToChar('A' + row)" data-seat="@seatNumber">
+                                @($"{Convert.ToChar('A' + row)}{seatNumber}")
                             </div>
                         }
                     </div>
@@ -74,7 +77,7 @@
                     </div>
                  }*@
             </div>
-            </form>
+</form>
 
             <!-- Right Section -->
             <div class="right-section">
@@ -100,29 +103,21 @@
         var seats = document.querySelectorAll(".seat");
         var cancelSelectionFrame = document.getElementById("cancelSelectionFrame");
         var selectedSeatsContainer = document.querySelector(".selected-seats");
-        var totalSection = document.createElement("div"); 
-        totalSection.classList.add("total-section"); 
+        var totalSection = document.querySelector(".total-section");
 
-        
         var selectionSummary = {
             totalSeats: 0,
             totalVipSeats: 0,
             totalPrice: 0
         };
 
-        
-        var totalSection = document.querySelector(".total-section");
-
         // First view of total
-        totalSection.textContent = `Total Seats: ${selectionSummary.totalSeats}, VIP Seats: ${selectionSummary.totalVipSeats}, Total Price: $${selectionSummary.totalPrice.toFixed(2)}`;
+        totalSection.textContent = `Total Seats: ${selectionSummary.totalSeats}, Total Price: $${selectionSummary.totalPrice.toFixed(2)}`;
 
         seats.forEach(function (seat) {
             seat.addEventListener("click", function () {
                 seat.classList.toggle("selected");
-                seat.insertAdjacentHTML($"
-                <input asp-for="MakeReservation" type="text" disabled/>
-                "");
-                
+
                 if (seat.classList.contains("selected")) {
                     selectionSummary.totalSeats++;
                     if (seat.classList.contains("vip")) {
@@ -142,11 +137,10 @@
                 }
 
                 // Viewing total
-                totalSection.textContent = `Total Seats: ${selectionSummary.totalSeats}, VIP Seats: ${selectionSummary.totalVipSeats}, Total Price: $${selectionSummary.totalPrice.toFixed(2)}`;
+                totalSection.textContent = `Total Seats: ${selectionSummary.totalSeats}, Total Price: $${selectionSummary.totalPrice.toFixed(2)}`;
 
-                
                 if (seat.classList.contains("selected")) {
-                    // Clonning 
+                    // Cloning
                     var clonedSeat = seat.cloneNode(true);
 
                     // Adding a cloned class
@@ -156,13 +150,16 @@
                         clonedSeat.classList.add("copied");
                     }
 
-                    
-                    var priceSpan = document.createElement("span");
-                    
-                    selectedSeatsContainer.appendChild(clonedSeat);
+                    clonedSeat.addEventListener("click", function () {
+                        seat.classList.remove("selected");
+                        clonedSeat.remove();
+                        updateTotal();
+                    });
 
+                    // Adding cloned seat to the right section
+                    selectedSeatsContainer.appendChild(clonedSeat);
                 } else {
-                    // Delete selcted seats from right section
+                    // Remove selected seats from the right section
                     var selectedSeat = selectedSeatsContainer.querySelector('[data-row="' + seat.dataset.row + '"][data-seat="' + seat.dataset.seat + '"]');
                     if (selectedSeat) {
                         selectedSeat.remove();
@@ -176,22 +173,17 @@
 
         // Clear functionality
         cancelSelectionFrame.addEventListener("click", function () {
-            var selectedSeats = document.querySelectorAll(".selected");
-            selectedSeats.forEach(function (selectedSeat) {
-                // Check if not legend
-                var isLegend = selectedSeat.closest('.hall-legend') !== null;
-
-                if (!isLegend) {
+            seats.forEach(function (selectedSeat) {
+                if (selectedSeat.classList.contains("selected")) {
                     selectedSeat.classList.remove("selected");
                 }
             });
 
-            // Delete selected
+            // Remove selected seats from the right section
             var selectedSeats = selectedSeatsContainer.querySelectorAll('.copied, .copied-vip');
             selectedSeats.forEach(function (selectedSeat) {
                 selectedSeat.remove();
             });
-
 
             // Reset
             selectionSummary = {
@@ -200,19 +192,18 @@
                 totalPrice: 0
             };
 
-            // Reste total section
-            totalSection.textContent = "Total Seats: 0, VIP Seats: 0, Total Price: $0.00";
+            // Reset total section
+            totalSection.textContent = "Total Seats: 0, Total Price: $0.00";
         });
-    });
 
-    @functions {
-        string GetVipClass(char row)
-        {
-            if (row == 'E' || row == 'F')
-            {
-                return "vip";
-            }
-            return "";
+        // Function to update total
+        function updateTotal() {
+            selectionSummary.totalSeats = document.querySelectorAll('.selected').length;
+            selectionSummary.totalVipSeats = document.querySelectorAll('.copied-vip').length;
+            selectionSummary.totalPrice = selectionSummary.totalSeats * 5 + selectionSummary.totalVipSeats * 8;
+
+            // Update total section
+            totalSection.textContent = `Total Seats: ${selectionSummary.totalSeats}, Total Price: $${selectionSummary.totalPrice.toFixed(2)}`;
         }
-    }
+    });
 </script>

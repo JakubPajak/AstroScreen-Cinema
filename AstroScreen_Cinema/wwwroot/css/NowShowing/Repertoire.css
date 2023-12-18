@@ -116,4 +116,30 @@ main {
             background-color: #fff; 
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); 
         }
+
+/*Button*/
+/* Ogólny styl przycisku */
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(2px);
+    border-radius: 20px;
+    color: aqua;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+
+    button:hover {
+        border-color: #fff;
+    }
+
+    
+    button:active {
+        background-color: #21618c;
+    }
+
     
