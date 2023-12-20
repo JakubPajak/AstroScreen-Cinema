@@ -12,26 +12,26 @@
 <link rel="stylesheet" href="~/css/Home/site.css" />
 <link rel="stylesheet" href="~/css/NowShowing/Repertoire.css" />
 
-    <nav>
-        <ul>
-            <li><img class="logo" src="~/images/Logo/favlogo.png" /></li>
-            <li><a id="home-link" asp-area="" asp-controller="Home" asp-action="Index">Home<span></span></a></li>
-            <li><a id="home-link" asp-area="" asp-controller="NowShowing" asp-action="Nowshowing">Now Showing<span></span></a></li>
-            @if (ViewBag.LoginStatus == "NO")
-            {
-                <li><a id="home-link" asp-area="" asp-controller="Login" asp-action="Login">Login<span></span></a></li>
-            }
-            @if (ViewBag.LoginStatus == "YES")
-            {
-                <li><a id="home-link" asp-area="" asp-controller="MyAccount" asp-action="MyAccount">My Account<span></span></a></li>
-            }
-        </ul>
-    </nav>
+<nav>
+    <ul>
+        <li><img class="logo" src="~/images/Logo/favlogo.png" /></li>
+        <li><a id="home-link" asp-area="" asp-controller="Home" asp-action="Index">Home<span></span></a></li>
+        <li><a id="home-link" asp-area="" asp-controller="NowShowing" asp-action="Nowshowing">Now Showing<span></span></a></li>
+        @if (ViewBag.LoginStatus == "NO")
+        {
+            <li><a id="home-link" asp-area="" asp-controller="Login" asp-action="Login">Login<span></span></a></li>
+        }
+        @if (ViewBag.LoginStatus == "YES")
+        {
+            <li><a id="home-link" asp-area="" asp-controller="MyAccount" asp-action="MyAccount">My Account<span></span></a></li>
+        }
+    </ul>
+</nav>
 
 <div class="nowshowing">
 
     <div class="Repertoire">Repertoire</div>
-        
+
     <main>
         <form asp-action="NowShowing" asp-controller="NowShowing" method="post">
             <section class="selections">
@@ -42,13 +42,13 @@
                         <option for="City" id="city" name="city">Zabrze</option>
                         <option for="City" id="city" name="city">Warszawa</option>
                         <option for="City" id="city" name="city">Kraków</option>
-                     
+
                     </select>
                 </div>
 
                 <div class="date-selection">
                     <label for="Date">Date selection:</label>
-                    <input type="date" for="Date" id="date" name="date"/>
+                    <input type="date" for="Date" id="date" name="date" />
                 </div>
                 <div>
                     <button type="submit" value="NowShowing">Filter</button>
@@ -56,81 +56,99 @@
             </section>
         </form>
 
-        <section class="movie-schedule">
-            <!-- Film 1 -->
-            @if (Model.Count != 0)
-            { 
-                @foreach (var movie in Model)
+        <form asp-action="Hall_One" asp-controller="Hall" method="post" id="scheduleForm">
+
+            <section class="movie-schedule">
+                <!-- Film 1 -->
+                @if (Model.Count != 0)
                 {
-                    var path = movie.imgPath;
+                    @foreach (var movie in Model)
+                    {
+                        <input type="hidden" id="selectedSchedule" name="selectedSchedule" />
+                        var path = movie.imgPath;
+                        <div class="movie">
+                            <img src="~/@path" alt="Movie 1">
+                            <div class="details">
+                                <div class="Title">
+                                    <p>@movie.MovieName</p>
+                                </div>
+                                <div class="additional-info">
+                                    <p>Duration: @movie.Duration</p>
+                                </div>
+                                <div class="schedule">
+                                    <p>Hours:</p>
+                                    <ul>
+                                        @{
+                                            var i = 0;
+                                        }
+                                        @foreach (var hour in movie.Hours)
+                                        {
+                                            var scheduleValue = $"{movie.City},{movie.Showtimes[i]},{hour}";
+                                            <li>
+                                                <a data-schedule="@scheduleValue" class="hour-link">
+                                                    @hour
+                                                    <span></span>
+                                                </a>
+                                            </li>
+                                            i += 1;
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
                     <div class="movie">
-                        <img src="~/@path" alt="Movie 1">
+                        <img src="~/images/SoonInCinemas/Barbie810x1200.jpg" alt="Movie 2">
                         <div class="details">
                             <div class="Title">
-                                <p>@movie.MovieName</p>
+                                <p>Barbie</p>
                             </div>
                             <div class="additional-info">
-                                <p>Duration: @movie.Duration</p>
-                                @*<p>Categories: Action, Adventure, Sci-Fi</p>*@
+                                <p>Duration: 1h 45min</p>
+                                <p>Categories: Comedy, Family</p>
                             </div>
                             <div class="schedule">
                                 <p>Hours:</p>
                                 <ul>
-                                    @foreach (var hour in movie.Hours)
-                                    {
-                                        <li><a id="home-link" asp-area="" asp-controller="Hall" asp-action="Hall_One">@hour<span></span></a></li>
-                                    }
+                                    <li>15:15</li>
+                                    <li>18:45</li>
+                                    <li>21:30</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 }
-            }
-            else
-            {
-                <div class="movie">
-                <img src="~/images/SoonInCinemas/Barbie810x1200.jpg" alt="Movie 2">
-                    <div class="details">
-                        <div class="Title">
-                            <p>Barbie</p>
-                        </div>
-                        <div class="additional-info">
-                            <p>Duration: 1h 45min</p>
-                            <p>Categories: Comedy, Family</p>
-                        </div>
-                        <div class="schedule">
-                            <p>Hours:</p>
-                            <ul>
-                                <li>15:15</li>
-                                <li>18:45</li>
-                                <li>21:30</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            }
-
-            <!-- Film 2 -->
-            @*<div class="movie">
-            <img src="~/images/SoonInCinemas/Barbie810x1200.jpg" alt="Movie 2">
-            <div class="details">
-                <div class="Title">
-                    <p>Barbie</p>
-                </div>
-                <div class="additional-info">
-                    <p>Duration: 1h 45min</p>
-                    <p>Categories: Comedy, Family</p>
-                </div>
-                <div class="schedule">
-                    <p>Hours:</p>
-                    <ul>
-                        <li>15:15</li>
-                        <li>18:45</li>
-                        <li>21:30</li>
-                    </ul>
-                </div>
-            </div>
-        </div>*@
-        </section>
+                }
+            </section>
+        </form>
     </main>
 </div>
+
+
+<script>
+    // Add this script to handle the click event
+    document.addEventListener("DOMContentLoaded", function () {
+        var hourLinks = document.querySelectorAll(".hour-link");
+
+        hourLinks.forEach(function (link) {
+            link.addEventListener("click", function () {
+                var scheduleValue = link.getAttribute("data-schedule");
+
+                // Set the value of the hidden input with id "selectedSchedule"
+                var hiddenInput = document.getElementById("selectedSchedule");
+                if (hiddenInput) {
+                    hiddenInput.value = scheduleValue;
+                }
+
+                // Optionally, you can submit the form programmatically
+                var scheduleForm = document.getElementById("scheduleForm");
+                if (scheduleForm) {
+                    scheduleForm.submit();
+                }
+            });
+        });
+    });
+</script>

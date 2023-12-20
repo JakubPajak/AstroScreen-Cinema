@@ -89,7 +89,10 @@
         var tabContents = document.querySelectorAll('.myaccount--minor_content .tab-content');
 
         tabs.forEach(function (tab, index) {
-            tab.addEventListener('click', function () {
+            tab.addEventListener('click', function (event) {
+
+                event.preventDefault();
+
                 // Remove 'active' class from all tabs and contents
                 tabs.forEach(function (t) {
                     t.classList.remove('active');

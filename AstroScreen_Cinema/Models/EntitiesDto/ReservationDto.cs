@@ -8,19 +8,13 @@ namespace AstroScreen_Cinema.Models.EntitiesDto
         public DateTime Reservation_date { get; set; }
 
 
-        public DateTime Birthdate { get; set; }
-
-
-        public bool IsRegistered { get; set; }
-
-
-        public Seats Seat { get; set; }
+        public List<Seats> Seats { get; set; }
 
 
         public Showtime Showtime { get; set; }
 
 
-        public Account? Account { get; set; }
+        public Account Account { get; set; }
     }
 }
 

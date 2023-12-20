@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using AstroScreen_Cinema.Models;
 using AstroScreen_Cinema.Models.EntitiesDto;
 
@@ -25,6 +26,7 @@ namespace AstroScreen_Cinema.Services
                     (showtime, movie) => new RepertoireDto
                     {
                         MovieName = movie.Title,
+                        ShowtimeId = showtime.Showtime_ID,
                         Desc = movie.Description,
                         Duration = movie.Duration,
                         Hour = showtime.Time.TimeOfDay,
@@ -33,20 +35,22 @@ namespace AstroScreen_Cinema.Services
                     }).ToList();
 
 
-            return GetUniqueMoviesWithHours(repertoires);
+            return GetUniqueMoviesWithHours(repertoires, _city);
         }
 
-        public List<RepertoireDto> GetUniqueMoviesWithHours(List<RepertoireDto> repertoires)
+        public List<RepertoireDto> GetUniqueMoviesWithHours(List<RepertoireDto> repertoires, string _city)
         {
             var uniqueMovies = repertoires
                 .GroupBy(movie => movie.MovieName)
                 .Select(group => new RepertoireDto
                 {
                     MovieName = group.Key,
+                    City = group.First().City,
                     Desc = group.First().Desc,
                     Duration = group.First().Duration,
                     Hours = group.Select(movie => movie.Hour.ToString()).ToList(),
-                    imgPath = group.First().imgPath
+                    imgPath = group.First().imgPath,
+                    Showtimes = group.Select(movie => movie.ShowtimeId).ToList(),
                 })
                 .ToList();
 

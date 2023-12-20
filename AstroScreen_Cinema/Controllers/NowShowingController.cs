@@ -29,6 +29,7 @@ namespace AstroScreen_Cinema.Controllers
                 {
                     var repertoires = _nowShowingService.GetRepertoires(selectedDate, _city);
                     HttpContext.Session.SetString("City", _city);
+
                     return View(repertoires);
                 }
                 else

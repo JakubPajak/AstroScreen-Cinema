@@ -201,3 +201,7 @@ h1 {
 .total-section {
     color: #fff;
 }
+
+.hidden {
+    display: none;
+}

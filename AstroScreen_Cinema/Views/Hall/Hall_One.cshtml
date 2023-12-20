@@ -12,6 +12,7 @@
 @model AstroScreen_Cinema.Models.EntitiesDto.HallDto
 @{
     var seatsPerRow = Model.NumberOfSeats / Model.NumberOfRows;
+    //var seatId = "";
 }
 <div class="SeatSelector">
     <div class="SelectorTitle"> </div>
@@ -36,46 +37,16 @@
                     <div class="hall-scheme-row">
                         @for (int seatNumber = 0; seatNumber < seatsPerRow; seatNumber++)
                             {
-                                //class="seat @GetVipClass(i)"
-                            @* <div class="seat" data-row="@row" data-seat="@seatNumber">
-                                @($"{@row} {@seatNumber}")
-                            </div> *@
-                            <div class="seat" data-row="@Convert.ToChar('A' + row)" data-seat="@seatNumber">
-                                @($"{Convert.ToChar('A' + row)}{seatNumber}")
-                            </div>
+
+                           //seatId = $"{Convert.ToChar('A' + row)}{seatNumber}";
+                        <div class="seat" data-row="@Convert.ToChar('A' + row)" data-seat="@seatNumber">
+                            @($"{Convert.ToChar('A' + row)}{seatNumber}")
+                        </div>
                         }
                     </div>
                 }
 
-                @*@for (char row = 'A'; row <= 'F'; row++)
-                {
-                    <div class="hall-scheme-row">
-                        @for (int seatNumber = 1; seatNumber <= 10; seatNumber++)
-                        {
-                            <div class="seat @GetVipClass(row)" data-row="@row" data-seat="@seatNumber">
-                                @($"{row}{seatNumber}")
-                            </div>
-
-                        }
-                    </div>
-                }*@
-
-                @*@for (char row = 'G'; row <= 'J'; row++)
-                {
-                    <div class="hall-scheme-row">
-                        @for (int seatNumber = 1; seatNumber <= 15; seatNumber++)
-                        {
-                            <div class="seat" data-row="@row" data-seat="@seatNumber">
-                        @($"{row}{seatNumber}")
-                    </div> 
-                            var seatId = $"{row}{seatNumber}";
-                            <div class="seat @(seatId == "H8" ? "taken" : "")" data-row="@row"
-                                 data-seat="@seatNumber" value="@seatId">
-                                @seatId
-                            </div>
-                        }
-                    </div>
-                 }*@
+                
             </div>
 </form>
 
@@ -92,8 +63,11 @@
                 </div>
 
                 <div class="Reservation">
-                    <ul><a id="home-link" asp-area="" asp-controller="Reservation" asp-action="Reservations">Make a Reservation<span></span></a></ul>
-                </div>
+                    @*<ul>*@
+                        <button class="Reservation" id="home-link" type="submit"
+                                asp-area="" asp-controller="Reservation" asp-action="Reservations">Make a Reservation</button>
+                        @*<a id="home-link" asp-area="" asp-controller="Reservation" asp-action="Reservations">Make a Reservation<span></span></a></ul>*@
+</div>
             </div>
         </div>
 </div>
@@ -118,16 +92,25 @@
             seat.addEventListener("click", function () {
                 seat.classList.toggle("selected");
 
-                if (seat.classList.contains("selected")) {
+                let seatId = seat.dataset.row + seat.dataset.seat;
+
+                let hiddenInput = seat.querySelector('input[name="selectedSeats"]');
+
+                if (seat.classList.contains("selected") && !hiddenInput) {
                     selectionSummary.totalSeats++;
+
+                    seat.insertAdjacentHTML("beforeend", `<input type="hidden" name="selectedSeats" value="${seatId}" />`);
                     if (seat.classList.contains("vip")) {
                         selectionSummary.totalVipSeats++;
                         selectionSummary.totalPrice += 8; // VIP price
                     } else {
                         selectionSummary.totalPrice += 5; // Standard price
                     }
-                } else {
+                } else if (!seat.classList.contains("selected") && hiddenInput) {
                     selectionSummary.totalSeats--;
+
+                    hiddenInput.remove();
+
                     if (seat.classList.contains("vip")) {
                         selectionSummary.totalVipSeats--;
                         selectionSummary.totalPrice -= 8; // VIP price
