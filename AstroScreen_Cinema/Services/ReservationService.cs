@@ -15,19 +15,26 @@ namespace AstroScreen_Cinema.Services
 		}
 
 
-		public void CacheSeatInformation(string[] _seats, out string stringOfSeats)
-		{
-			StringBuilder formattedString = new StringBuilder();
+        public void CacheSeatInformation(string[] _seats, out string stringOfSeats)
+        {
+            StringBuilder formattedString = new StringBuilder();
 
-			foreach (var seat in _seats)
-			{
-				formattedString.Append(seat);
-			}
+            foreach (var seat in _seats)
+            {
+                formattedString.Append(seat);
+                formattedString.Append(","); 
+            }
 
-			stringOfSeats = formattedString.ToString();
-		}
+            if (_seats.Length > 0)
+            {
+                formattedString.Length--; 
+            }
 
-		public ReservationDto GetReservationData(string[] seats, string showtimeId, string _city, string _userLogin)
+            stringOfSeats = formattedString.ToString();
+        }
+
+
+        public ReservationDto GetReservationData(string[] seats, string showtimeId, string _city, string _userLogin)
 		{
 			var reservation = new ReservationDto();
 			var Seats = new List<Seats>();

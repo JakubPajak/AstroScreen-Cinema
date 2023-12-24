@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AstroScreen_Cinema.Models;
 using AstroScreen_Cinema.Models.EntitiesDto;
 using AstroScreen_Cinema.Services;
+using Azure.Core;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -35,9 +38,33 @@ namespace AstroScreen_Cinema.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Login(LoginDto loginDto)
+        public async Task<IActionResult> Login(LoginDto loginDto)
         {
-            var user = _loginService.GetLogin(loginDto.Login, loginDto.Password);
+            var user = _loginService.GetLogin(loginDto.Login, loginDto.Password, out string _token);
+
+
+            //var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //using (var httpClient = new HttpClient())
+            //{
+            //    // Set the authorization header
+            //    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token);
+
+            //    // Make your API request
+            //    HttpResponseMessage response = await httpClient.GetAsync("Home/Index");
+
+            //    // Check the response status
+            //    if (response.IsSuccessStatusCode)
+            //    {
+            //        // Read the response content
+            //        string responseBody = await response.Content.ReadAsStringAsync();
+            //        // Process the response as needed
+            //    }
+            //    else
+            //    {
+            //        // Handle the error
+            //    }
+            //}
+
 
             HttpContext.Session.SetString("LoginStatus", user.IsLogged);
             HttpContext.Session.SetString("UserLogin", user.Login);

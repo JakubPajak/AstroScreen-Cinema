@@ -9,10 +9,12 @@ namespace AstroScreen_Cinema.Controllers
     public class ReservationController : Controller
     {
         private readonly ReservationService _reservationService;
+        private readonly ILoginService _loginService;
 
-        public ReservationController(ReservationService reservationService)
+        public ReservationController(ReservationService reservationService, ILoginService loginService)
         {
             _reservationService = reservationService;
+            _loginService = loginService;
         }
 
         public IActionResult CacheSeatInformation()
@@ -36,10 +38,8 @@ namespace AstroScreen_Cinema.Controllers
 
         public IActionResult Reservations()
         { 
-            string[] elements = Request.Form["selectedSeats"].ToString().Split(", ", StringSplitOptions.RemoveEmptyEntries);
-
-            var seats = elements[elements.Count() - 2].Split(',').Skip(1).ToArray();
-            var totalPrice = elements[elements.Count()-1];
+            var seats = HttpContext.Session.GetString("SelectedSeats").Split(',').ToArray();
+            var totalPrice = HttpContext.Session.GetString("TotalPrice");
 
             var city = HttpContext.Session.GetString("City");
             var showtimeid = HttpContext.Session.GetString("ShowtimeId");
@@ -65,6 +65,17 @@ namespace AstroScreen_Cinema.Controllers
             //in order to fulfill the reservation
 
             return View(_reservationService.GetReservationData(seats, showtimeid, city, user));
+        }
+
+        [HttpPost]
+        public IActionResult LoginFromReservation(string _login, string _pass)
+        {
+            var user = _loginService.GetLogin(_login, _pass, out string _token);
+
+            HttpContext.Session.SetString("LoginStatus", user.IsLogged);
+            HttpContext.Session.SetString("UserLogin", user.Login);
+
+            return RedirectToAction("Reservations", "Reservation");
         }
     }
 }

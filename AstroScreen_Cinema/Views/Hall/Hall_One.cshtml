@@ -75,23 +75,30 @@
 
 
 <!-- Add this HTML structure for the popup at the end of your main view -->
+@if (ViewBag.Submitted != null && ViewBag.Submitted)
+    {
     <div id="popup" class="popup">
         <div class="popup-content">
             <span class="close" onclick="closePopup()">&times;</span>
             <h2>Welcome to our Cinema!</h2>
             <p>Are you a registered user?</p>
             <div class="choose__option">
-                <div class="login__input">
+                <form  asp-area="" asp-controller="Reservation" asp-action="LoginFromReservation" method="post" class="login__input">
                     <label>Email</label>
-                    <input type="text" />
+                    <input type="text" name="_login"/>
                     <label>Password</label>
-                    <input type="password" />
-                    <button onclick="login()">Login</button>
+                    <input type="password" name="_pass"/>
+                    <button type="submit">Login</button>
+                </form>
+                <div class="guest__button">
+                    <div class="btn">
+                        <a asp-area="" asp-controller="Reservation" asp-action="Reservations">Continue as a guest</a>
+                    </div>
                 </div>
-                <button onclick="continueAsGuest()">Continue as Guest</button>
             </div>
         </div>
     </div>
+    }
 
 
 

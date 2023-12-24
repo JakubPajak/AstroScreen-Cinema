@@ -90,57 +90,14 @@
     </div>
 
     <div class="Posters">
-
-        <figure class="Poster" data-title=@shownig[1].Title>
-            <img src=@shownig[1].imgPath />
-            @* <figurecaption>@movie.Title</figurecaption> *@
-            <figurecaption>@shownig[1].Title</figurecaption>
-        </figure>
-        <figure class="Poster" data-title=@shownig[2].Title>
-            <img src=@shownig[2].imgPath />
-            @* <figurecaption>@movie.Title</figurecaption> *@
-            <figurecaption>@shownig[2].Title</figurecaption>
-        </figure>
-        <figure class="Poster" data-title=@shownig[3].Title>
-            <img src=@shownig[3].imgPath />
-            @* <figurecaption>@movie.Title</figurecaption> *@
-            <figurecaption>@shownig[3].Title</figurecaption>
-        </figure>
-        <figure class="Poster" data-title=@shownig[4].Title>
-            <img src=@shownig[4].imgPath />
-            @* <figurecaption>@movie.Title</figurecaption> *@
-            <figurecaption>@shownig[4].Title</figurecaption>
-        </figure>
-        <figure class="Poster" data-title=@shownig[5].Title>
-            <img src=@shownig[5].imgPath />
-            @* <figurecaption>@movie.Title</figurecaption> *@
-            <figurecaption>@shownig[5].Title</figurecaption>
-        </figure><figure class="Poster" data-title=@Model[6].Title>
-            <img src=@shownig[6].imgPath />
-            @* <figurecaption>@movie.Title</figurecaption> *@
-            <figurecaption>@shownig[6].Title</figurecaption>
-        </figure>
-        </figure><figure class="Poster" data-title=@shownig[7].Title>
-            <img src=@shownig[7].imgPath />
-            @* <figurecaption>@movie.Title</figurecaption> *@
-            <figurecaption>@shownig[7].Title</figurecaption>
-        </figure>
-        </figure><figure class="Poster" data-title=@shownig[8].Title>
-            <img src=@shownig[8].imgPath />
-            @* <figurecaption>@movie.Title</figurecaption> *@
-            <figurecaption>@shownig[8].Title</figurecaption>
-        </figure>
-        </figure><figure class="Poster" data-title=@shownig[9].Title>
-            <img src=@shownig[9].imgPath />
-            @* <figurecaption>@movie.Title</figurecaption> *@
-            <figurecaption>@shownig[9].Title</figurecaption>
-        </figure>
-        </figure><figure class="Poster" data-title=@shownig[10].Title>
-            <img src=@shownig[10].imgPath />
-            @* <figurecaption>@movie.Title</figurecaption> *@
-            <figurecaption>@shownig[10].Title</figurecaption>
-        </figure>
-
+        @foreach (var movie in shownig)
+        {
+            <figure class="Poster" data-title=@movie.Title>
+                <img src=@movie.imgPath />
+                @* <figurecaption>@movie.Title</figurecaption> *@
+                <figurecaption>@movie.Title</figurecaption>
+            </figure>
+        }
     </div>
 
     <div class="popup-image-soon">

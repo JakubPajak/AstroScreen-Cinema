@@ -26,8 +26,12 @@ namespace AstroScreen_Cinema.Controllers
             else
             {
                 //var elements = HttpContext.Session.GetString("SelectedSeats").Split(',').ToArray();
-                ViewBag.Submitted = true;
+                if (HttpContext.Session.GetString("LoginStatus") == null)
+                    ViewBag.Submitted = true;
+                else
+                    ViewBag.Submitted = false;
             }
+
             var _city = HttpContext.Session.GetString("City");
             var hall = _hallRepertuair.GetHall(_city);
             return View(hall);
