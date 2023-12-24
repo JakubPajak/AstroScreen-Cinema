@@ -59,7 +59,7 @@ builder.Services.AddScoped<MyMovieGen>();
 builder.Services.AddScoped<MyShowtimeGen>();
 builder.Services.AddScoped<DataGenerator>();
 
-//Contrller services
+//Controller services
 builder.Services.AddScoped<IHallReperuairService, HallReperuairService >();
 builder.Services.AddScoped<IHomeService, HomeService>();
 builder.Services.AddScoped<ILoginService, LoginService>();
@@ -95,6 +95,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/");
 
 app.Run();

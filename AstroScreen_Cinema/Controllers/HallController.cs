@@ -18,16 +18,19 @@ namespace AstroScreen_Cinema.Controllers
 
         public IActionResult Hall_One(string selectedSchedule)
         {
-            var elements = selectedSchedule.Split(',').ToArray();
+            if (!string.IsNullOrEmpty(selectedSchedule))
+            {
+                var elements = selectedSchedule.Split(',').ToArray();
+                HttpContext.Session.SetString("ShowtimeId", elements[1]);
+            }
+            else
+            {
+                //var elements = HttpContext.Session.GetString("SelectedSeats").Split(',').ToArray();
+                ViewBag.Submitted = true;
+            }
             var _city = HttpContext.Session.GetString("City");
-            HttpContext.Session.SetString("ShowtimeId", elements[1]);
             var hall = _hallRepertuair.GetHall(_city);
             return View(hall);
         }
-
-        //private IActionResult View(object value)  
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }

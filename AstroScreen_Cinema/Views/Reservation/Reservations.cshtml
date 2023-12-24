@@ -20,18 +20,18 @@
         @*<input type="text" class="form-input" placeholder="Input 6" value="@Model.Input6">
         <input type="text" class="form-input" placeholder="Input 7" value="@Model.Input7">*@
     </div>
-        </div>
 
     <div class="sidebar">
         <h3>Sidebar</h3>
         @foreach (var seat in Model.Seats)
         {
-            <label class="sidebar-label">seat</label>
+            <label class="sidebar-label">@((char)('A' + seat.RowNum - 1))@seat.SeatNum</label>
         }
-        <label class="sidebar-label">@Model.Showtime.Day</label>
-        <label class="sidebar-label">@Model.Showtime.Time</label>
-        <label class="sidebar-label">@Model.Showtime.Movie.Title</label>
-        <label class="sidebar-label">@Model.Showtime.Movie.Description</label>
+        <label class="sidebar-label">Day of the showtime: @Model.Showtime.Day.Day</label>
+        <label class="sidebar-label">Hour: @Model.Showtime.Time.TimeOfDay</label>
+        <label class="sidebar-label">Title of the movie: @Model.Showtime.Movie.Title</label>
+        <label class="sidebar-label">Short description: @Model.Showtime.Movie.Description</label>
+        <img src="~/@Model.Showtime.Movie.PosterPath"/>
         <button class="submit-btn">Submit</button>
     </div>
 </form>

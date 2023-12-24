@@ -12,12 +12,12 @@
 @model AstroScreen_Cinema.Models.EntitiesDto.HallDto
 @{
     var seatsPerRow = Model.NumberOfSeats / Model.NumberOfRows;
-    //var seatId = "";
+    //var isSubmitted = ViewBag.Submitted == null ? false : true;
 }
 <div class="SeatSelector">
     <div class="SelectorTitle"> </div>
-        <h1>@Model.City</h1>
-    
+    <h1>@Model.City</h1>
+
     <!--Hall legend-->
     <div class="hall-legend">
         <div class="seat-legend">Not Selected</div>
@@ -32,48 +32,70 @@
             <div class="hall-container left-section">
                 <div class="screen">Screen</div>
 
-                @for (int row = 0; row<Model.NumberOfRows; row++)
+                @for (int row = 0; row < Model.NumberOfRows; row++)
                 {
                     <div class="hall-scheme-row">
                         @for (int seatNumber = 0; seatNumber < seatsPerRow; seatNumber++)
-                            {
+                        {
 
-                           //seatId = $"{Convert.ToChar('A' + row)}{seatNumber}";
-                        <div class="seat" data-row="@Convert.ToChar('A' + row)" data-seat="@seatNumber">
-                            @($"{Convert.ToChar('A' + row)}{seatNumber}")
-                        </div>
+                            //seatId = $"{Convert.ToChar('A' + row)}{seatNumber}";
+                            <div class="seat" data-row="@Convert.ToChar('A' + row)" data-seat="@seatNumber">
+                                @($"{Convert.ToChar('A' + row)}{seatNumber}")
+                            </div>
                         }
                     </div>
                 }
 
-                
+
             </div>
-</form>
+    </form>
 
-            <!-- Right Section -->
-            <div class="right-section">
-                <div id="cancelSelectionFrame" class="cancel-selection-frame">Clear Selection</div>
+    <!-- Right Section -->
+    <div class="right-section">
+        <div id="cancelSelectionFrame" class="cancel-selection-frame">Clear Selection</div>
 
-                <div class="selected-seats">
-                    <p>Your selections</p>
-                </div>
+        <div class="selected-seats">
+            <p>Your selections</p>
+        </div>
 
-                <div class="total-section">
-                    <p>Total Seats: 0, VIP Seats: 0, Total Price: $0</p>
-                </div>
+        <div class="total-section">
+            <p>Total Seats: 0, VIP Seats: 0, Total Price: $0</p>
+        </div>
 
-                <div class="Reservation">
-                    @*<ul>*@
-                        <button class="Reservation" id="home-link" type="submit"
-                                asp-area="" asp-controller="Reservation" asp-action="Reservations">Make a Reservation</button>
-                        @*<a id="home-link" asp-area="" asp-controller="Reservation" asp-action="Reservations">Make a Reservation<span></span></a></ul>*@
+        <div class="Reservation">
+            @*<ul>*@
+            <button class="Reservation" id="home-link" type="submit"
+                    asp-area="" asp-controller="Reservation" asp-action="CacheSeatInformation">
+                Make a Reservation
+            </button>
+            @*<a id="home-link" asp-area="" asp-controller="Reservation" asp-action="Reservations">Make a Reservation<span></span></a></ul>*@
+        </div>
+    </div>
 </div>
+
+
+<!-- Add this HTML structure for the popup at the end of your main view -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h2>Welcome to our Cinema!</h2>
+            <p>Are you a registered user?</p>
+            <div class="choose__option">
+                <div class="login__input">
+                    <label>Email</label>
+                    <input type="text" />
+                    <label>Password</label>
+                    <input type="password" />
+                    <button onclick="login()">Login</button>
+                </div>
+                <button onclick="continueAsGuest()">Continue as Guest</button>
             </div>
         </div>
-</div>
+    </div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
+
+
+<script>document.addEventListener("DOMContentLoaded", function () {
         var seats = document.querySelectorAll(".seat");
         var cancelSelectionFrame = document.getElementById("cancelSelectionFrame");
         var selectedSeatsContainer = document.querySelector(".selected-seats");
@@ -84,6 +106,8 @@
             totalVipSeats: 0,
             totalPrice: 0
         };
+        let SelectedSeats = [];
+
 
         // First view of total
         totalSection.textContent = `Total Seats: ${selectionSummary.totalSeats}, Total Price: $${selectionSummary.totalPrice.toFixed(2)}`;
@@ -98,8 +122,8 @@
 
                 if (seat.classList.contains("selected") && !hiddenInput) {
                     selectionSummary.totalSeats++;
-
-                    seat.insertAdjacentHTML("beforeend", `<input type="hidden" name="selectedSeats" value="${seatId}" />`);
+                    //SelectedSeats.push(seatId);
+                    //seat.insertAdjacentHTML("beforeend", `<input type="hidden" name="selectedSeats" value="${SelectedSeats}, ${selectionSummary.totalPrice} " />`);
                     if (seat.classList.contains("vip")) {
                         selectionSummary.totalVipSeats++;
                         selectionSummary.totalPrice += 8; // VIP price
@@ -118,6 +142,8 @@
                         selectionSummary.totalPrice -= 5; // Standard price
                     }
                 }
+                SelectedSeats.push(seatId);
+                seat.insertAdjacentHTML("beforeend", `<input type="hidden" name="selectedSeats" value="${SelectedSeats}, ${selectionSummary.totalPrice} " />`);
 
                 // Viewing total
                 totalSection.textContent = `Total Seats: ${selectionSummary.totalSeats}, Total Price: $${selectionSummary.totalPrice.toFixed(2)}`;
@@ -188,5 +214,17 @@
             // Update total section
             totalSection.textContent = `Total Seats: ${selectionSummary.totalSeats}, Total Price: $${selectionSummary.totalPrice.toFixed(2)}`;
         }
-    });
+
+        function OpenPopup() {
+            var isSubmitted = @((bool?)ViewBag.Submitted ?? false);
+
+            if (isSubmitted) {
+                document.querySelector(".popup").classList.remove("hidden");
+            } else {
+                return;
+            }
+        }
+
+});
+
 </script>

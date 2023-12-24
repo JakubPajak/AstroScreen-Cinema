@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using AstroScreen_Cinema.Models;
 using AstroScreen_Cinema.Models.EntitiesDto;
 
@@ -14,9 +15,16 @@ namespace AstroScreen_Cinema.Services
 		}
 
 
-		public string MakeReservationTemporary(string[] _seats, string _city, string showtimeId)
+		public void CacheSeatInformation(string[] _seats, out string stringOfSeats)
 		{
-			return $"{_seats}, {_city}, {showtimeId}";
+			StringBuilder formattedString = new StringBuilder();
+
+			foreach (var seat in _seats)
+			{
+				formattedString.Append(seat);
+			}
+
+			stringOfSeats = formattedString.ToString();
 		}
 
 		public ReservationDto GetReservationData(string[] seats, string showtimeId, string _city, string _userLogin)
@@ -43,6 +51,7 @@ namespace AstroScreen_Cinema.Services
 					Surname = "Default",
 					Email = "Default",
 					Password = "Default",
+					IsRegistered = false,
 					Birthdate = DateTime.MinValue,
 					PhoneNum = 0,
 				};
@@ -69,7 +78,6 @@ namespace AstroScreen_Cinema.Services
 			reservation.Showtime.Movie = movie;
 			reservation.Account = user;
 			return reservation;
-
 		}
 
 	}
