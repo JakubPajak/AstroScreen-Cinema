@@ -8,6 +8,7 @@ using AstroScreen_Cinema.Models.EntitiesDto;
 
 namespace AstroScreen_Cinema.Controllers
 {
+    [Route("Repertoire")]
     public class NowShowingController : Controller
     {
         private readonly INowShowingService _nowShowingService;
@@ -20,6 +21,7 @@ namespace AstroScreen_Cinema.Controllers
         //{
         //    return View();
         //}
+        [Route("Now-available")]
         public IActionResult NowShowing()
         {
             if (Request.Method == "POST")

@@ -9,14 +9,14 @@
 <link rel="stylesheet" href="~/css/Reservation/ReservationStyle.css" />
 
 <title>Confirm reservation</title>
-<form class="reservation__form">
+<form asp-action="FulfillTheReservation" asp-controller="Reservation" method="post" class="reservation__form">
     <div class="reservation__input-container">
         <h2>Your Form Title</h2>
-        <input type="text" class="form-input" placeholder="Title" value="@Model.Account.Name">
-        <input type="text" class="form-input" placeholder="Input 1" value="@Model.Account.Surname">
-        <input type="text" class="form-input" placeholder="Input 3" value="@Model.Account.Email">
-        <input type="text" class="form-input" placeholder="Input 4" value="@Model.Account.Birthdate">
-        <input type="text" class="form-input" placeholder="Input 5" value="@Model.Account.PhoneNum">
+        <input type="text" class="form-input" placeholder="Title" asp-for="Account.Name" value="@Model.Account.Name">
+        <input type="text" class="form-input" placeholder="Input 1" asp-for="Account.Surname" value="@Model.Account.Surname">
+        <input type="text" class="form-input" placeholder="Input 3" asp-for="Account.Email" value="@Model.Account.Email">
+        <input type="text" class="form-input" placeholder="Input 4" asp-for="Account.Birthdate" value="@Model.Account.Birthdate">
+        <input type="text" class="form-input" placeholder="Input 5" asp-for="Account.PhoneNum" value="@Model.Account.PhoneNum">
         @*<input type="text" class="form-input" placeholder="Input 6" value="@Model.Input6">
         <input type="text" class="form-input" placeholder="Input 7" value="@Model.Input7">*@
     </div>
@@ -27,10 +27,10 @@
         {
             <label class="sidebar-label">@((char)('A' + seat.RowNum - 1))@seat.SeatNum</label>
         }
-        <label class="sidebar-label">Day of the showtime: @Model.Showtime.Day.Day</label>
-        <label class="sidebar-label">Hour: @Model.Showtime.Time.TimeOfDay</label>
-        <label class="sidebar-label">Title of the movie: @Model.Showtime.Movie.Title</label>
-        <label class="sidebar-label">Short description: @Model.Showtime.Movie.Description</label>
+        <label class="sidebar-label" asp-for="Showtime.Day">Day of the showtime: @Model.Showtime.Day.Day</label>
+        <label class="sidebar-label" asp-for="Showtime.Time">Hour: @Model.Showtime.Time.TimeOfDay</label>
+        <label class="sidebar-label" asp-for="Movie.Title">Title of the movie: @Model.Showtime.Movie.Title</label>
+        <label class="sidebar-label" asp-for="Movie.Description">Short description: @Model.Showtime.Movie.Description</label>
         <img src="~/@Model.Showtime.Movie.PosterPath"/>
         <button class="submit-btn">Submit</button>
     </div>

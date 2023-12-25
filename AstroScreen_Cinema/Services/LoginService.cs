@@ -104,11 +104,11 @@ namespace AstroScreen_Cinema.Services
             var newUser = new Account()
             {
                 Name = _user.Name,
-                Surname = _user.SecondName,
+                Surname = _user.Surname,
                 Password = HashPassword(_user.Password),
-                Email = _user.EmailAddress,
+                Email = _user.Email,
                 PhoneNum = _user.PhoneNum,
-                Birthdate = _user.BirthDate
+                Birthdate = _user.Birthdate
             };
 
             await _appDBContext.AddAsync(newUser);

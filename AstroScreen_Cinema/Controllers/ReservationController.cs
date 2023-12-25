@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using AstroScreen_Cinema.Models;
 using System;
 using AstroScreen_Cinema.Services;
+using AstroScreen_Cinema.Models.EntitiesDto;
 
 namespace AstroScreen_Cinema.Controllers
 {
+    [Route("Reservation")]
     public class ReservationController : Controller
     {
         private readonly ReservationService _reservationService;
@@ -17,6 +19,7 @@ namespace AstroScreen_Cinema.Controllers
             _loginService = loginService;
         }
 
+        [Route("Choose-seats")]
         public IActionResult CacheSeatInformation()
         {
             string[] elements = Request.Form["selectedSeats"].ToString().Split(", ", StringSplitOptions.RemoveEmptyEntries);
@@ -35,7 +38,7 @@ namespace AstroScreen_Cinema.Controllers
             return RedirectToAction("Hall_One", "Hall");
         }
 
-
+        [Route("Proceed-to-checkout")]
         public IActionResult Reservations()
         { 
             var seats = HttpContext.Session.GetString("SelectedSeats").Split(',').ToArray();
@@ -68,6 +71,7 @@ namespace AstroScreen_Cinema.Controllers
         }
 
         [HttpPost]
+        [Route("Reservation-login")]
         public IActionResult LoginFromReservation(string _login, string _pass)
         {
             var user = _loginService.GetLogin(_login, _pass, out string _token);
@@ -76,6 +80,20 @@ namespace AstroScreen_Cinema.Controllers
             HttpContext.Session.SetString("UserLogin", user.Login);
 
             return RedirectToAction("Reservations", "Reservation");
+        }
+
+        [HttpPost]
+        [Route("Checkout")]
+        public async Task<IActionResult> FulfillTheReservation(ReservationDto reservationDto)
+        {
+            var showtimeid = HttpContext.Session.GetString("ShowtimeId");
+
+            var user = HttpContext.Session.GetString("UserLogin");
+
+            await _reservationService.SaveTheReservation(reservationDto, showtimeid, user);
+
+
+            return View();
         }
     }
 }

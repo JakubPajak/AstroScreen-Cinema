@@ -15,29 +15,50 @@ namespace AstroScreen_Cinema.Services
 
         public MyAccountDto GetAccountData(string _login)
         {
+            var myAccount = new MyAccountDto();
             var user = _appDBContext.Accounts.FirstOrDefault(a => a.Email.Equals(_login));
 
-            var userAccount = new MyAccountDto()
-            {
-                Name = user.Name,
-                SecondName = user.Surname,
-                PhoneNum = user.PhoneNum,
-                EmailAddress = user.Email,
-                BirthDate = user.Birthdate
-            };
+            var reservations = _appDBContext.Reservations
+                .Where(r => r.Account_ID.Equals(user.Account_ID));
 
-            return userAccount;
+
+            myAccount.Name = user.Name;
+            myAccount.Surname = user.Surname;
+            myAccount.PhoneNum = user.PhoneNum;
+            myAccount.Email = user.Email;
+            myAccount.Birthdate = user.Birthdate;
+
+            foreach (var reservation in reservations)
+            {
+                var reservationDto = _appDBContext.Showtimes
+                        .Where(sh => sh.Showtime_ID.Equals(reservation.Showtime_ID))
+                        .Join(
+                            _appDBContext.Movies,
+                            showtime => showtime.Movie_ID,
+                            movie => movie.Film_ID,
+                            (showtime, movie) => new ReservationDto
+                            {
+                                Showtime = showtime,
+                                //Movie = movie,
+                            })
+                        .FirstOrDefault();
+
+                myAccount.ReservationDetails.Add(reservation.Reservation_ID.ToString(), reservationDto);
+            }
+            
+
+            return myAccount;
         }
 
         public async Task<bool> ChangeDataService(MyAccountDto myAccountDto)
         {
-            var account = _appDBContext.Accounts.FirstOrDefault(a => a.Email.Equals(myAccountDto.EmailAddress));
+            var account = _appDBContext.Accounts.FirstOrDefault(a => a.Email.Equals(myAccountDto.Email));
 
             account.Name = myAccountDto.Name;
-            account.Surname = myAccountDto.SecondName;
+            account.Surname = myAccountDto.Surname;
             account.PhoneNum = myAccountDto.PhoneNum;
-            account.Email = myAccountDto.EmailAddress;
-            account.Birthdate = myAccountDto.BirthDate;
+            account.Email = myAccountDto.Email;
+            account.Birthdate = myAccountDto.Birthdate;
 
             _appDBContext.Update(account);
             int affectedRows = await _appDBContext.SaveChangesAsync();

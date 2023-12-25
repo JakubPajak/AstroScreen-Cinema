@@ -37,7 +37,9 @@ namespace AstroScreen_Cinema.Controllers
         {
             await _myAccountService.ChangeDataService(myAccountDto);
 
-            return RedirectToAction("MyAccount", "MyAccount");
+            ViewBag.DataChanged = true;
+
+            return RedirectToAction("ChangeData", "MyAccount");
         }
 
         public IActionResult ViewingHistory()

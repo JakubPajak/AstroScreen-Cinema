@@ -15,6 +15,8 @@ namespace AstroScreen_Cinema.Models.EntitiesDto
 
 
         public Account Account { get; set; }
+
+        public Movie? Movie { get; set; }
     }
 }
 
