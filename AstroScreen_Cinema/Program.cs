@@ -8,8 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using StackoveflowClone.Services;
 using Serilog;
-using Serilog.Extensions.Logging;
-using Serilog.Extensions.Logging.File;
 using Serilog.Events;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -58,7 +56,6 @@ builder.Services.Configure<Microsoft.AspNetCore.Mvc.JsonOptions>(options =>
 });
 
 
-//builder.Services.AddDbContext<AppDBContext>();
 builder.Services.AddDbContext<AppDBContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DataBaseMAC"));
@@ -66,6 +63,7 @@ builder.Services.AddDbContext<AppDBContext>(options =>
 });
 
 builder.Services.AddSession();
+builder.Services.AddLogging();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSingleton(authenticationSettings);
 
@@ -77,12 +75,13 @@ builder.Services.AddScoped<MyShowtimeGen>();
 builder.Services.AddScoped<DataGenerator>();
 
 //Controller services
+builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IHallReperuairService, HallReperuairService >();
 builder.Services.AddScoped<IHomeService, HomeService>();
 builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<IMyAccountService, MyAccountService>();
 builder.Services.AddScoped<INowShowingService, NowShowingService>();
-builder.Services.AddScoped<ReservationService>();
+builder.Services.AddScoped<IReservationService, ReservationService>();
 builder.Services.AddScoped<IUserHttpContextService, UserHttpContextService>();
 
 var app = builder.Build();
@@ -94,7 +93,6 @@ var seeder = scope.ServiceProvider.GetRequiredService<DataGenerator>();
 //await seeder.Seed();
 
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");

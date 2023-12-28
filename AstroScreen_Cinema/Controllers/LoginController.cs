@@ -16,13 +16,11 @@ namespace AstroScreen_Cinema.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly ILogger<LoginController> _logger;
         private readonly AppDBContext _appDbContext;
         private readonly ILoginService _loginService;
 
-        public LoginController(ILogger<LoginController> logger, AppDBContext appDbContext, ILoginService loginService)
+        public LoginController(AppDBContext appDbContext, ILoginService loginService)
         {
-            _logger = logger;
             _appDbContext = appDbContext;
             _loginService = loginService;
         }
@@ -68,6 +66,7 @@ namespace AstroScreen_Cinema.Controllers
 
             HttpContext.Session.SetString("LoginStatus", user.IsLogged);
             HttpContext.Session.SetString("UserLogin", user.Login);
+
             return RedirectToAction("Index", "Home");
         }
 

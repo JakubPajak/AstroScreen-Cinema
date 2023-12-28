@@ -10,6 +10,7 @@ using Azure.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using StackoveflowClone.Exceptions;
+using static AstroScreen_Cinema.Services.EmailService;
 
 namespace AstroScreen_Cinema.Services
 {
@@ -19,14 +20,16 @@ namespace AstroScreen_Cinema.Services
         private readonly AuthenticationSettings _authenticationSettings;
         private readonly IAuthorizationService _authorizationServiece;
         private readonly IUserHttpContextService _userHttpContext;
+        private readonly IEmailService _emailService;
 
         public LoginService(AppDBContext context, AuthenticationSettings authenticationSettings, IAuthorizationService authorizationServiece,
-            IUserHttpContextService userHttpContext)
+            IUserHttpContextService userHttpContext, IEmailService emailService)
         {
             _appDBContext = context;
             _authenticationSettings = authenticationSettings;
             _authorizationServiece = authorizationServiece;
             _userHttpContext = userHttpContext;
+            _emailService = emailService;
         }
 
 
@@ -114,7 +117,12 @@ namespace AstroScreen_Cinema.Services
             await _appDBContext.AddAsync(newUser);
             try
             {
+                //Try to save the changes 
                 await _appDBContext.SaveChangesAsync();
+
+                //If the changes were corretly saved, the confirmation mail can be sent
+                //that the registration has been succesfull
+                await _emailService.SendMail(EmailAction.REGISTER, _user.Email);
             }
             catch (Exception ex)
             {

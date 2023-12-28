@@ -1,16 +1,21 @@
 ﻿using System;
 using AstroScreen_Cinema.Models;
 using AstroScreen_Cinema.Models.EntitiesDto;
+using static AstroScreen_Cinema.Services.EmailService;
 
 namespace AstroScreen_Cinema.Services
 {
     public class MyAccountService : IMyAccountService
     {
         private readonly AppDBContext _appDBContext;
+        private readonly IEmailService _emailService;
+        private readonly ILogger<MyAccountService> _logger;
 
-        public MyAccountService(AppDBContext appDBContext)
+        public MyAccountService(ILogger<MyAccountService> logger, AppDBContext appDBContext, IEmailService emailService)
         {
             _appDBContext = appDBContext;
+            _emailService = emailService;
+            _logger = logger;
         }
 
         public MyAccountDto GetAccountData(string _login)
@@ -61,9 +66,18 @@ namespace AstroScreen_Cinema.Services
             account.Birthdate = myAccountDto.Birthdate;
 
             _appDBContext.Update(account);
-            int affectedRows = await _appDBContext.SaveChangesAsync();
+            try
+            {
+                await _appDBContext.SaveChangesAsync();
 
-            return affectedRows == 1 ? true : throw new BadHttpRequestException("Could not correcly save the data into the database");
+                await _emailService.SendMail(EmailAction.PASSWORD_CHANGE, account.Email);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Email", "Log to email file");    
+            }
+
+            return true;
         }
 
         public List<ViewHistory> GetViewingHistory(string login)

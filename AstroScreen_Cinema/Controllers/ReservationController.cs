@@ -10,10 +10,10 @@ namespace AstroScreen_Cinema.Controllers
     [Route("Reservation")]
     public class ReservationController : Controller
     {
-        private readonly ReservationService _reservationService;
+        private readonly IReservationService _reservationService;
         private readonly ILoginService _loginService;
 
-        public ReservationController(ReservationService reservationService, ILoginService loginService)
+        public ReservationController(IReservationService reservationService, ILoginService loginService)
         {
             _reservationService = reservationService;
             _loginService = loginService;
@@ -26,9 +26,6 @@ namespace AstroScreen_Cinema.Controllers
 
             var seats = elements[elements.Count() - 2].Split(',').Skip(1).ToArray();
             var totalPrice = elements[elements.Count() - 1];
-
-            var city = HttpContext.Session.GetString("City");
-            var showtimeid = HttpContext.Session.GetString("ShowtimeId");
 
             _reservationService.CacheSeatInformation(seats, out string stringOfSeats);
 
@@ -79,6 +76,8 @@ namespace AstroScreen_Cinema.Controllers
             HttpContext.Session.SetString("LoginStatus", user.IsLogged);
             HttpContext.Session.SetString("UserLogin", user.Login);
 
+            ViewBag.User = user.Login;
+
             return RedirectToAction("Reservations", "Reservation");
         }
 
@@ -88,10 +87,11 @@ namespace AstroScreen_Cinema.Controllers
         {
             var showtimeid = HttpContext.Session.GetString("ShowtimeId");
 
+            var seats = HttpContext.Session.GetString("SelectedSeats").Split(',').ToArray();
+
             var user = HttpContext.Session.GetString("UserLogin");
 
-            await _reservationService.SaveTheReservation(reservationDto, showtimeid, user);
-
+            await _reservationService.SaveTheReservation(reservationDto, showtimeid, user, seats);
 
             return View();
         }

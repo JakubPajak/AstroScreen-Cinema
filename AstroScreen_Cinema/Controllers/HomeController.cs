@@ -9,13 +9,11 @@ namespace AstroScreen_Cinema.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
     private readonly AppDBContext _appDbContext;
     private readonly IHomeService _homeService;
 
-    public HomeController(ILogger<HomeController> logger, AppDBContext appDbContext, IHomeService homeService)
+    public HomeController(AppDBContext appDbContext, IHomeService homeService)
     {
-        _logger = logger;
         _appDbContext = appDbContext;
         _homeService = homeService;
     }
@@ -35,11 +33,6 @@ public class HomeController : Controller
     {
         return View();
     }
-
-    //public async Task<IActionResult> NowShowing()
-    //{
-
-    //}
 
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

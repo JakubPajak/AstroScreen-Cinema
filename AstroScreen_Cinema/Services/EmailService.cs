@@ -6,9 +6,9 @@ using Serilog.Context;
 
 namespace AstroScreen_Cinema.Services
 {
-	public class EmailService
-	{
-        private readonly ILogger _logger;
+    public class EmailService : IEmailService
+    {
+        private readonly ILogger<EmailService> _logger;
 
         public enum EmailAction
         {
@@ -19,10 +19,10 @@ namespace AstroScreen_Cinema.Services
             REMINDER,
         };
 
-		public EmailService(ILogger logger)
-		{
+        public EmailService(ILogger<EmailService> logger)
+        {
             _logger = logger;
-		}
+        }
 
         public async Task<bool> SendMail(EmailAction emailAction, string _userMail)
         {
@@ -68,7 +68,7 @@ namespace AstroScreen_Cinema.Services
 
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 using (LogContext.PushProperty("LogType", "email"))
                 {
@@ -79,6 +79,6 @@ namespace AstroScreen_Cinema.Services
                 throw;
             }
         }
-	}
+    }
 }
 

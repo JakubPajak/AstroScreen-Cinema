@@ -17,8 +17,13 @@
         <input type="text" class="form-input" placeholder="Input 3" asp-for="Account.Email" value="@Model.Account.Email">
         <input type="text" class="form-input" placeholder="Input 4" asp-for="Account.Birthdate" value="@Model.Account.Birthdate">
         <input type="text" class="form-input" placeholder="Input 5" asp-for="Account.PhoneNum" value="@Model.Account.PhoneNum">
-        @*<input type="text" class="form-input" placeholder="Input 6" value="@Model.Input6">
-        <input type="text" class="form-input" placeholder="Input 7" value="@Model.Input7">*@
+
+        @if (ViewBag.User != null)
+        {
+            <input type="radio" class="showPassword"/>
+            <input type="text" class="form-input hidden" placeholder="Password" asp-for="Account.Password">
+            <input type="text" class="form-input hidden" placeholder="Confirm Password">
+        }
     </div>
 
     <div class="sidebar">
@@ -26,12 +31,34 @@
         @foreach (var seat in Model.Seats)
         {
             <label class="sidebar-label">@((char)('A' + seat.RowNum - 1))@seat.SeatNum</label>
+            <input type="hidden" asp-for="@seat"/>
         }
         <label class="sidebar-label" asp-for="Showtime.Day">Day of the showtime: @Model.Showtime.Day.Day</label>
         <label class="sidebar-label" asp-for="Showtime.Time">Hour: @Model.Showtime.Time.TimeOfDay</label>
         <label class="sidebar-label" asp-for="Movie.Title">Title of the movie: @Model.Showtime.Movie.Title</label>
         <label class="sidebar-label" asp-for="Movie.Description">Short description: @Model.Showtime.Movie.Description</label>
-        <img src="~/@Model.Showtime.Movie.PosterPath"/>
+        <img src="~/@Model.Showtime.Movie.PosterPath" />
         <button class="submit-btn">Submit</button>
-    </div>
+    <div>
 </form>
+
+<script>
+    // Function to toggle visibility of password inputs
+    function togglePasswordInputs() {
+        var passwordInput = document.getElementById('password');
+        var confirmPasswordInput = document.getElementById('confirmPassword');
+
+        if (document.getElementById('showPassword').checked) {
+            passwordInput.classList.remove('hidden');
+            confirmPasswordInput.classList.remove('hidden');
+        } else {
+            passwordInput.classList.add('hidden');
+            confirmPasswordInput.classList.add('hidden');
+        }
+    }
+
+
+    document.getElementById('showPassword').addEventListener('change', togglePasswordInputs);
+
+    togglePasswordInputs();
+</script>
