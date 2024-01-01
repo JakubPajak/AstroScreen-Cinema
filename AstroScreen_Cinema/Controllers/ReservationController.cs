@@ -91,7 +91,9 @@ namespace AstroScreen_Cinema.Controllers
 
             var user = HttpContext.Session.GetString("UserLogin");
 
-            await _reservationService.SaveTheReservation(reservationDto, showtimeid, user, seats);
+            var city = HttpContext.Session.GetString("City");
+
+            await _reservationService.SaveTheReservation(reservationDto, showtimeid, user, seats,city);
 
             return View();
         }

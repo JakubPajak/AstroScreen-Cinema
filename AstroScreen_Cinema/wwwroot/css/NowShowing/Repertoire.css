@@ -35,7 +35,7 @@ main {
 .city-selection,
 .date-selection {
     margin-right: 20px;
-    color:azure;
+    color: azure;
     font-size:20px;
 
 }
@@ -50,11 +50,21 @@ main {
         padding: 8px; 
         border: 1px solid #4a4a4a; 
         border-radius: 5px;
-        background-color: rgba(255, 255, 255, 0.3); 
+        background-color: rgba(255, 255, 255, 0.1); 
         color: aqua; 
         outline: none; 
         transition: border-color 0.3s ease; 
     }
+
+        .city-selection select:focus {
+           
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(2px); 
+        }
+
+
+
+
     .date-selection input[type="date"]:hover, select:hover {
         border-color: #fff; 
     }   
@@ -88,10 +98,11 @@ main {
     color:aqua;
 }
 
-.schedule a,.schedule, .additional-info {
+.schedule a, .schedule, .additional-info {
     color: azure;
-    text-decoration: none; 
-    display: block; 
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
 }
 
     

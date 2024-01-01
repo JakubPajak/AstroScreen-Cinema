@@ -79,28 +79,55 @@
 
 </div>
 
+@* <div class="slider">
+    <div class="slide-track slider-dissapear">
+        <!--6 slides-->
+        <div class="slide">
+            <img src="@slider[1].imgPath" alt="Slide 1" />
+        </div>
+        <div class="slide">
+            <img src="@slider[2].imgPath" alt="Slide 2" />
+        </div>
+        <div class="slide">
+            <img src="@slider[3].imgPath" alt="Slide 3" />
+        </div>
+        <div class="slide">
+            <img src="@slider[4].imgPath" alt="Slide 4" />
+        </div>
+        <div class="slide">
+            <img src="@slider[5].imgPath" alt="Slide 5" />
+        </div>
+        
+    </div>
+    <div class="navigation">
+        <button onclick="changeSlide(-1)">Previous</button>
+        <button onclick="changeSlide(1)">Next</button>
+    </div>
+</div> *@
+
 
 <!--SoonInCinemas-->
 <div class="SoonInCinemas">
 
     <div class="SoonTitleContainer">
         <div class="SoonTitle">
-            <h1>SOON IN OUR CINEMAS!</h1>
+            <h1>NOW IN OUR CINEMAS!</h1>
         </div>
     </div>
 
     <div class="Posters">
-        @foreach (var movie in shownig)
-        {
-            <figure class="Poster" data-title=@movie.Title>
-                <img src=@movie.imgPath />
-                @* <figurecaption>@movie.Title</figurecaption> *@
-                <figurecaption>@movie.Title</figurecaption>
-            </figure>
-        }
+    @foreach (var movie in shownig)
+    {
+        <figure class="Poster" data-title=@movie.Title>
+            <img src=@movie.imgPath />
+            @* <figurecaption>@movie.Title</figurecaption> *@
+            <figurecaption>@movie.Title</figurecaption>
+        </figure>
+    }
     </div>
 
     <div class="popup-image-soon">
+        <span class="popup-close">×</span>
         <div class="popup-content-soon">
             <h1 class="popup-title-soon">Default Text</h1>
             <p class="popup-description-soon">Default Description</p>
@@ -109,6 +136,7 @@
     </div>
 
 </div>
+
 
 
 <!--Events-->
@@ -153,7 +181,8 @@
 
 
 <!--ScriptforPOPUPsoonincinemas-->
-<script>document.querySelectorAll('.SoonInCinemas .Posters .Poster img').forEach(image => {
+<script>
+    document.querySelectorAll('.SoonInCinemas .Posters .Poster img').forEach(image => {
         image.onclick = () => {
             const title = image.parentElement.getAttribute('data-title');
             const { title: popupTitle, description: popupDescription } = getMovieDescription(title);
@@ -290,3 +319,53 @@
                 };
         }
     }</script>
+
+
+<!--ScriptforsliderV2-->
+<script>
+    // document.addEventListener("DOMContentLoaded", function () {
+    //     let currentSlide = 0;
+    //     const totalSlides = document.querySelectorAll(".slide").length;
+    //     const slidesContainer = document.querySelector(".slide-track");
+    //     const slideWidth = document.querySelector(".slide").offsetWidth;
+
+    //     function changeSlide(direction) {
+    //         currentSlide += direction;
+
+    //         if (currentSlide < 0) {
+    //             currentSlide = totalSlides - 1;
+    //         } else if (currentSlide >= totalSlides) {
+    //             currentSlide = 0;
+    //         }
+
+    //         updateSlide();
+    //     }
+
+    //     function updateSlide() {
+    //         const newTransformValue = -currentSlide * slideWidth;
+
+    //         slidesContainer.style.transition = "transform 0.5s ease-in-out";
+    //         slidesContainer.style.transform = `translateX(${newTransformValue}px)`;
+
+    //         // Dodane: resetowanie klonu dla efektu nieskończoności
+    //         if (currentSlide === totalSlides - 1) {
+    //             setTimeout(() => {
+    //                 slidesContainer.style.transition = "none";
+    //                 slidesContainer.style.transform = "translateX(0)";
+    //                 currentSlide = 0;
+    //             }, 500);
+    //         }
+    //     }
+
+    //     document.querySelector(".navigation button:nth-child(1)").addEventListener("click", function () {
+    //         changeSlide(-1);
+    //     });
+
+    //     document.querySelector(".navigation button:nth-child(2)").addEventListener("click", function () {
+    //         changeSlide(1);
+    //     });
+    // });
+
+
+
+</script>

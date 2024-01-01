@@ -18,15 +18,36 @@
 }
 
 .myaccount--left_nav {
-    width: 30%; /* Adjust the width as needed */
+    width: 20%; 
     border-right: solid 1px white;
-    margin: 0px;
+    margin: 0;
+    text-align: center; 
 }
 
 .myaccount-menu_content {
     margin-bottom: 10px;
-    border-bottom: solid 1px white;
+    border-bottom: solid 1px white; 
+    text-align: center; 
 }
+
+    .myaccount-menu_content h3 {
+        font-size: 20px;
+        color: whitesmoke;
+        text-decoration: none;
+        margin-bottom: 10px; 
+    }
+
+.myaccount-menu_content a {
+    text-decoration: none; 
+    color: whitesmoke; 
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+    .myaccount-menu_content a:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
 
 .myaccount--minor_content {
     flex: 1;
@@ -96,16 +117,18 @@
     }
 
 
-.myaccount--content_label button {
+.myaccount--left_nav button {
+    margin-top: 10px; /* Przesunięcie przycisku na dół */
     padding: 8px;
     background-color: aqua;
     color: black;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    display: inline-block; /* Dodaj tę linię */
+    /*display: inline-block;*/
+    margin: 0 auto;
 }
 
-    .myaccount--content_label button:hover {
+    .myaccount--left_nav button:hover {
         background-color: #2980b9;
     }

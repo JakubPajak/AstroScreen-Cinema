@@ -10,10 +10,17 @@
 h1 {
     color: #fff;
     text-align: center;
-    padding: 1em 0;
-    font-size: 30px;
+    font-size: 50px;
     font-weight: bold;
 }
+
+.section-background {
+    background-color: rgba(0, 0, 0, 0.8); 
+    padding: 20px; 
+    border-radius: 10px; 
+    margin-top: 20px; 
+}
+
 
 .hall-legend {
     display: flex;
@@ -31,9 +38,29 @@ h1 {
     color: azure;
 }
 
-    .seat-legend.vip {
-        background-color: #ffcc00;
+    .seat-legend.selected {
+        background-color: #3498db;
     }
+
+    .seat-legend.taken {
+        background-color: #ff0000;
+    }
+
+.hall-legend {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.seat-legend {
+    margin: 0 10px;
+    padding: 5px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    cursor: default;
+    color: azure;
+}
 
     .seat-legend.selected {
         background-color: #3498db;
@@ -66,31 +93,40 @@ h1 {
 }
 
 .total-section {
-    order: 1;
     color: #fff;
+    text-align: center;
+    margin-bottom: 20px; 
+    order: 1; 
 }
 
 .Reservation {
-    padding: 10px;
-    border: 2px solid #fff;
-    border-radius: 10px;
-    cursor: pointer;
-    order: 2;
-    background-color: aqua;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    order: 2; 
 }
 
-    .Reservation a {
-        text-decoration: none;
-        display: block;
-        color: #000;
-        width: 100%;
-        margin: 0 auto;
-        text-align: center;
-    }
-
-    .Reservation:hover {
+    .Reservation button {
+        padding: 10px;
+        border: 2px solid #fff;
+        border-radius: 10px;
+        cursor: pointer;
         background-color: #2980b9;
     }
+
+        .Reservation button a {
+            text-decoration: none;
+            display: block;
+            color: #000;
+            width: 100%;
+            text-align: center;
+        }
+
+        .Reservation button:hover {
+            background-color: #1d4862;
+        }
+
+
 
 .hall-container,
 .seat-selected {
@@ -145,31 +181,25 @@ h1 {
         pointer-events: none;
     }
 
-.vip {
-    background-color: #ffcc00;
-    color: #000;
-}
 
-.seat.copied {
-    background-color: #3498db;
-    color: #fff;
-}
+    .seat.copied {
+        background-color: #3498db;
+        color: #fff;
+        align-items: center;
+        justify-content: center;
+    }
 
-.seat.copied-vip {
-    background-color: #ffcc00;
-    color: #000;
-}
 
-.seat.copied,
-.seat.copied-vip {
+.seat.copied{
     display: inline-block;
     margin-right: 5px;
-    flex-wrap: wrap;
+    /*flex-wrap: wrap;*/
 }
 
 .selected-seats .cloned {
     background-color: #3498db;
     color: #fff;
+    align-items: center;
 }
 
 /*Selected*/
@@ -209,59 +239,136 @@ h1 {
 /*------------------------------------------------------*/
 /*                        POP UP                        */
 
-.popup {
+/* Popup container */
+#popup {
     position: fixed;
     display: flex;
     justify-content: center;
-    align-content: center;
+    align-items: center;
     top: 20%;
     z-index: 1;
     width: 700px;
     height: 500px;
-    background-color: #fff;
+    background-color: rgba(26, 26, 26, 0.8); 
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border: 2px solid rgb(0, 255, 255); 
+    backdrop-filter: blur(15px); 
 }
 
 .popup-content {
     display: flex;
-    justify-content: center;
-    align-content: center;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     padding: 20px;
     text-align: center;
+    color: #fff; 
 }
 
-.choose__option{
-    flex-direction: row;
+.popup-content h2 {
+    font-size: 40px;
+    color: #00bcd4; 
+}
+
+/* Sections */
+.choose__option {
+    display: flex;
+    justify-content: space-between; 
+    margin: 0 20px; 
+}
+
+.left-section-pop,
+.right-section-pop {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 40px; 
+    margin-left: 40px; 
+}
+
+/* Left section */
+.left-section-pop {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
 }
 
 .login__input {
-    width: 50%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
 }
 
-.guest__button{
-    width: 50%;
+
+    .login__input label {
+        color: #ccc;
+        margin-bottom: 5px;
+        margin-right: 0; 
+    }
+
+    .login__input input {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid #555;
+        border-radius: 5px;
+        background-color: rgba(26, 26, 26, 0.5);
+        color: #fff;
+        margin-bottom: 10px;
+        margin-right: 0; 
+    }
+
+        .login__input input:focus {
+            outline: none;
+            border-color: #00bcd4;
+            box-shadow: 0 0 10px rgba(0, 188, 212, 0.5);
+        }
+
+    .login__input button {
+        background: linear-gradient(90deg, #00bcd4 0%, #008ba3 100%);
+        color: white;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        margin-top: 20px;
+        margin: 20px auto 0; 
+    }
+
+        .login__input button:hover {
+            background: linear-gradient(90deg, #008ba3 0%, #005662 100%);
+        }
+
+/* Right section */
+.right-section-pop {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
-.close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 20px;
-    cursor: pointer;
+.guest__button {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    margin-top: 10px;
-    cursor: pointer;
-}
+    .guest__button .btn a {
+        display: inline-block; 
+        text-decoration: none;
+        border: 2px solid #00bcd4;
+        padding: 10px;
+        border-radius: 5px;
+        color: #00bcd4;
+        transition: background 0.3s ease, color 0.3s ease;
+    }
 
-button:hover {
-    background-color: #45a049;
-}
+        .guest__button .btn a:hover {
+            background: #00bcd4;
+            color: #fff;
+        }

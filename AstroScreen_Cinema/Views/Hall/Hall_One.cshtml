@@ -15,13 +15,11 @@
     //var isSubmitted = ViewBag.Submitted == null ? false : true;
 }
 <div class="SeatSelector">
-    <div class="SelectorTitle"> </div>
-    <h1>@Model.City</h1>
-
+    @* <div class="SelectorTitle section-background"></div> *@
+    <h1 class="section-background1">@Model.City</h1>
     <!--Hall legend-->
-    <div class="hall-legend">
+    <div class="hall-legend section-background">
         <div class="seat-legend">Not Selected</div>
-        @* <div class="seat-legend vip">VIP - 8$</div> *@
         <div class="seat-legend selected">Selected - 5$</div>
         <div class="seat-legend taken">Taken</div>
     </div>
@@ -63,12 +61,10 @@
         </div>
 
         <div class="Reservation">
-            @*<ul>*@
             <button class="Reservation" id="home-link" type="submit"
                     asp-area="" asp-controller="Reservation" asp-action="CacheSeatInformation">
                 Make a Reservation
             </button>
-            @*<a id="home-link" asp-area="" asp-controller="Reservation" asp-action="Reservations">Make a Reservation<span></span></a></ul>*@
         </div>
     </div>
 </div>
@@ -76,33 +72,149 @@
 
 <!-- Add this HTML structure for the popup at the end of your main view -->
 @if (ViewBag.Submitted != null && ViewBag.Submitted)
-    {
-    <div id="popup" class="popup">
+{
+    <div id="popup" class="popup" aria-hidden="true">
         <div class="popup-content">
-            <span class="close" onclick="closePopup()">&times;</span>
+           @*  <span class="close" id="closePopup">&times;</span> *@
             <h2>Welcome to our Cinema!</h2>
-            <p>Are you a registered user?</p>
+            
             <div class="choose__option">
-                <form  asp-area="" asp-controller="Reservation" asp-action="LoginFromReservation" method="post" class="login__input">
-                    <label>Email</label>
-                    <input type="text" name="_login"/>
-                    <label>Password</label>
-                    <input type="password" name="_pass"/>
-                    <button type="submit">Login</button>
-                </form>
-                <div class="guest__button">
-                    <div class="btn">
-                        <a asp-area="" asp-controller="Reservation" asp-action="Reservations">Continue as a guest</a>
+                <div class="left-section-pop">
+                    <p>Are you a registered user?</p>
+                    <form asp-area="" asp-controller="Reservation" asp-action="LoginFromReservation" method="post" class="login__input">
+                        <label>Email</label>
+                        <input type="text" name="_login" />
+                        <label>Password</label>
+                        <input type="password" name="_pass" />
+                        <button type="submit">Login</button>
+                    </form>
+                </div>
+                <div class="right-section-pop">
+                    <p>Continue without account:</p>
+                    <div class="guest__button">
+                        <div class="btn">
+                            <a asp-area="" asp-controller="Reservation" asp-action="Reservations">Continue as a guest</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    }
+}
 
 
 
-<script>document.addEventListener("DOMContentLoaded", function () {
+@* <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var seats = document.querySelectorAll(".seat");
+        var cancelSelectionFrame = document.getElementById("cancelSelectionFrame");
+        var selectedSeatsContainer = document.querySelector(".selected-seats");
+        var totalSection = document.querySelector(".total-section");
+
+        var selectionSummary = {
+            totalSeats: 0,
+            totalPrice: 0
+        };
+
+        // First view of total
+        totalSection.textContent = `Total Seats: ${selectionSummary.totalSeats}, Total Price: $${selectionSummary.totalPrice.toFixed(2)}`;
+
+        seats.forEach(function (seat) {
+            seat.addEventListener("click", function () {
+                seat.classList.toggle("selected");
+
+                let seatId = seat.dataset.row + seat.dataset.seat;
+                let hiddenInput = seat.querySelector('input[name="selectedSeats"]');
+
+                if (seat.classList.contains("selected") && !hiddenInput) {
+                    selectionSummary.totalSeats++;
+                    selectionSummary.totalPrice += 5; // Standard price
+                    seat.insertAdjacentHTML("beforeend", `<input type="hidden" name="selectedSeats" value="${seatId}" />`);
+                } else if (!seat.classList.contains("selected") && hiddenInput) {
+                    selectionSummary.totalSeats--;
+
+                    hiddenInput.remove(); // Remove the hidden input for this specific seat
+                    selectionSummary.totalPrice -= 5; // Standard price
+                }
+
+                // Viewing total
+                totalSection.textContent = `Total Seats: ${selectionSummary.totalSeats}, Total Price: $${selectionSummary.totalPrice.toFixed(2)}`;
+
+                if (seat.classList.contains("selected")) {
+                    // Cloning
+                    var clonedSeat = seat.cloneNode(true);
+                    clonedSeat.classList.add("copied");
+
+                    clonedSeat.addEventListener("click", function () {
+                        seat.classList.remove("selected");
+                        clonedSeat.remove();
+                        updateTotal();
+                    });
+
+                    // Adding cloned seat to the right section
+                    selectedSeatsContainer.appendChild(clonedSeat);
+                } else {
+                    // Remove selected seats from the right section
+                    var selectedSeat = selectedSeatsContainer.querySelector('[data-row="' + seat.dataset.row + '"][data-seat="' + seat.dataset.seat + '"]');
+                    if (selectedSeat) {
+                        selectedSeat.remove();
+                    }
+                }
+            });
+        });
+
+        // Adding Total to right section
+        document.querySelector(".right-section").appendChild(totalSection);
+
+        // Clear functionality
+        cancelSelectionFrame.addEventListener("click", function () {
+            seats.forEach(function (selectedSeat) {
+                if (selectedSeat.classList.contains("selected")) {
+                    selectedSeat.classList.remove("selected");
+                }
+            });
+
+            // Remove selected seats from the right section
+            var selectedSeats = selectedSeatsContainer.querySelectorAll('.copied');
+            selectedSeats.forEach(function (selectedSeat) {
+                selectedSeat.remove();
+            });
+
+            // Reset
+            selectionSummary = {
+                totalSeats: 0,
+                totalPrice: 0
+            };
+
+            // Reset total section
+            totalSection.textContent = "Total Seats: 0, Total Price: $0.00";
+        });
+
+        // Function to update total
+        function updateTotal() {
+            selectionSummary.totalSeats = document.querySelectorAll('.selected').length;
+            selectionSummary.totalPrice = selectionSummary.totalSeats * 5;
+
+            // Update total section
+            totalSection.textContent = `Total Seats: ${selectionSummary.totalSeats}, Total Price: $${selectionSummary.totalPrice.toFixed(2)}`;
+        }
+
+        function OpenPopup() {
+            var isSubmitted = @((bool?)ViewBag.Submitted ?? false);
+
+            if (isSubmitted) {
+                document.querySelector(".popup").classList.remove("hidden");
+            } else {
+                return;
+            }
+        }
+    });
+
+
+</script> *@
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
         var seats = document.querySelectorAll(".seat");
         var cancelSelectionFrame = document.getElementById("cancelSelectionFrame");
         var selectedSeatsContainer = document.querySelector(".selected-seats");
@@ -232,6 +344,6 @@
             }
         }
 
-});
+    });
 
 </script>

@@ -10,12 +10,18 @@
 
 <title>Confirm reservation</title>
 <form asp-action="FulfillTheReservation" asp-controller="Reservation" method="post" class="reservation__form">
+
     <div class="reservation__input-container">
-        <h2>Your Form Title</h2>
-        <input type="text" class="form-input" placeholder="Title" asp-for="Account.Name" value="@Model.Account.Name">
+        <h2>Fill this form to finish your reservation</h2>
+        <label>Name</label>
+        <input type="text" class="form-input"  asp-for="Account.Name" value="@Model.Account.Name">
+        <label>Surname</label>
         <input type="text" class="form-input" placeholder="Input 1" asp-for="Account.Surname" value="@Model.Account.Surname">
+        <label>Email Address</label>
         <input type="text" class="form-input" placeholder="Input 3" asp-for="Account.Email" value="@Model.Account.Email">
-        <input type="text" class="form-input" placeholder="Input 4" asp-for="Account.Birthdate" value="@Model.Account.Birthdate">
+        <label>Birth Date</label>
+        <input type="date" class="form-input" placeholder="Input 4" asp-for="Account.Birthdate" value="@Model.Account.Birthdate">
+        <label>Phone Number</label>
         <input type="text" class="form-input" placeholder="Input 5" asp-for="Account.PhoneNum" value="@Model.Account.PhoneNum">
 
         @if (ViewBag.User != null)
@@ -24,22 +30,30 @@
             <input type="text" class="form-input hidden" placeholder="Password" asp-for="Account.Password">
             <input type="text" class="form-input hidden" placeholder="Confirm Password">
         }
+        <button class="submit-btn">Submit</button>
     </div>
 
     <div class="sidebar">
-        <h3>Sidebar</h3>
-        @foreach (var seat in Model.Seats)
-        {
-            <label class="sidebar-label">@((char)('A' + seat.RowNum - 1))@seat.SeatNum</label>
-            <input type="hidden" asp-for="@seat"/>
-        }
-        <label class="sidebar-label" asp-for="Showtime.Day">Day of the showtime: @Model.Showtime.Day.Day</label>
-        <label class="sidebar-label" asp-for="Showtime.Time">Hour: @Model.Showtime.Time.TimeOfDay</label>
-        <label class="sidebar-label" asp-for="Movie.Title">Title of the movie: @Model.Showtime.Movie.Title</label>
-        <label class="sidebar-label" asp-for="Movie.Description">Short description: @Model.Showtime.Movie.Description</label>
-        <img src="~/@Model.Showtime.Movie.PosterPath" />
-        <button class="submit-btn">Submit</button>
-    <div>
+        <div class="movie-details">
+            <h3>Movie Details</h3>
+            @foreach (var seat in Model.Seats)
+            {
+                <label class="seats">@((char)('A' + seat.RowNum - 1))@seat.SeatNum</label>
+                <input type="hidden" asp-for="@seat" />
+            }
+            <label class="sidebar-label" asp-for="Showtime.Day">Day of the showtime: @Model.Showtime.Day.Day</label>
+            <label class="sidebar-label" asp-for="Showtime.Time">Hour: @Model.Showtime.Time.TimeOfDay</label>
+        </div>
+        <div class="poster-details">
+            <img src="~/@Model.Showtime.Movie.PosterPath" />
+            <div class="text-details">
+                <label class="sidebar-label Title" asp-for="Movie.Title">@Model.Showtime.Movie.Title</label>
+                <label class="sidebar-label Description" asp-for="Movie.Description">@Model.Showtime.Movie.Description</label>
+            </div>
+        </div>
+    </div>
+
+
 </form>
 
 <script>

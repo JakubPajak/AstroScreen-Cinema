@@ -1,11 +1,17 @@
 ﻿.slider {
-    height: 600px;
+    height: 500px;
     margin: auto;
     position: relative;
     width: 90%;
     display: grid;
     place-items: center;
     overflow: hidden;
+    border: 4px solid; 
+    border-radius: 15px; 
+    background-color: rgba(30, 43, 43, 0.28);
+    background-image: linear-gradient(360deg, rgba(30, 43, 43, 0.28) 0%, rgba(0, 13, 22, 0.76) 100%);
+    margin-bottom: 20px; 
+    position: relative; 
 }
 
 .slide-track {
@@ -18,8 +24,8 @@
         animation-play-state: paused;
     }
 
-/* AUTO SLIDE */
-
+/* AUTO SLIDE 
+*/
 @keyframes scroll {
     0% {
         transform: translateX(0);
@@ -37,40 +43,101 @@
     align-items: center;
     padding: 15px;
     perspective: 100px;
-    /*z-index: 2;*/
 }
 
-img {
+.slider img {
     width: 100%;
-   
+    border-radius: 10px; 
+    transition: transform 0.5s ease;  
 }
 
-img:hover {
-    transform: translateZ(15px);
-    transition: transform 1s;
-}
+    .slider img:hover {
+        transform: translateZ(10px);
+    }
 
-
-
-/*gradient shadows*/
-
-/*.slider-dissapear::before,
-.slider-dissapear::after {
-    background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+.slider::before,
+.slider::after {
+    background: linear-gradient(to right, rgba(0, 13, 22, 1) 0%, rgba(0, 13, 22, 0) 100%);
     content: '';
     height: 100%;
     position: absolute;
-    width: 15%;
-    z-index: 2;
+    width: 40%;
+    z-index: 1;
+    
 }
 
-.slider-dissapear::before {
+.slider::before {
     left: 0;
     top: 0;
 }
 
-.slider-dissapear::after {
+.slider::after {
     right: 0;
     top: 0;
     transform: rotateZ(180deg);
-} */
+}
+
+/*.slider {
+    height: 400px;*/ /* Zmniejszona wysokość ramki */
+    /*margin: auto;
+    position: relative;
+    width: 70%;*/ /* Zmniejszona szerokość ramki */
+    /*display: grid;
+    place-items: center;
+    overflow: hidden;
+    border: 4px solid aqua;*/ /* Kolor krawędzi ramki */
+    /*border-radius: 15px;*/ /* Zaokrąglenie ramki */
+    /*background: rgba(255, 255, 255, 0.8);*/ /* Szare zblurowane tło ramki */
+    /*margin-bottom: 20px;*/ /* Dodany margines na dole ramki */
+/*}
+
+
+
+.slide-track {
+    display: flex;
+    justify-content: center;
+}
+
+.slide {
+    height: 200px;*/ /* Zmniejszona wysokość slajdu */
+    /*width: 400px;*/ /* Zmniejszona szerokość slajdu */
+    /*display: flex;
+    align-items: center;
+    padding: 15px;
+    perspective: 100px;
+    z-index: 2;
+}
+
+.slide img {
+    width: 100%;
+}
+
+    .slide img:hover {
+        transform: translateZ(15px);
+        transition: transform 1s;
+    }
+
+.navigation {
+    margin-top: 10px;
+    text-align: center;
+    justify-content: center;
+    margin-right: 50px;*/ /* Dodane, aby przyciski były przesunięte na lewą stronę z odstępem 10px */
+/*}
+
+button {
+    margin: 0 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+    background-color: aqua;*/ /* Kolor tła przycisku */
+    /*color: white;*/ /* Kolor tekstu przycisku */
+    /*border: 2px solid aqua;*/ /* Kolor obramowania przycisku */
+    /*border-radius: 5px;*/ /* Zaokrąglenie krawędzi przycisku */
+/*}
+
+    button:hover {
+        background-color: transparent;*/ /* Przezroczyste tło po najechaniu myszą */
+        /*color: aqua;*/ /* Zmiana koloru tekstu po najechaniu myszą */
+    /*}*/
+
+
+
