@@ -4,6 +4,6 @@ namespace AstroScreen_Cinema.Services
 {
     public interface IHallReperuairService
     {
-        HallDto GetHall(string city);
+        HallDto GetHall(string city, string showtimeId);
     }
 }

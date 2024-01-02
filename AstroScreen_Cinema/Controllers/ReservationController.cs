@@ -31,8 +31,14 @@ namespace AstroScreen_Cinema.Controllers
 
             HttpContext.Session.SetString("SelectedSeats", stringOfSeats);
             HttpContext.Session.SetString("TotalPrice", totalPrice.ToString());
-
-            return RedirectToAction("Hall_One", "Hall");
+            if (HttpContext.Session.GetString("UserLogin") == null)
+            {
+                return RedirectToAction("Hall_One", "Hall");
+            }
+            else
+            {
+                return RedirectToAction("Reservations", "Reservation");
+            }
         }
 
         [Route("Proceed-to-checkout")]
@@ -71,14 +77,20 @@ namespace AstroScreen_Cinema.Controllers
         [Route("Reservation-login")]
         public IActionResult LoginFromReservation(string _login, string _pass)
         {
-            var user = _loginService.GetLogin(_login, _pass, out string _token);
+            var user = _loginService.GetLogin(_login, _pass, out string _token, out string _errorMessage);
 
             HttpContext.Session.SetString("LoginStatus", user.IsLogged);
             HttpContext.Session.SetString("UserLogin", user.Login);
 
             ViewBag.User = user.Login;
-
-            return RedirectToAction("Reservations", "Reservation");
+            if (_errorMessage != null)
+            {
+                return RedirectToAction("Hall_One", "Hall");
+            }
+            else
+            {
+                return RedirectToAction("Reservations", "Reservation");
+            }
         }
 
         [HttpPost]

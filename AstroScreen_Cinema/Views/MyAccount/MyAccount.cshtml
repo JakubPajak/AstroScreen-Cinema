@@ -15,10 +15,10 @@
             <div class="myaccount-menu_content" id="tab3">
                 <a asp-area="" asp-controller="MyAccount" asp-action="ViewingHistory"><h3>Viewing History</h3></a>
             </div>
-            <div class="myaccount-menu_content" id="tab4">
+            <div id="tab4">
                 <a asp-area="" asp-controller="Home" asp-action="Index"><h3>Back to Home Page</h3></a>
             </div>
-            <button type="submit">Save changes</button>
+
         </div>
         <div class="myaccount--minor_content">
             <div class="tab-content active" id="content1">
@@ -51,55 +51,67 @@
                         <div class="myaccount--content_details">
                             <div class="myaccount--content_label">
                                 <label>Name:</label>
-                                <input type="text" placeholder="@Model.Name" asp-for="Name" /> Name: @Model.Name
+                                <input type="text" placeholder="@Model.Name" asp-for="@Model.Name" /> Name: @Model.Name
                             </div>
                             <div class="myaccount--content_label">
                                 <label>Second Name:</label>
-                                <input type="text" placeholder="@Model.Surname" asp-for="Surname" /> Name: @Model.Surname
+                                <input type="text" placeholder="@Model.Surname" asp-for="@Model.Surname" /> Name: @Model.Surname
                             </div>
                             <div class="myaccount--content_label">
                                 <label>Phone Number:</label>
-                                <input type="tel" placeholder="@Model.PhoneNum" asp-for="PhoneNum" /> Name: @Model.PhoneNum
+                                <input type="tel" placeholder="@Model.PhoneNum" asp-for="@Model.PhoneNum" /> Name: @Model.PhoneNum
                             </div>
                             <div class="myaccount--content_label">
                                 <label>Email Address:</label>
-                                <input type="email" placeholder="@Model.Email" asp-for="Email" /> Name: @Model.Email
+                                <input type="email" placeholder="@Model.Email" asp-for="@Model.Email" /> Name: @Model.Email
                             </div>
                             <div class="myaccount--content_label">
                                 <label>Birth Date:</label>
-                                <input type="date" placeholder="@Model.Birthdate" asp-for="Birthdate" /> Name: @Model.Birthdate
+                                <input type="date" placeholder="@Model.Birthdate" asp-for="@Model.Birthdate" /> Name: @Model.Birthdate
                             </div>
                             <div class="myaccount--content_label hidden"></div>
                         </div>
+                        <button type="submit">Save changes</button>
                     </div>
                 </form>
             </div>
-            @*@foreach (var reservationItem in Model.ReservationDetails)
-             {
-                <div class="tab-content" id="content3">
-                    <div class="myaccount--content_div">
-                        <h2 class="myaccount--header">Viewing History</h2>
-                        <div class="myaccount--content_details">
-                            <div class="myaccount--content_label">
-                                <label>Title:</label>
-                                <label>@reservationItem.Value.Movie.Title</label>
-                            </div>
-                            <div class="myaccount--content_label">
-                                <label>Reservation ID:</label>
-                                <label>@reservationItem.Value.Showtime.Day</label>
-                            </div>
-                            <div class="myaccount--content_label">
-                                <label>@reservationItem.Value.Movie.Description</label>
-                                <label></label>
-                            </div>
-                            <div class="myaccount--content_label">
-                                <label>Poster</label>
-                                <img src="~/@reservationItem.Value.Movie.PosterPath"/>
+            @if (Model.ReservationDetails != null)
+            {
+                @foreach (var reservationItem in Model.ReservationDetails)
+                {
+                    <div class="tab-content" id="content3">
+                        <div class="myaccount--content_div">
+                            <h2 class="myaccount--header">Viewing History</h2>
+                            <div class="myaccount--content_details">
+                                <div class="myaccount--content_label">
+                                    <label>Title:</label>
+                                    <label>@reservationItem.Value.Movie.Title</label>
+                                </div>
+                                <div class="myaccount--content_label">
+                                    <label>Reservation ID:</label>
+                                    <label>@reservationItem.Value.Showtime.Day</label>
+                                </div>
+                                <div class="myaccount--content_label">
+                                    <label>@reservationItem.Value.Movie.Description</label>
+                                    <label></label>
+                                </div>
+                                <div class="myaccount--content_label">
+                                    <label>Poster</label>
+                                    <img src="~/@reservationItem.Value.Movie.PosterPath" />
+                                </div>
                             </div>
                         </div>
                     </div>
+                }
+            }
+            else
+            {
+                <div class="tab-content" id="content3">
+                    <div class="myaccount--content_div">
+                       <h2>Unfortunately There is no viewing history to display</h2>
+                    </div>
                 </div>
-             }*@
+            }
             <div class="tab-content" id="content4">
                 <p>TAB4</p>
             </div>

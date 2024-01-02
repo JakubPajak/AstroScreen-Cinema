@@ -38,14 +38,14 @@ namespace AstroScreen_Cinema.Services
             {
                 switch (emailAction)
                 {
-                    case EmailAction.REGISTER:
+                    case EmailAction.CONFIRMATION:
                         message = MailHelper.CreateSingleTemplateEmail(from, to, "d-463443cbc9774187aa9a5731fa165579", new
                         {
                             movietitle = "Avatar",
                             seats = "A1"
                         });
                         break;
-                    case EmailAction.CONFIRMATION:
+                    case EmailAction.REGISTER:
 
                         break;
                     case EmailAction.PASSWORD_CHANGE:

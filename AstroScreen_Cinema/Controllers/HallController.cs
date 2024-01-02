@@ -18,9 +18,10 @@ namespace AstroScreen_Cinema.Controllers
 
         public IActionResult Hall_One(string selectedSchedule)
         {
+            var elements = new string[' '];
             if (!string.IsNullOrEmpty(selectedSchedule))
             {
-                var elements = selectedSchedule.Split(',').ToArray();
+                elements = selectedSchedule.Split(',').ToArray();
                 HttpContext.Session.SetString("ShowtimeId", elements[1]);
             }
             else
@@ -33,7 +34,7 @@ namespace AstroScreen_Cinema.Controllers
             }
 
             var _city = HttpContext.Session.GetString("City");
-            var hall = _hallRepertuair.GetHall(_city);
+            var hall = _hallRepertuair.GetHall(_city, elements[1]);
             return View(hall);
         }
     }

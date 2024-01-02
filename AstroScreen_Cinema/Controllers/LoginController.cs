@@ -38,7 +38,7 @@ namespace AstroScreen_Cinema.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginDto loginDto)
         {
-            var user = _loginService.GetLogin(loginDto.Login, loginDto.Password, out string _token);
+            var user = _loginService.GetLogin(loginDto.Login, loginDto.Password, out string _token, out string _errorMessage);
 
 
             //var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -63,11 +63,22 @@ namespace AstroScreen_Cinema.Controllers
             //    }
             //}
 
+            if (user.Login != null)
+            {
+                HttpContext.Session.SetString("LoginStatus", user.IsLogged);
+                HttpContext.Session.SetString("UserLogin", user.Login);
+            }
 
-            HttpContext.Session.SetString("LoginStatus", user.IsLogged);
-            HttpContext.Session.SetString("UserLogin", user.Login);
 
-            return RedirectToAction("Index", "Home");
+            if (_errorMessage != "")
+            {
+                ViewBag.ErrorMessage = _errorMessage;
+                return View(user);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         [HttpGet]
@@ -85,7 +96,7 @@ namespace AstroScreen_Cinema.Controllers
             await _loginService.RegisterUser(registerDto);
 
             ViewBag.RegisterStatus = "DONE";
-            return View();
+            return RedirectToPage("RegistrationConfirmation");
         }
     }
 }

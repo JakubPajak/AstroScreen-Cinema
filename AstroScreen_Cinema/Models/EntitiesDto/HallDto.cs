@@ -8,6 +8,8 @@ namespace AstroScreen_Cinema.Models.EntitiesDto
 		public int NumberOfSeats { get; set; }
 
 		public int NumberOfRows { get; set; }
+
+		public List<SeatDto> SelectedSeats { get; set; }
 	}
 }
 

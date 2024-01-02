@@ -45,14 +45,11 @@
                 </div>
 
                 @{
-                    if (ViewBag.LoginStatus != "NULL")
+                    if (ViewBag.ErrorMessage != "NULL")
                     {
-                        if (ViewBag.LoginStatus == "NO")
-                        {
                             <div class="login--error">
-                                <p>Login failed. Please check your credentials</p>
+                                <p>@ViewBag.ErrorMessage</p>
                             </div>
-                        }
                     }
                 }
                 <div class="login--submit_btn_container">

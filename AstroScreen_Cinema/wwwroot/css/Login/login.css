@@ -125,8 +125,11 @@
         color: #fff;
     }
 
-
-
+.login--error{
+    color: red;
+    font-size: 13px;
+    font-style:italic;
+}
 
 
 

@@ -6,7 +6,7 @@
 
 @{
     var slider = Model.Where(m => m.Desc.Equals("Random")).ToList();
-    var shownig = Model.Where(m => !m.Desc.Equals("Random")).ToList();
+    var allMovies = Model.Where(m => !m.Desc.Equals("Random")).ToList();
 }
 
 <link rel="stylesheet" href="~/css/Home/site.css" />
@@ -79,33 +79,6 @@
 
 </div>
 
-@* <div class="slider">
-    <div class="slide-track slider-dissapear">
-        <!--6 slides-->
-        <div class="slide">
-            <img src="@slider[1].imgPath" alt="Slide 1" />
-        </div>
-        <div class="slide">
-            <img src="@slider[2].imgPath" alt="Slide 2" />
-        </div>
-        <div class="slide">
-            <img src="@slider[3].imgPath" alt="Slide 3" />
-        </div>
-        <div class="slide">
-            <img src="@slider[4].imgPath" alt="Slide 4" />
-        </div>
-        <div class="slide">
-            <img src="@slider[5].imgPath" alt="Slide 5" />
-        </div>
-        
-    </div>
-    <div class="navigation">
-        <button onclick="changeSlide(-1)">Previous</button>
-        <button onclick="changeSlide(1)">Next</button>
-    </div>
-</div> *@
-
-
 <!--SoonInCinemas-->
 <div class="SoonInCinemas">
 
@@ -116,7 +89,7 @@
     </div>
 
     <div class="Posters">
-    @foreach (var movie in shownig)
+    @foreach (var movie in allMovies)
     {
         <figure class="Poster" data-title=@movie.Title>
             <img src=@movie.imgPath />

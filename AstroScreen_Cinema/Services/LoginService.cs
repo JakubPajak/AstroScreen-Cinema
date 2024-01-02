@@ -34,21 +34,20 @@ namespace AstroScreen_Cinema.Services
 
 
 
-        public LoginDto GetLogin(string _login, string _pass, out string _token)
+        public LoginDto GetLogin(string _login, string _pass, out string _token, out string _errorMessage)
         {
+            var errorMessage = "";
+            var tokenStr = "";
+            var userDto = new LoginDto();
             var getUser = _appDBContext.Accounts.FirstOrDefault(a => a.Email.Equals(_login));
 
-            if (getUser == null)
-                throw new NotFoundException("Invalid email address");
+            try
+            {
+                if (getUser == null)
+                    throw new NotFoundException("Invalid email address");
 
-            //if (VerifyPassword(_pass, getUser.Password))
-            //    throw new ForbiddenAccessException("Invalid email or Pass");
-
-            if (getUser.Password != _pass)
-                throw new ForbiddenAccessException("Invalid email or Pass");
-
-
-
+                if (!VerifyPassword(_pass, getUser.Password))
+                    throw new ForbiddenAccessException("Invalid email or Pass");
             var claims = new List<Claim>()
             {
                 new Claim(ClaimTypes.Role, "Logged"),
@@ -69,9 +68,39 @@ namespace AstroScreen_Cinema.Services
 
 
             var tokenHandler = new JwtSecurityTokenHandler();
-            _token = tokenHandler.WriteToken(token);
+            tokenStr = tokenHandler.WriteToken(token);
+            _errorMessage = errorMessage;
 
-            return new LoginDto() { Login = getUser.Email, Password = getUser.Password, IsLogged = "YES" };
+                userDto.Login = getUser.Email;
+                userDto.Password = getUser.Password;
+                userDto.IsLogged = "YES";
+            }
+            catch(NotFoundException ex)
+            {
+                Console.WriteLine(ex.ToString());
+                errorMessage = "Invalid email address. There is no such user registered";
+            }
+            catch(ForbiddenAccessException ex)
+            {
+                Console.WriteLine(ex.ToString());
+                errorMessage = "Invalid email or password. The login process failed";
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                errorMessage = "Unexpected Error occured. Please contact our tech team to let us know" +
+                    "about this error";
+            }
+
+            _token = tokenStr;
+            _errorMessage = errorMessage;
+            if (errorMessage == ""){
+                userDto.IsLogged = "YES";
+            }
+            else {
+                userDto.IsLogged = "NO";
+            }
+            return userDto;
         }
 
 
@@ -111,7 +140,8 @@ namespace AstroScreen_Cinema.Services
                 Password = HashPassword(_user.Password),
                 Email = _user.Email,
                 PhoneNum = _user.PhoneNum,
-                Birthdate = _user.Birthdate
+                Birthdate = _user.Birthdate,
+                IsRegistered = true,
             };
 
             await _appDBContext.AddAsync(newUser);
