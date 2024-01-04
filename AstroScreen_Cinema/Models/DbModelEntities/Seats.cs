@@ -24,7 +24,10 @@ namespace AstroScreen_Cinema.Models
 		public CinemaHall? CinemaHall { get; set; }
 
 
-		public List<Reservation>? Reservations { get; set; } = new List<Reservation>();
+		public Guid Reservation_ID { get; set; }
+
+		
+		public Reservation Reservation { get; set; }
 	}
 }
 

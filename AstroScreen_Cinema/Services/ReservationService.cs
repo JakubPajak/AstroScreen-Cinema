@@ -126,28 +126,6 @@ namespace AstroScreen_Cinema.Services
             }
             #endregion
 
-
-            //Creating new Seat record
-            #region
-            foreach (var seat in _seats)
-            {
-                string letterPart = seat.ToString().Substring(0, 1);
-                string numberPart = new String(seat.SkipWhile(c => !Char.IsDigit(c)).ToArray());
-                var seatTemp = new Seats()
-                {
-                    //Adding the seats that were selected 
-                    RowNum = char.ToUpper(letterPart[0]) - 'A' + 1,
-                    SeatNum = int.Parse(numberPart),
-                    IsReserved = true,
-                    CinemaHall = _appDBContext.CinemaHalls.FirstOrDefault(c => c.City.Equals(_city)),
-                };
-                newSeat.Add(seatTemp);
-            }
-
-            await _appDBContext.AddRangeAsync(newSeat);
-            #endregion
-
-
             //Creating new Reservation record
             #region
             newReservation.Reservation_date = DateTime.Now;
@@ -166,6 +144,27 @@ namespace AstroScreen_Cinema.Services
             //relation between reservation and seat entity.
             //One reservation can get many seats, i do not know why this was not
             //taken into consideration at the beginning of the development process.
+
+            //Creating new Seat record
+            #region
+            foreach (var seat in _seats)
+            {
+                string letterPart = seat.ToString().Substring(0, 1);
+                string numberPart = new String(seat.SkipWhile(c => !Char.IsDigit(c)).ToArray());
+                var seatTemp = new Seats()
+                {
+                    //Adding the seats that were selected 
+                    RowNum = char.ToUpper(letterPart[0]) - 'A' + 1,
+                    SeatNum = int.Parse(numberPart),
+                    IsReserved = true,
+                    CinemaHall = _appDBContext.CinemaHalls.FirstOrDefault(c => c.City.Equals(_city)),
+                    Reservation = newReservation,
+                };
+                newSeat.Add(seatTemp);
+            }
+
+            await _appDBContext.AddRangeAsync(newSeat);
+            #endregion
 
             await _appDBContext.AddAsync(newReservation);
 

@@ -34,14 +34,10 @@ namespace AstroScreen_Cinema.Models
 
         //	//	Connection between different entities	//	//
 
-
-        public Guid Seat_ID { get; set; }
-
-
-		public Seats? Seat { get; set; }
+        public List<Seats> Seats { get; set; }
 
 
-		public Guid Showtime_ID { get; set; }
+        public Guid Showtime_ID { get; set; }
 
 
 		public Showtime? Showtime { get; set; }

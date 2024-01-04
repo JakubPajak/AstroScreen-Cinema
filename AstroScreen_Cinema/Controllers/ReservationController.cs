@@ -33,6 +33,7 @@ namespace AstroScreen_Cinema.Controllers
             HttpContext.Session.SetString("TotalPrice", totalPrice.ToString());
             if (HttpContext.Session.GetString("UserLogin") == null)
             {
+                HttpContext.Session.SetString("Submitted", "Once");
                 return RedirectToAction("Hall_One", "Hall");
             }
             else

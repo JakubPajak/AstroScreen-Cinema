@@ -16,7 +16,7 @@ namespace AstroScreen_Cinema.Controllers
             _hallRepertuair = hallRepertuair;
         }
 
-        public IActionResult Hall_One(string selectedSchedule)
+        public IActionResult HallTemp(string selectedSchedule)
         {
             var elements = new string[' '];
             if (!string.IsNullOrEmpty(selectedSchedule))
@@ -24,17 +24,22 @@ namespace AstroScreen_Cinema.Controllers
                 elements = selectedSchedule.Split(',').ToArray();
                 HttpContext.Session.SetString("ShowtimeId", elements[1]);
             }
-            else
+            return RedirectToAction("Hall_One", "Hall");
+        }
+
+        public IActionResult Hall_One()
+        {
+            var elements = HttpContext.Session.GetString("ShowtimeId");
+            var _city = HttpContext.Session.GetString("City");
+            if (HttpContext.Session.GetString("Submitted") != null && HttpContext.Session.GetString("Submitted").Equals("Once"))
             {
-                //var elements = HttpContext.Session.GetString("SelectedSeats").Split(',').ToArray();
                 if (HttpContext.Session.GetString("LoginStatus") == null)
                     ViewBag.Submitted = true;
                 else
                     ViewBag.Submitted = false;
             }
 
-            var _city = HttpContext.Session.GetString("City");
-            var hall = _hallRepertuair.GetHall(_city, elements[1]);
+            var hall = _hallRepertuair.GetHall(_city, elements);
             return View(hall);
         }
     }

@@ -12,7 +12,6 @@
 @model AstroScreen_Cinema.Models.EntitiesDto.HallDto
 @{
     var seatsPerRow = Model.NumberOfSeats / Model.NumberOfRows;
-    //var isSubmitted = ViewBag.Submitted == null ? false : true;
 }
 <div class="SeatSelector">
     @* <div class="SelectorTitle section-background"></div> *@
@@ -34,19 +33,30 @@
                 {
                     <div class="hall-scheme-row">
                         @for (int seatNumber = 0; seatNumber < seatsPerRow; seatNumber++)
-                        {
-
-                            //seatId = $"{Convert.ToChar('A' + row)}{seatNumber}";
-                            <div class="seat" data-row="@Convert.ToChar('A' + row)" data-seat="@seatNumber">
-                                @($"{Convert.ToChar('A' + row)}{seatNumber}")
-                            </div>
+                            {
+                                var seatTemp = new AstroScreen_Cinema.Models.EntitiesDto.SeatDto()
+                                {
+                                    SeatNumber = seatNumber,
+                                    RowNumber = row,
+                                };
+                               var result = Model.SelectedSeats.Any(s => s.RowNumber == row && s.SeatNumber == seatNumber);
+                               if (result)
+                                {
+                                <div class="seat taken" data-row="@Convert.ToChar('A' + row)" data-seat="@seatNumber" style="background-color:red;">
+                                    @($"{Convert.ToChar('A' + row)}{seatNumber}")
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="seat" data-row="@Convert.ToChar('A' + row)" data-seat="@seatNumber">
+                                    @($"{Convert.ToChar('A' + row)}{seatNumber}")
+                                </div>
+                            }
                         }
                     </div>
                 }
-
-
             </div>
-    </form>
+
 
     <!-- Right Section -->
     <div class="right-section">
@@ -68,16 +78,15 @@
         </div>
     </div>
 </div>
-
+</form>
 
 <!-- Add this HTML structure for the popup at the end of your main view -->
 @if (ViewBag.Submitted != null && ViewBag.Submitted)
 {
     <div id="popup" class="popup" aria-hidden="true">
         <div class="popup-content">
-           @*  <span class="close" id="closePopup">&times;</span> *@
             <h2>Welcome to our Cinema!</h2>
-            
+
             <div class="choose__option">
                 <div class="left-section-pop">
                     <p>Are you a registered user?</p>
@@ -101,6 +110,7 @@
         </div>
     </div>
 }
+
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -197,10 +207,6 @@
                 }
             });
 
-            SelectedSeats = [];
-        });
-
-
             // Remove selected seats from the right section
             var selectedSeats = selectedSeatsContainer.querySelectorAll('.copied, .copied-vip');
             selectedSeats.forEach(function (selectedSeat) {
@@ -214,6 +220,7 @@
                 totalPrice: 0
             };
 
+            SelectedSeats = [];
             // Reset total section
             totalSection.textContent = "Total Seats: 0, Total Price: $0.00";
         });

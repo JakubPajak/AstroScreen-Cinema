@@ -91,7 +91,7 @@ namespace AstroScreen_Cinema
                 .RuleFor(r => r.Surname, f => f.Person.LastName)
                 .RuleFor(r => r.Email, f => f.Person.Email)
                 .RuleFor(r => r.PhoneNum, f => f.Random.Number(111111111, 999999999))
-                .RuleFor(r => r.Seat, f => SeatsGenerator.Generate())
+                .RuleFor(r => r.Seats, f => SeatsGenerator.Generate(2))
                 .RuleFor(r => r.Showtime, f => ShowTimeGenerator.Generate())
                 .RuleFor(r => r.Account, f => AccountGenerator.Generate());
 

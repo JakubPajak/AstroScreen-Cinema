@@ -41,8 +41,8 @@
                 <label class="seats">@((char)('A' + seat.RowNum - 1))@seat.SeatNum</label>
                 <input type="hidden" asp-for="@seat" />
             }
-            <label class="sidebar-label" asp-for="Showtime.Day">Day of the showtime: @Model.Showtime.Day.Day</label>
-            <label class="sidebar-label" asp-for="Showtime.Time">Hour: @Model.Showtime.Time.TimeOfDay</label>
+            <label class="sidebar-label">Day of the showtime: @Model.Showtime.Day.ToString("yyyy-MM-dd")</label>
+            <label class="sidebar-label" asp-for="Showtime.Time">Hour: @Model.Showtime.Time.ToString("HH:mm")</label>
         </div>
         <div class="poster-details">
             <img src="~/@Model.Showtime.Movie.PosterPath" />

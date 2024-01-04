@@ -33,7 +33,7 @@ namespace AstroScreen_Cinema.Services
             var SelectedSeats = new List<SeatDto>();
             var hallId = _appDBContext.Showtimes.FirstOrDefault(s => s.Showtime_ID.Equals(Guid.Parse(_showtimeId)));
 
-            var seats = _appDBContext.Seats.Where(s => s.Hall_ID.Equals(hallId.Hall_ID));
+            var seats = _appDBContext.Seats.Where(s => s.Hall_ID.Equals(hallId.Hall_ID) && s.Reservation.Showtime_ID.Equals(Guid.Parse(_showtimeId)));
 
             if (seats.Any())
             {
@@ -43,19 +43,6 @@ namespace AstroScreen_Cinema.Services
                     {
                         RowNumber = seat.RowNum,
                         SeatNumber = seat.SeatNum,
-                    };
-                    SelectedSeats.Add(seatTemp);
-                }
-            }
-            else
-            {
-                for (int i = 0; i < 4; i++)
-                {
-
-                    var seatTemp = new SeatDto
-                    {
-                        RowNumber = i,
-                        SeatNumber = i + 4,
                     };
                     SelectedSeats.Add(seatTemp);
                 }

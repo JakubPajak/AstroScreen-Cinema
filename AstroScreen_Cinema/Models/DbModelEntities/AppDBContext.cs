@@ -55,12 +55,11 @@ namespace AstroScreen_Cinema.Models
                 .OnDelete(DeleteBehavior.NoAction);
 
 
-            modelBuilder.Entity<Reservation>()
-                .HasOne(s => s.Seat)
-                .WithMany(r => r.Reservations)
-                .HasForeignKey(k => k.Seat_ID)
+            modelBuilder.Entity<Seats>()
+                .HasOne(r => r.Reservation)
+                .WithMany(s => s.Seats)
+                .HasForeignKey(k => k.Reservation_ID)
                 .OnDelete(DeleteBehavior.NoAction);
-
 
             modelBuilder.Entity<Reservation>()
                 .HasOne(sh => sh.Showtime)
