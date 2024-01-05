@@ -4,6 +4,11 @@ using SendGrid;
 using SendGrid.Helpers.Mail;
 using Serilog.Context;
 
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace AstroScreen_Cinema.Services
 {
     public class EmailService : IEmailService
@@ -27,7 +32,7 @@ namespace AstroScreen_Cinema.Services
         public async Task<bool> SendMail(EmailAction emailAction, string _userMail)
         {
             var message = new SendGridMessage();
-            var apiKey = "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";
+            var apiKey = "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";
             var client = new SendGridClient(apiKey);
 
             var to = new EmailAddress(_userMail, "Odbiorca");
@@ -41,7 +46,7 @@ namespace AstroScreen_Cinema.Services
                     case EmailAction.CONFIRMATION:
                         message = MailHelper.CreateSingleTemplateEmail(from, to, "d-463443cbc9774187aa9a5731fa165579", new
                         {
-                            movietitle = "Avatar",
+                            movietitle = "Avatar WYSŁANO MAIL AUUU NA MAILA Z BAZY AUUU",
                             seats = "A1"
                         });
                         break;
