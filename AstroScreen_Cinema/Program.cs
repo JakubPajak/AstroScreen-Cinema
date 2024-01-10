@@ -38,16 +38,24 @@ builder.Services.AddAuthentication(option =>
 });
 
 // Set up logger with enriched log events
-Log.Logger = new LoggerConfiguration()
-    .Enrich.FromLogContext()
-    .WriteTo.Logger(l => l
-        .Filter.ByIncludingOnly(evt => evt.Properties.ContainsKey("LogType") && evt.Properties["LogType"].ToString() == "email")
-        .WriteTo.File("email.txt", restrictedToMinimumLevel: LogEventLevel.Information, rollingInterval: RollingInterval.Month))
-    .WriteTo.Logger(l => l
-        .Filter.ByIncludingOnly(evt => evt.Properties.ContainsKey("LogType") && evt.Properties["LogType"].ToString() == "reservation")
-        .WriteTo.File("reservation.txt", restrictedToMinimumLevel: LogEventLevel.Information, rollingInterval: RollingInterval.Day))
-    .CreateLogger();
+builder.Host.UseSerilog((hostingContext, loggerConfiguration) =>
+{
+    loggerConfiguration
+        .Enrich.FromLogContext()
+        .WriteTo.Logger(l => l
+            .Filter.ByIncludingOnly(evt => evt.Properties.ContainsKey("LogType") && evt.Properties["LogType"].ToString() == "email")
+            .WriteTo.File("email.txt", restrictedToMinimumLevel: LogEventLevel.Information, rollingInterval: RollingInterval.Month))
+        .WriteTo.Logger(l => l
+            .Filter.ByIncludingOnly(evt => evt.Properties.ContainsKey("LogType") && evt.Properties["LogType"].ToString() == "reservation")
+            .WriteTo.File("reservation.txt", restrictedToMinimumLevel: LogEventLevel.Information, rollingInterval: RollingInterval.Day));
+});
 
+
+builder.Services.AddLogging(loggingBuilder =>
+{
+    loggingBuilder.ClearProviders();
+    loggingBuilder.AddSerilog();
+});
 
 
 builder.Services.Configure<Microsoft.AspNetCore.Mvc.JsonOptions>(options =>
@@ -58,8 +66,8 @@ builder.Services.Configure<Microsoft.AspNetCore.Mvc.JsonOptions>(options =>
 
 builder.Services.AddDbContext<AppDBContext>(options =>
 {
-    //options.UseSqlServer(builder.Configuration.GetConnectionString("DataBaseMAC"));
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DataBaseWIN"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DataBaseMAC"));
+    //options.UseSqlServer(builder.Configuration.GetConnectionString("DataBaseWIN"));
 });
 
 builder.Services.AddSession();

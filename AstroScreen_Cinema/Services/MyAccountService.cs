@@ -23,34 +23,45 @@ namespace AstroScreen_Cinema.Services
             var myAccount = new MyAccountDto();
             var user = _appDBContext.Accounts.FirstOrDefault(a => a.Email.Equals(_login));
 
-            var reservations = _appDBContext.Reservations
-                .Where(r => r.Account_ID.Equals(user.Account_ID));
-
-
-            myAccount.Name = user.Name;
-            myAccount.Surname = user.Surname;
-            myAccount.PhoneNum = user.PhoneNum;
-            myAccount.Email = user.Email;
-            myAccount.Birthdate = user.Birthdate;
-
-            foreach (var reservation in reservations)
+            if (user != null)
             {
-                var reservationDto = _appDBContext.Showtimes
+                var reservations = _appDBContext.Reservations
+                    .Where(r => r.Account_ID.Equals(user.Account_ID)).ToList();
+
+                myAccount.Name = user.Name;
+                myAccount.Surname = user.Surname;
+                myAccount.PhoneNum = user.PhoneNum;
+                myAccount.Email = user.Email;
+                myAccount.Birthdate = user.Birthdate;
+
+                foreach (var reservation in reservations)
+                {
+                    var showtime = _appDBContext.Showtimes
                         .Where(sh => sh.Showtime_ID.Equals(reservation.Showtime_ID))
-                        .Join(
-                            _appDBContext.Movies,
-                            showtime => showtime.Movie_ID,
-                            movie => movie.Film_ID,
-                            (showtime, movie) => new ReservationDto
-                            {
-                                Showtime = showtime,
-                                //Movie = movie,
-                            })
                         .FirstOrDefault();
 
-                myAccount.ReservationDetails.Add(reservation.Reservation_ID.ToString(), reservationDto);
+                    var movie = _appDBContext.Movies
+                        .Where(m => m.Film_ID == showtime.Movie_ID)
+                        .FirstOrDefault();
+
+
+                    var reservationDto = new ReservationDto()
+                    {
+                        Showtime = showtime,
+                        Movie = movie,
+                        Seats = _appDBContext.Seats.Where(s => s.Reservation_ID
+                            .Equals(reservation.Reservation_ID)).ToList(),
+                    };
+
+                    if (myAccount.ReservationDetails == null)
+                    {
+                        myAccount.ReservationDetails = new Dictionary<string, ReservationDto>();
+                    }
+
+                    myAccount.ReservationDetails.Add(reservation.Reservation_ID.ToString(), reservationDto);
+                }
+
             }
-            
 
             return myAccount;
         }

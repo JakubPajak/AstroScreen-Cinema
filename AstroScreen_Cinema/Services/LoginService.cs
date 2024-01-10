@@ -10,6 +10,7 @@ using Azure.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using StackoveflowClone.Exceptions;
+using Serilog;
 using static AstroScreen_Cinema.Services.EmailService;
 
 namespace AstroScreen_Cinema.Services
@@ -21,15 +22,17 @@ namespace AstroScreen_Cinema.Services
         private readonly IAuthorizationService _authorizationServiece;
         private readonly IUserHttpContextService _userHttpContext;
         private readonly IEmailService _emailService;
+        private readonly ILogger<ILoginService> _logger;
 
         public LoginService(AppDBContext context, AuthenticationSettings authenticationSettings, IAuthorizationService authorizationServiece,
-            IUserHttpContextService userHttpContext, IEmailService emailService)
+            IUserHttpContextService userHttpContext, IEmailService emailService, ILogger<ILoginService> logger)
         {
             _appDBContext = context;
             _authenticationSettings = authenticationSettings;
             _authorizationServiece = authorizationServiece;
             _userHttpContext = userHttpContext;
             _emailService = emailService;
+            _logger = logger;
         }
 
 
@@ -84,6 +87,7 @@ namespace AstroScreen_Cinema.Services
             {
                 Console.WriteLine(ex.ToString());
                 errorMessage = "Invalid email or password. The login process failed";
+                Log.Error("Invalid email or password. The login process failed. {@LogType}", "email");
             }
             catch(Exception ex)
             {

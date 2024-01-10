@@ -1,6 +1,11 @@
 ﻿@namespace AstroScreen_Cinema.Views.MyAccount
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
+<link rel="stylesheet" href="~/css/Reservation/ReservationStyle.css" />
+<link rel="stylesheet" href="~/css/MyAccount/myaccount.css" />
+<link rel="stylesheet" href="~/css/MyAccount/changeData.css" />
+<link rel="stylesheet" href="~/css/Hall/Hall1.css" />
+
 @model AstroScreen_Cinema.Models.EntitiesDto.MyAccountDto;
 
 <div class="myacount--main_container">
@@ -50,65 +55,79 @@
                         <h2 class="myaccount--header">Account Details</h2>
                         <div class="myaccount--content_details">
                             <div class="myaccount--content_label">
-                                <label>Name:</label>
-                                <input type="text" placeholder="@Model.Name" asp-for="@Model.Name" /> Name: @Model.Name
+                                <label>Name:</label><br />
+                                <input class="myaccount--change-input" type="text" placeholder="@Model.Name" asp-for="@Model.Name" />
                             </div>
                             <div class="myaccount--content_label">
                                 <label>Second Name:</label>
-                                <input type="text" placeholder="@Model.Surname" asp-for="@Model.Surname" /> Name: @Model.Surname
+                                <input class="myaccount--change-input" type="text" placeholder="@Model.Surname" asp-for="@Model.Surname" />
                             </div>
                             <div class="myaccount--content_label">
                                 <label>Phone Number:</label>
-                                <input type="tel" placeholder="@Model.PhoneNum" asp-for="@Model.PhoneNum" /> Name: @Model.PhoneNum
+                                <input class="myaccount--change-input" type="tel" placeholder="@Model.PhoneNum" asp-for="@Model.PhoneNum" />
                             </div>
                             <div class="myaccount--content_label">
                                 <label>Email Address:</label>
-                                <input type="email" placeholder="@Model.Email" asp-for="@Model.Email" /> Name: @Model.Email
+                                <input class="myaccount--change-input" type="email" placeholder="@Model.Email" asp-for="@Model.Email" />
                             </div>
                             <div class="myaccount--content_label">
                                 <label>Birth Date:</label>
-                                <input type="date" placeholder="@Model.Birthdate" asp-for="@Model.Birthdate" /> Name: @Model.Birthdate
+                                <input class="myaccount--change-input" type="date" placeholder="@Model.Birthdate" asp-for="@Model.Birthdate" />
                             </div>
                             <div class="myaccount--content_label hidden"></div>
                         </div>
-                        <button type="submit">Save changes</button>
+                        <button class="myaccount--change-btn" type="submit">Save changes</button>
                     </div>
                 </form>
             </div>
             @if (Model.ReservationDetails != null)
             {
-                @foreach (var reservationItem in Model.ReservationDetails)
-                {
-                    <div class="tab-content" id="content3">
-                        <div class="myaccount--content_div">
-                            <h2 class="myaccount--header">Viewing History</h2>
-                            <div class="myaccount--content_details">
-                                <div class="myaccount--content_label">
-                                    <label>Title:</label>
-                                    <label>@reservationItem.Value.Movie.Title</label>
+                <div class="tab-content" id="content3">
+                <h2 class="myaccount--header">Viewing History</h2>
+                    @foreach (var reservationItem in Model.ReservationDetails)
+                    {
+                        <div class="myaccount--content_div myaccount--viewing-bottom">
+                            <div class="myaccount--content_viewing">
+                                <div class="myaccount--reservation-data">
+                                    <div class="myaccount--content_label">
+                                        <label>Reserved Seats:</label><br />
+                                        <div class="row">
+                                            @foreach (var seat in reservationItem.Value.Seats)
+                                            {
+                                                <div class="seat">
+                                                    @($"{Convert.ToChar('A' + seat.RowNum)}{seat.SeatNum}")
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="myaccount--content_label">
+                                        <label>Reservation Time:</label><br />
+                                        <label>@reservationItem.Value.Showtime.Day</label>
+                                    </div>
+                                    <div class="myaccount--content_label">
+                                        <label>Title:</label>
+                                        <label>@reservationItem.Value.Movie.Title</label>
+                                    </div>
+                                    <div class="myaccount--content_label">
+                                        <label>@reservationItem.Value.Movie.Description</label>
+                                        <label></label>
+                                    </div>
                                 </div>
-                                <div class="myaccount--content_label">
-                                    <label>Reservation ID:</label>
-                                    <label>@reservationItem.Value.Showtime.Day</label>
-                                </div>
-                                <div class="myaccount--content_label">
-                                    <label>@reservationItem.Value.Movie.Description</label>
-                                    <label></label>
-                                </div>
-                                <div class="myaccount--content_label">
+                                <div class="myaccount--content_label myaccount--poster">
                                     <label>Poster</label>
                                     <img src="~/@reservationItem.Value.Movie.PosterPath" />
                                 </div>
                             </div>
                         </div>
-                    </div>
-                }
+                    }
+                </div>
             }
+
             else
             {
                 <div class="tab-content" id="content3">
                     <div class="myaccount--content_div">
-                       <h2>Unfortunately There is no viewing history to display</h2>
+                        <h2>Unfortunately There is no viewing history to display</h2>
                     </div>
                 </div>
             }

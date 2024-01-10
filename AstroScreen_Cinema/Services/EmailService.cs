@@ -46,7 +46,7 @@ namespace AstroScreen_Cinema.Services
                     case EmailAction.CONFIRMATION:
                         message = MailHelper.CreateSingleTemplateEmail(from, to, "d-463443cbc9774187aa9a5731fa165579", new
                         {
-                            movietitle = "Avatar WYSŁANO MAIL AUUU NA MAILA Z BAZY AUUU",
+                            movietitle = "Avatar",
                             seats = "A1"
                         });
                         break;

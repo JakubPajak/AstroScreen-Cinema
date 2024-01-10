@@ -181,7 +181,7 @@ namespace AstroScreen_Cinema.Services
             }
             catch (Exception ex)
             {
-                _logger.LogInformation("Reservation", "Log into the reservation log file");
+                _logger.LogInformation("Log into the reservation log file. {@LogType}", "reservation");
                 return false;
             }
         }

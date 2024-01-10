@@ -1,0 +1,26 @@
+﻿.myaccount--change-input {
+    width: 300px;
+    font-size: 20px;
+    font-family: inherit;
+    color: whitesmoke;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.myaccount--change-input:focus{
+    border: inherit;
+    border-bottom: 4px solid aliceblue;
+    transition: ease-in;
+}
+
+.myaccount--change-btn {
+    font-size: inherit;
+    font-family: inherit;
+    padding: 10px;
+    border: none;
+    border-radius: 15px;
+    cursor:pointer;
+    background: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%);
+}

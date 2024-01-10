@@ -58,6 +58,18 @@
     /* Your styles for display_data */
 }
 
+.row{
+    display:flex;
+    flex-direction: row;
+    margin: 10px;
+    justify-content: space-between;
+}
+
+.seat {
+    cursor: none;
+    background-color: green;
+}
+
 .tab-content {
     display: none;
 }
@@ -84,7 +96,37 @@
 .myaccount--content_details {
     display: flex;
     flex-wrap: wrap;
-    gap: 50px;
+    column-gap: 50px;
+}
+
+.myaccount--content_viewing{
+    display: flex;
+    flex-direction: row;
+    width:100%;
+    padding: 15px;
+}
+
+.myaccount--poster{
+    width:30%;
+    height:auto;
+    padding: 15px;
+}
+
+.myaccount--poster img{
+    width: 100%;
+    height: auto;
+}
+
+.myaccount--viewing-bottom{
+    width: 100%;
+    border-bottom: 2px solid white;
+}
+
+.myaccount--reservation-data {
+    width: 50%;
+    flex-direction: column;
+    padding: 10px 10px;
+    align-items: center;
 }
 
 .myaccount--content_label {
@@ -97,11 +139,12 @@
     margin-bottom: 10px;
     color: aliceblue;
 }
-    .myaccount--content_label:focus {
-        outline: none;
-        border-color: #00bcd4;
-        box-shadow: 0 0 10px rgba(0, 188, 212, 0.5);
-    }
+
+.myaccount--content_label:focus {
+    outline: none;
+    border-color: #00bcd4;
+    box-shadow: 0 0 10px rgba(0, 188, 212, 0.5);
+}
 
 .myaccount-menu-link {
     text-decoration: none;
@@ -112,9 +155,9 @@
     transition: background-color 0.3s ease;
 }
 
-    .myaccount-menu-link:hover {
-        background-color: rgba(255, 255, 255, 0.2);
-    }
+.myaccount-menu-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
 
 
 .myaccount--left_nav button {
@@ -129,6 +172,6 @@
     margin: 0 auto;
 }
 
-    .myaccount--left_nav button:hover {
-        background-color: #2980b9;
-    }
+.myaccount--left_nav button:hover {
+    background-color: #2980b9;
+}

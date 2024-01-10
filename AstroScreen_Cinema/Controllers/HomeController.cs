@@ -4,6 +4,7 @@ using AstroScreen_Cinema.Models;
 using System;
 using AstroScreen_Cinema.Models.EntitiesDto;
 using AstroScreen_Cinema.Services;
+using Serilog;
 
 namespace AstroScreen_Cinema.Controllers;
 
