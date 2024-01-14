@@ -81,7 +81,7 @@ namespace AstroScreen_Cinema.Services
             {
                 await _appDBContext.SaveChangesAsync();
 
-                await _emailService.SendMail(EmailAction.PASSWORD_CHANGE, account.Email);
+                await _emailService.SendMail(EmailAction.PASSWORD_CHANGE, account.Email, myAccountDto);
             }
             catch (Exception ex)
             {

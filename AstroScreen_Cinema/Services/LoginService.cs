@@ -82,14 +82,16 @@ namespace AstroScreen_Cinema.Services
             {
                 Console.WriteLine(ex.ToString());
                 errorMessage = "Invalid email address. There is no such user registered";
+                Log.Error("Invalid email or password. The login process failed.");
             }
             catch(ForbiddenAccessException ex)
             {
                 Console.WriteLine(ex.ToString());
                 errorMessage = "Invalid email or password. The login process failed";
-                Log.Error("Invalid email or password. The login process failed. {@LogType}", "email");
+                _logger.LogError("Invalid email or password. The login process failed. {@LogType}", new { LogType = "email" });
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
                 errorMessage = "Unexpected Error occured. Please contact our tech team to let us know" +
@@ -156,7 +158,7 @@ namespace AstroScreen_Cinema.Services
 
                 //If the changes were corretly saved, the confirmation mail can be sent
                 //that the registration has been succesfull
-                await _emailService.SendMail(EmailAction.REGISTER, _user.Email);
+                await _emailService.SendMail(EmailAction.REGISTER, _user.Email, _user);
             }
             catch (Exception ex)
             {

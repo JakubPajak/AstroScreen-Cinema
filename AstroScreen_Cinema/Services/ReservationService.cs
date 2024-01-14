@@ -173,9 +173,9 @@ namespace AstroScreen_Cinema.Services
                 await _appDBContext.SaveChangesAsync();
 
                 if (_user == null)
-                    await _emailService.SendMail(EmailAction.CONFIRMATION, newUser.Email);
+                    await _emailService.SendMail(EmailAction.CONFIRMATION, newUser.Email, newReservation);
                 else
-                    await _emailService.SendMail(EmailAction.CONFIRMATION, _user);
+                    await _emailService.SendMail(EmailAction.CONFIRMATION, _user, newReservation);
 
                 return true;
             }

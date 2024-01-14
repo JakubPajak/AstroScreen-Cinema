@@ -7,6 +7,7 @@ namespace AstroScreen_Cinema.Models.EntitiesDto
 	{
         public DateTime Reservation_date { get; set; }
 
+        public Guid? reservationID { get; set; }
 
         public List<Seats> Seats { get; set; } = new List<Seats>();
 

@@ -1,7 +1,9 @@
-﻿namespace AstroScreen_Cinema.Services
+﻿using static AstroScreen_Cinema.Services.EmailService;
+
+namespace AstroScreen_Cinema.Services
 {
     public interface IEmailService
     {
-        Task<bool> SendMail(EmailService.EmailAction emailAction, string _userMail);
+        public Task<bool> SendMail<T>(EmailAction emailAction, string _userMail, T payload);
     }
 }
