@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AstroScreen_Cinema.Models.EntitiesDto;
+using AstroScreen_Cinema.Models;
 
 namespace AstroScreen_Cinema.Services
 {
@@ -33,13 +34,13 @@ namespace AstroScreen_Cinema.Services
         public async Task<bool> SendMail<T>(EmailAction emailAction, string _userMail, T payload)
         {
             //Reservation details needed to send proper email
-            string[] reservationDetails = null;
+            string[] reservationDetails = new string[5];
 
             //Register confirmation to send email with details
-            string[] registrationDetails = null;
+            string[] registrationDetails = new string[2];
 
             //MyAccount data needed to confirm changes
-            string[] changeData = null;
+            string[] changeData = new string[3];
 
             var message = new SendGridMessage();
             var apiKey = "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";
@@ -50,35 +51,28 @@ namespace AstroScreen_Cinema.Services
             var from = new EmailAddress("astroscreencinema@gmail.com", "AstroScreen Cinema");
 
 
-            switch (emailAction.GetType())
+            switch (payload)
             {
-                case Type t when t == typeof(ReservationDto):
-
-                    ReservationDto reservationDto = (ReservationDto)(object)payload;
-
+                case Reservation reservationDto:
+                    // Handle Reservation type
                     reservationDetails[0] = reservationDto.Showtime.Day.ToString("dd-mm-yyyy");
                     reservationDetails[1] = reservationDto.Showtime.Time.ToString("HH:mm");
-                    reservationDetails[2] = reservationDto.Movie.Title;
+                    reservationDetails[2] = reservationDto.Reservation_ID.ToString();
                     reservationDetails[3] = reservationDto.Account.Name;
                     foreach (var seat in reservationDto.Seats)
                     {
-                        reservationDetails[4] += seat + ", ";
+                        reservationDetails[4] += Convert.ToChar('A' + seat.RowNum) + seat.SeatNum + ", ";
                     }
-
                     break;
 
-                case Type t when t == typeof(RegisterDto):
-
-                    RegisterDto registerDto = (RegisterDto)(object)payload;
+                case RegisterDto registerDto:
 
                     registrationDetails[0] = registerDto.Name + registerDto.Surname;
                     registrationDetails[1] = registerDto.Email;
 
                     break;
 
-                case Type t when t == typeof(MyAccountDto):
-
-                    MyAccountDto myAccountDto = (MyAccountDto)(object)payload;
+                case MyAccountDto myAccountDto:
 
                     changeData[0] = myAccountDto.Email;
                     changeData[1] = myAccountDto.Name + myAccountDto.Surname;
@@ -94,7 +88,7 @@ namespace AstroScreen_Cinema.Services
                     case EmailAction.CONFIRMATION:
                         message = MailHelper.CreateSingleTemplateEmail(from, to, "d-463443cbc9774187aa9a5731fa165579", new
                         {
-                            movietitle = reservationDetails[2],
+                            reservationId = reservationDetails[2],
                             seats = reservationDetails[4],
                             day = reservationDetails[0],
                             time = reservationDetails[1],

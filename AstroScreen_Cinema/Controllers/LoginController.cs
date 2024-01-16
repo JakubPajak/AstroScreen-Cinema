@@ -40,7 +40,7 @@ namespace AstroScreen_Cinema.Controllers
         {
             var user = _loginService.GetLogin(loginDto.Login, loginDto.Password, out string _token, out string _errorMessage);
 
-
+            #region
             //var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             //using (var httpClient = new HttpClient())
             //{
@@ -62,6 +62,7 @@ namespace AstroScreen_Cinema.Controllers
             //        // Handle the error
             //    }
             //}
+            #endregion
 
             if (user.Login != null)
             {
@@ -96,7 +97,13 @@ namespace AstroScreen_Cinema.Controllers
             await _loginService.RegisterUser(registerDto);
 
             ViewBag.RegisterStatus = "DONE";
-            return RedirectToPage("RegistrationConfirmation");
+            return RedirectToAction("RegistrationConfirmation", "Login");
+        }
+
+        [Route("Registration-confirmation")]
+        public IActionResult RegistrationConfirmation()
+        {
+            return View();
         }
     }
 }
